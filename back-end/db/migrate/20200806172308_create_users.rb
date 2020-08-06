@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :username
       t.string :email
       t.string :password
-      t.string :language
+      t.integer :language_id
       t.integer :user_quizzes_id
 
       t.timestamps

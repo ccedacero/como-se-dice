@@ -1,0 +1,2 @@
+class AlphabetsController < ApplicationController
+end

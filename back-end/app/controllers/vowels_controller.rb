@@ -1,0 +1,2 @@
+class VowelsController < ApplicationController
+end

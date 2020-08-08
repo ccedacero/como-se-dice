@@ -47,7 +47,24 @@ most_common_english_words = ["a", "about", "all", "also", "and", "as",
   "time", "to", "two", "up", "use", "very", "want", "way", "we", "well", 
   "what", "when", "which", "who", "will", "with", "would", "year", "you",
   "your" ]
-  most_common_english_words.map{|word| Vocab.create(word: word)}
+  most_common_english_translated = ["a", "sobre", "todos", "también", "y", "como",
+    "en", "ser", "porque", "pero", "por", "puede", "venir", "podría", "día",
+    "hacer", "incluso", "buscar", "primero", "para", "de", "obtener", "dar", "ir",
+    "tengo", "él", "ella", "aquí", "él", "su", "cómo", "yo", "si", "en",
+    "en", "eso", "su", "solo", "saber", "me gusta", "mirar", "hacer", "hombre",
+    "muchos", "yo", "más", "mi", "nuevo", "no", "no", "ahora", "de", "en", "uno",
+      "solo", "o", "otro", "nuestro", "fuera", "gente", "decir", "ver", "ella",
+      "entonces", "algunos", "tomar", "decir", "que", "eso", "el", "su", "ellos",
+      "entonces", "allí", "estos", "ellos", "cosa", "piensan", "esto", "esos",
+       "tiempo", "hasta", "dos", "arriba", "uso", "mucho", "deseo", "camino", "nosotros", "bien",
+       "qué", "cuándo", "cuál", "quién", "será", "con", "sería", "año", "usted",
+       "tu"]
+
+
+  most_common_english_words.each_with_index do |word, index|
+      Vocab.create(word: word, wordSpanish: most_common_english_translated[index])
+end
+  # most_common_english_traslated.map{|word| }
 
 
 
@@ -60,17 +77,37 @@ phrases = ["Excuse me.Is anyone sitting here?",
 "Good morning",
 "Good afternoon", 
 "Good evening",
- "I\’m here to see nombre aqui",
- "I\’m here tomee nombre aqui",
+ "I\’m here to see ...",
+ "I\’m here to meet ...",
 "Sorry, I forgot to introduce myself",
 "I should probably introduce myself",
 "My name is,but please call me ....",
-"I\’m ...nombre aqui from lugar de origen",
-"Are you ...",
+"I\’m from ...",
+"Are you ...?",
 "Im sorry, I didn’t catch your name.",
 "Nice to meet you",
 ]
-phrases.map {|phrase| Phrase.create(sentence: phrase)}
+phrasesSpanish = ["Disculpe, ¿hay alguien sentado aquí?",
+  "¿Está libre este asiento?",
+  "¿Perdón Habla inglés?",
+  "Lo siento, ¿es este el lugar correcto?",
+  "Buenos días",
+  "Buenas tardes",
+  "Buena noches",
+    "Estoy aquí para ver a ...",
+    "Estoy aquí para encontrarme ...",
+  "Lo siento, olvidé presentarme",
+  "Probablemente debería presentarme",
+  "Mi nombre es, pero por favor llámame ....",
+  "Soy de ...",
+  "Es usted ...?",
+  "Lo siento, no entendí tu nombre",
+  "Encantada de conocerte",]
+
+
+phrases.each_with_index do |phrase, index|
+  Phrase.create(sentence: phrase, sentenceSpanish: phrasesSpanish[index])
+end
 # I’ve been looking forward to meeting you too./ I’ve heard so much about you too."
 # "
 # Welcome back to…"

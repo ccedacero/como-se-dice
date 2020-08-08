@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_08_06_173942) do
 
   create_table "phrases", force: :cascade do |t|
     t.string "sentence"
+    t.string "sentenceSpanish"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(version: 2020_08_06_173942) do
 
   create_table "vocabs", force: :cascade do |t|
     t.string "word"
+    t.string "wordSpanish"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

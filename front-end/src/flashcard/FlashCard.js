@@ -10,6 +10,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    marginLeft: "10em",
   },
   bullet: {
     display: "inline-block",
@@ -20,10 +21,8 @@ const useStyles = makeStyles({
     fontSize: "2em",
   },
   word: {
-    fontSize: "6.5rem",
-  },
-  pos: {
-    marginBottom: "3em",
+    fontSize: "5.5rem",
+    textAlign: "center",
   },
   centerCard: {
     marginTop: "40vh",
@@ -38,19 +37,27 @@ const useStyles = makeStyles({
   iconSize: {
     fontSize: 40,
   },
+  nextArrow: {
+    marginLeft: "4em",
+  },
 });
 
-export default function OutlinedCard(props) {
+export default function OutlinedCard({ word: { word }, setVocab }) {
   const classes = useStyles();
   const [isFlipped, setisFlipped] = useState(false);
   const bull = <span className={classes.bullet}>•</span>;
-
   const handleClick = (e) => {
-    console.log("hi");
     e.preventDefault();
     setisFlipped((preveState) => {
       return !preveState;
     });
+  };
+
+  const nextCard = (e) => {
+    setVocab((prevState) => ({
+      ...prevState,
+      count: prevState.count + 1,
+    }));
   };
   return (
     <ReactCardFlip
@@ -69,7 +76,7 @@ export default function OutlinedCard(props) {
               Como se dice?
             </Typography>
             <Typography className={classes.word} variant="h5" component="h2">
-              {/* {props.word} */} Hola
+              {word}
             </Typography>
             <CardActions>
               <Button onClick={handleClick} size="medium">
@@ -79,6 +86,10 @@ export default function OutlinedCard(props) {
             </CardActions>
           </CardContent>
         </div>
+        <Button onClick={nextCard} className={classes.nextArrow} size="medium">
+          <ArrowForwardIcon className={classes.iconSize} />
+          <span className={classes.languageSize}>Next</span>
+        </Button>
       </Card>
       <Card className={(classes.root, classes.centerCard)} variant="outlined">
         <div>
@@ -97,6 +108,10 @@ export default function OutlinedCard(props) {
               <Button onClick={handleClick} size="medium">
                 <ArrowForwardIcon className={classes.iconSize} />
                 <span className={classes.languageSize}>Espanol</span>
+              </Button>
+              <Button onClick={nextCard} size="medium">
+                <ArrowForwardIcon className={classes.iconSize} />
+                <span className={classes.languageSize}>Next</span>
               </Button>
             </CardActions>
           </CardContent>

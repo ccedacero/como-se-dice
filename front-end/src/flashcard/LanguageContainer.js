@@ -18,6 +18,7 @@ const LanguageContainer = () => {
       });
   }, []);
 
+  console.log(vocab);
   const renderVocab = () => {
     if (vocab.words.length > 0) {
       // return vocab.words.map((word) => {
@@ -27,6 +28,7 @@ const LanguageContainer = () => {
           key={currentWord.id}
           word={currentWord}
           setVocab={setVocab}
+          vocab={vocab.words}
         />
       );
     }

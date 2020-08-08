@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ReactCardFlip from "react-card-flip";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "2em",
+    borderRadius: "1.5em",
   },
   languageSize: {
     fontSize: "1.3em",
@@ -42,7 +43,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OutlinedCard({ word: { word }, setVocab }) {
+export default function OutlinedCard({
+  vocab,
+  word: { id, word, wordSpanish },
+  setVocab,
+}) {
   const classes = useStyles();
   const [isFlipped, setisFlipped] = useState(false);
   const bull = <span className={classes.bullet}>•</span>;
@@ -52,12 +57,22 @@ export default function OutlinedCard({ word: { word }, setVocab }) {
       return !preveState;
     });
   };
-
   const nextCard = (e) => {
-    setVocab((prevState) => ({
-      ...prevState,
-      count: prevState.count + 1,
-    }));
+    if (id < vocab[vocab.length - 1].id) {
+      setVocab((prevState) => ({
+        ...prevState,
+        count: prevState.count + 1,
+      }));
+    }
+  };
+
+  const previousCard = (e) => {
+    if (id > vocab[0].id) {
+      setVocab((prevState) => ({
+        ...prevState,
+        count: prevState.count - 1,
+      }));
+    }
   };
   return (
     <ReactCardFlip
@@ -79,17 +94,24 @@ export default function OutlinedCard({ word: { word }, setVocab }) {
               {word}
             </Typography>
             <CardActions>
+              <Button onClick={previousCard} size="medium">
+                <ArrowBackIcon className={classes.iconSize} />
+                <span className={classes.languageSize}>Back</span>
+              </Button>
               <Button onClick={handleClick} size="medium">
-                <ArrowForwardIcon className={classes.iconSize} />
                 <span className={classes.languageSize}>Ingles </span>
+              </Button>
+              <Button
+                onClick={nextCard}
+                className={classes.nextArrow}
+                size="medium"
+              >
+                <ArrowForwardIcon className={classes.iconSize} />
+                <span className={classes.languageSize}>Next</span>
               </Button>
             </CardActions>
           </CardContent>
         </div>
-        <Button onClick={nextCard} className={classes.nextArrow} size="medium">
-          <ArrowForwardIcon className={classes.iconSize} />
-          <span className={classes.languageSize}>Next</span>
-        </Button>
       </Card>
       <Card className={(classes.root, classes.centerCard)} variant="outlined">
         <div>
@@ -99,17 +121,24 @@ export default function OutlinedCard({ word: { word }, setVocab }) {
               color="textSecondary"
               gutterBottom
             >
-              How do you say?
+              Como se dice?
             </Typography>
             <Typography className={classes.word} variant="h5" component="h2">
-              {/* {props.word} */} Hello
+              {wordSpanish}
             </Typography>
             <CardActions>
-              <Button onClick={handleClick} size="medium">
-                <ArrowForwardIcon className={classes.iconSize} />
-                <span className={classes.languageSize}>Espanol</span>
+              <Button onClick={previousCard} size="medium">
+                <ArrowBackIcon className={classes.iconSize} />
+                <span className={classes.languageSize}>Back</span>
               </Button>
-              <Button onClick={nextCard} size="medium">
+              <Button onClick={handleClick} size="medium">
+                <span className={classes.languageSize}>Ingles </span>
+              </Button>
+              <Button
+                onClick={nextCard}
+                className={classes.nextArrow}
+                size="medium"
+              >
                 <ArrowForwardIcon className={classes.iconSize} />
                 <span className={classes.languageSize}>Next</span>
               </Button>

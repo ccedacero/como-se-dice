@@ -1,3 +1,3 @@
 class VocabSerializer < ActiveModel::Serializer
-  attributes :id, :word
+  attributes :id, :word, :wordSpanish, :wordUrl
 end

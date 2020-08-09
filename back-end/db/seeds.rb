@@ -25,16 +25,16 @@ hannah = User.create(name:"Hannah Kofkin", email: "hkofkin@gmail.com",language_i
 cristian = User.create(name:"Cristian Cedacero", email: "cristian.cedacero@gmail.com",language_id: Language.first.id,password: "hello", user_quizzes_id:3)
 bashir = User.create(name:"Bashir", email: "bashiralhanshali@gmail.com",language_id: Language.first.id,password: "hello", user_quizzes_id:4)
 
-# SEEDING Alphabet
+# SEEDING Alphabet + url 
 alphabetList = "abcdefghijklmnopqrstuvwxyz".split'';
-alphabetList.map {|letter| Alphabet.create(letter: letter)} 
+alphabetList.map {|letter| Alphabet.create(letter: letter, letterUrl:"https://comosedice.s3.amazonaws.com/Alphabet/#{letter+letter}.mp3")} 
 
 
-# SEEDING VOWELS 
+# SEEDING VOWELS + url
 vowelList = "aeiou".split'';
-vowelList.map {|vowel| Vowel.create(letter: vowel)}
+vowelList.map {|vowel| Vowel.create(letter: vowel, letterUrl:"https://comosedice.s3.amazonaws.com/Vowels/#{vowel}.mp3")}
 
-# SEEDING VOCAB
+# SEEDING VOCAB 
 most_common_english_words = ["a", "about", "all", "also", "and", "as", 
 "at", "be", "because", "but", "by", "can", "come", "could", "day", 
 "do", "even", "find", "first", "for", "from", "get", "give", "go", 
@@ -64,10 +64,7 @@ most_common_english_words = ["a", "about", "all", "also", "and", "as",
   most_common_english_words.each_with_index do |word, index|
       Vocab.create(word: word, wordSpanish: most_common_english_translated[index])
 end
-  # most_common_english_traslated.map{|word| }
-
-
-
+  
 # SEEDING PHRASES
 # Starting the conversation
 phrases = ["Excuse me.Is anyone sitting here?", 
@@ -102,7 +99,7 @@ phrasesSpanish = ["Disculpe, ¿hay alguien sentado aquí?",
   "Soy de ...",
   "Es usted ...?",
   "Lo siento, no entendí tu nombre",
-  "Encantada de conocerte",]
+  "Encantada de conocerte"]
 
 
 phrases.each_with_index do |phrase, index|

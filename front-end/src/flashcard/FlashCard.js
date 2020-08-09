@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import ReactCardFlip from "react-card-flip";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -45,12 +46,23 @@ const useStyles = makeStyles({
 
 export default function OutlinedCard({
   vocab,
+  letterUrl,
   word: { id, word, wordSpanish },
   setVocab,
 }) {
   const classes = useStyles();
   const [isFlipped, setisFlipped] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const bull = <span className={classes.bullet}>•</span>;
+  let audio = new Audio();
+
+  const handleplaySong = () => {
+    audio.src =
+      "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3";
+    audio.play();
+    // setTimeout(() => audio.pause(), 5000);
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
     setisFlipped((preveState) => {
@@ -74,6 +86,7 @@ export default function OutlinedCard({
       }));
     }
   };
+
   return (
     <ReactCardFlip
       isFlipped={isFlipped}
@@ -92,6 +105,10 @@ export default function OutlinedCard({
             </Typography>
             <Typography className={classes.word} variant="h5" component="h2">
               {word}
+              <PlayCircleOutlineIcon
+                className={classes.iconSize}
+                onClick={handleplaySong}
+              />
             </Typography>
             <CardActions>
               <Button onClick={previousCard} size="medium">

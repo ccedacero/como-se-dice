@@ -72,17 +72,17 @@ export default function Navbar(props) {
             // onClick={toggleDrawer(true)}
             // to={user_name ? "/" : "/login"}
           >
-            ComoseDice?
+            ComoSeDice
           </IconButton>
           <Hidden smDown>
             <Button color="inherit" component={Link} to="/forum">
               Foro
             </Button>
             {/* CONDITIONALS FOR NAV BAR DISPLAY */}
-            {/* {props.loggedIn !== "null" || !props.loggedIn ? */}(
+            {/* {props.loggedIn !== "null" || !props.loggedIn ? */}
             <>
               <Button color="inherit" component={Link} to="/applications">
-                Aprender
+                Vocabulario
               </Button>
               <Button color="inherit" component={Link} to="/interviews">
                 Pruebas
@@ -94,9 +94,9 @@ export default function Navbar(props) {
                 className={classes.right}
                 to="/logout"
               >
-                Logout
+                {/* Logout */}
               </Button>
-              <Button color="inherit">hola</Button>
+              <Button color="inherit"></Button>
             </>
             {/* ) : ( */}
             <>

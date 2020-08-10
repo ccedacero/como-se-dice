@@ -1,6 +1,7 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
+import Home from "./home/Home";
 import { withStyles } from "@material-ui/core/styles";
 import LanguageContainer from "./flashcard/LanguageContainer";
 import Navbar from "../src/nav//Navbar";
@@ -17,8 +18,9 @@ export const App = () => {
     <>
       <CssBaseline />
       <Navbar />
-      <Container maxWidth="sm">
-        <LanguageContainer />
+      <Container maxWidth="lg">
+        <Home />
+        {/* <LanguageContainer /> */}
       </Container>
     </>
   );

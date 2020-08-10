@@ -44,10 +44,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OutlinedCard({
+export default function VocabCard({
+  currentWord: { id, wordSpanish, wordUrl, word },
   vocab,
-  letterUrl,
-  word: { id, word, wordSpanish },
   setVocab,
 }) {
   const classes = useStyles();
@@ -55,14 +54,12 @@ export default function OutlinedCard({
   const [playing, setPlaying] = useState(false);
   const bull = <span className={classes.bullet}>•</span>;
   let audio = new Audio();
-
+  // console.log(vocab, word, wordSpanish, wordUrl);
   const handleplaySong = () => {
-    audio.src =
-      "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3";
+    audio.src = wordUrl;
     audio.play();
     // setTimeout(() => audio.pause(), 5000);
   };
-
   const handleClick = (e) => {
     e.preventDefault();
     setisFlipped((preveState) => {
@@ -104,11 +101,7 @@ export default function OutlinedCard({
               Como se dice?
             </Typography>
             <Typography className={classes.word} variant="h5" component="h2">
-              {word}
-              <PlayCircleOutlineIcon
-                className={classes.iconSize}
-                onClick={handleplaySong}
-              />
+              {wordSpanish}
             </Typography>
             <CardActions>
               <Button onClick={previousCard} size="medium">
@@ -141,7 +134,11 @@ export default function OutlinedCard({
               Como se dice?
             </Typography>
             <Typography className={classes.word} variant="h5" component="h2">
-              {wordSpanish}
+              {word}
+              <PlayCircleOutlineIcon
+                className={classes.iconSize}
+                onClick={handleplaySong}
+              />
             </Typography>
             <CardActions>
               <Button onClick={previousCard} size="medium">

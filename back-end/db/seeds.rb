@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command or created alongside the database with db:setup.
-#
-# Examples:
-#
-#   movies = Movie.create[{ name: 'Star Wars' }, { name: 'Lord of the Rings' }]
-#   Character.createname: 'Luke', movie: movies.first
 User.destroy_all
 Language.destroy_all
 Alphabet.destroy_all
@@ -16,7 +9,7 @@ Phrase.destroy_all
 # Comment.destroy_all
 
 
-# SEEDING anguage
+# SEEDING language
 Language.create(language:"Spanish");
 
 # USERS
@@ -33,6 +26,47 @@ alphabetList.map {|letter| Alphabet.create(letter: letter, letterUrl:"https://co
 # SEEDING VOWELS + url
 vowelList = "aeiou".split'';
 vowelList.map {|vowel| Vowel.create(letter: vowel, letterUrl:"https://comosedice.s3.amazonaws.com/Vowels/#{vowel}.mp3")}
+
+# Seeding PAYVOCAB + url
+pay = ["Day shift","Afternoon shift", "Evening shift", "Night shift", "Overtime pay", "Overtime hours", "Break time", "Take a break", "We pay by the hour", "Pay", "Salary", "Hours", "The clock", "A second", "A minute", "An hour", "A day", "A week", "A month", "A year", "On time", "Just in time", "Punctual", "Noon", "Midnight", "Calendar", "We pay", "We pay once a week", "We pay every two weeks", "We pay every fifteen days", "We pay once a month", "How many hours did you work", "We do not any work available", "Can you come in at seven?", "Here is your check", "Stop working at five"]
+pago = ["Turno de día","Turno de tarde", "Turno del atardecer", "Turno de noche", "Pago de horas extras", "Horas extras", "Tiempo de descanso", "Descanso", "Pagamos por hora", "Pago", "Salario", "Horas", "Reloj", "Un segundo", "Un minuto", "Una hora", "Un día", "Una semana", "Un mes", "Un año", "A tiempo", "Justo a tiempo", "Puntual", "Mediodía", "Medianoche", "Calendario", "Pagamos", "Pagamos una vez a la semana", "Pagamos cada dos semanas", "Pagamos cada quince días", "Pagamos una vez al mes", "¿Cuántas horas trabajó?", "No tenemos trabajo disponible", "¿Puede venir a las siete?", "Aquí está su cheque", "Deje de trabajar a las cinco"]
+  pay.each_with_index do |word, index|
+      Vocab.create(word: word, wordSpanish: pago[index],wordUrl: "https://comosedice.s3.amazonaws.com/Pay/#{word}.mp3")
+  end
+
+# Formatting info below
+# proper.split(",")
+# proper = proper.map(wrd => wrd[0].toUpperCase()+wrd.slice(1))
+# proper = proper.map(wrd => wrd[0]=== " "? wrd.slice(1) : wrd)
+# Get amazon titles with below 
+# titles = document.querySelectorAll("table")[0].children[1].querySelectorAll("a").forEach(entry => titleArr.push(entry.innerText))
+# arr.map(wrd => wrd.slice(0,-4))
+
+# Seeding Greetings + url
+greetings = ["Hello", "Nice to meet you!", "The pleasure is mine", "Good morning", "Good afternoon", "Good night", "See you tomorrow", "We’ll see you", "See you soon", "It has been a pleasure", "Likewise", "Goodbye!", "How are you?", "How have you been?", "How is your family?", "You’re welcome!", "Very well, Thank you"]
+saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "Buenas tardes", "Buenas noches", "Hasta mañana", "Nos vemos", "Hasta pronto", "Ha sido un placer", "Igualmente", "¡Adiós! ¿Cómo estás?", "¿Cómo has estado?", "¿Cómo está tu familia?", "¡De nada!", "Muy bien, Gracias"]
+
+ greetings.each_with_index do |word, index|
+      Vocab.create(word: word, wordSpanish: pago[index], wordUrl: "https://comosedice.s3.amazonaws.com/Greetings/#{word}.mp3")
+  end
+
+  # Seeding Praises + url 
+  # praises = ["Good", "Very Good", "Wonderful!", "Great!", "Fantastic!", "Well done!", "Perfect!", "Pretty!", "Beautiful!", "Congratulations!", "Best Wishes!", "You do good work!", "I like your work", "You are a good worker!", "Well done!"]
+  # alabanzas = ["Bien", "Muy Bien", "Maravilloso!", "¡Genial!", "¡Fantástico!", "¡Bien hecho!", "¡Perfecto!", "¡Bonito!", "¡Hermoso!", "¡Felicitaciones!", "¡Mis mejores deseos!", "¡Haces buen trabajo!", "Me gusta tu trabajo", "Tu eres ¡buen trabajador!", "¡Bien hecho!"]
+
+
+# SEEDING PHRASES
+# Starting the conversation
+# 
+
+
+# phrases.each_with_index do |phrase, index|
+#   Phrase.create(sentence: phrase, sentenceSpanish: phrasesSpanish[index])
+# end
+
+puts "=========================="
+puts "~~~~~~~~~~SEEDED~~~~~~~~~~"
+puts "=========================="
 
 # SEEDING VOCAB 
 # most_common_english_words = ["a", "about", "all", "also", "and", "as", 
@@ -60,344 +94,37 @@ vowelList.map {|vowel| Vowel.create(letter: vowel, letterUrl:"https://comosedice
 #        "qué", "cuándo", "cuál", "quién", "será", "con", "sería", "año", "usted",
       #  "tu"]
 
-      
 
-
-  most_common_english_words.each_with_index do |word, index|
-      Vocab.create(word: word, wordSpanish: most_common_english_translated[index])
-end
-  
-# SEEDING PHRASES
-# Starting the conversation
-phrases = ["Excuse me.Is anyone sitting here?", 
-"Is this seat free?",
-"Sorry do you speak English?",
-"Sorry, is this the right place?",
-"Good morning",
-"Good afternoon", 
-"Good evening",
- "I\’m here to see ...",
- "I\’m here to meet ...",
-"Sorry, I forgot to introduce myself",
-"I should probably introduce myself",
-"My name is,but please call me ....",
-"I\’m from ...",
-"Are you ...?",
-"Im sorry, I didn’t catch your name.",
-"Nice to meet you",
-]
-phrasesSpanish = ["Disculpe, ¿hay alguien sentado aquí?",
-  "¿Está libre este asiento?",
-  "¿Perdón Habla inglés?",
-  "Lo siento, ¿es este el lugar correcto?",
-  "Buenos días",
-  "Buenas tardes",
-  "Buena noches",
-    "Estoy aquí para ver a ...",
-    "Estoy aquí para encontrarme ...",
-  "Lo siento, olvidé presentarme",
-  "Probablemente debería presentarme",
-  "Mi nombre es, pero por favor llámame ....",
-  "Soy de ...",
-  "Es usted ...?",
-  "Lo siento, no entendí tu nombre",
-  "Encantada de conocerte"]
-
-
-phrases.each_with_index do |phrase, index|
-  Phrase.create(sentence: phrase, sentenceSpanish: phrasesSpanish[index])
-end
-# I’ve been looking forward to meeting you too./ I’ve heard so much about you too."
-# "
-# Welcome back to…"
-# "
-# Thanks for coming all this way/ coming such a long way on such a cold day/ hot day/ humid day/ snowy day/… day."
-# "
-# Thanks for inviting me/ us to…."
-# "
-#  "
-# "
-# # Ending small talk/ Ending conversations"
-# "
-# # Transitions language then saying something nice about the conversation"
-# "
-# Well, it’s been great to talk but…"
-# "
-# So, it’s been lovely to catch up but…"
-# "
-# Okay then, I’d love to chat more/ hear more about that later but…"
-# "
-#  "
-# "
-# # Giving a reason for ending the small talk/ ending the conversation"
-# "
-# I’m afraid/ Unfortunately/ I’m sorry but I have another meeting at… o’clock so…"
-# "
-# I know you are very busy so…"
-# "
-# We have a lot to get through today so…"
-# "
-# We only have this room until twelve so…"
-# "
-#  "
-# "
-# # Getting down to business"
-# "
-# Do you have a minute to talk?/ Are you free to talk?"
-# "
-# As you know/ As I said in my email I just need to talk to you about…"
-# "
-#  "
-# "
-# # Reacting when the other person needs to end the conversation"
-# "
-# Of course I’ll let you get on then./ Sorry I won’t keep you any longer then."
-# "
-#  "
-# "
-# # Moving to another place/ Directing people/ Giving directions/ Leading people somewhere"
-# "
-# This way please./ After you./ Please follow me."
-# "
-#  "
-# "
-# # Introducing other people"
-# "
-# Have you met…?/ I don’t think you’ve met..."
-# "
-# I’d like to introduce you to/ Can I introduce you to my colleague/ my boss…?"
-# "
-# This is my/ the… John Smith."
-# "
-#  "
-# "
-# # Phrases like “Nice to meet you” at the end of the conversation"
-# "
-# It was really/ very/ so nice to meet you."
-# "
-# It was nice/ great meeting you."
-# "
-#  "
-# "
-# # Like “Nice to see you again”, but at the end of the conversation"
-# "
-# It was lovely/ great/ so nice to see you again."
-# "
-#  "
-# "
-# # Small talk at the end of a conversation"
-# "
-# Are you finished/ Have you finished for the day/ for the day/ for the week?"
-# "
-# Do you have many more meetings today?"
-# "
-# Do you have to go straight back to your office now/ after this?"
-# "
-# Do you have any plans for this evening/ for the weekend/ for…?"
-# "
-#  "
-# "
-# # Good wishes for something that the other person will do in the future"
-# "
-# I hope you/ Hope you have a good time/ good weekend/ good evening/ good time/ good trip."
-# "
-# Take care./ Bon voyage./ Have a safe journey back/ home."
-# "
-#  "
-# "
-# # Good wishes for other people"
-# "
-# Please pass on my best regards to…/ say “Hi” to… from me."
-# "
-#  "
-# "
-# # Mentioning future contact"
-# "
-# I hope we have the chance to meet again soon."
-# "
-# I look forward to seeing you/ hearing from you/ your call."
-# "
-# See you there"
-# "
-#  "
-# "
-# # Other friendly and polite language at the end of a conversation"
-# "
-# Thanks again for taking the time to come here today."
-# "
-# I hope you had a good time/ I hope it was worth the trip/ I hope…"
-# "
-# Thanks, that was really useful/ lovely/ really productive/ very stimulating/ a real eye opener/…"
-# "
-#  "
-# "
-# # Small talk"
-# "
-# Small talk when meeting for the first time"
-# "
-# Is this your first time here/ in…/ here in…?"
-# "
-# What do you do for a living?"
-# "
-# What does your company/ division/ department/ section/ team/… do?"
-# "
-# Where is your company based?/ Where are you based?/ Where do you work?/ Do you work near here?/ Is your office near here?/ Are you based near here?"
-# "
-# Who do you work for? What do you do there?"
-# "
-#  "
-# "
-# # Small talk with people you’ve met before"
-# "
-# What a coincidence!/ This is a nice surprise. I didn’t know that you were interested in…/ that you were in the area/ that you…"
-# "
-# Did you have a good/ nice/ fun weekend/ evening/ holiday?"
-# "
-# Have you been busy lately/ recently/ today/ this week?"
-# "
-# How has your day been/ week been so far?"
-# "
-# How was your long/ three-day weekend?"
-# "
-# How was your summer/ Xmas/ New Year/ Easter/ bank holiday/ vacation?"
-# "
-# How’s it going?/ How are things?/ How are you doing?/ How’s life treating you?"
-# "
-# How’s John doing/ getting on/ getting on with…?"
-# "
-# How’s work?"
-# "
-# How’s your project going?/ How’s… going?"
-# "
-# What are you working on at the moment?/ Are you still working on…?"
-# "
-#  "
-# "
-# # Small talk when meeting for the first time or again"
-# "
-# Did you have any problems getting here?/ Did you have any trouble finding us?"
-# "
-# How long are you here?/ How long will you be here?/ How long are you staying in… this time?/ Are you staying long?"
-# "
-# How was your flight from…/ to…?/ How was your journey here/ from…?"
-# "
-# How’s the weather outside/ outside now/ in…/ back in… now?/ Is it still…?"
-# "
-# It’s a bit/ rather/ quite/ really/ so humid/ cold/ hot/ grey/ crowded/ busy/…, isn’t it? Is it usually like this at this time of year?"
-# "
-# # Was the map that I sent okay?"
-# "
-# What brings you here today?/ What brings you to…?/ Are you here for/ to…?"
-# "
-# You must be really jet lagged. What time is it now in…?/ What’s the time difference between… and…?"
-# "
-#  "
-# "
-# # Answers to “How…?” questions"
-# "
-# Really great/ Pretty good/ Very well/ Not so/ too bad/ Fine"
-# "
-# Not so good/ Not so great."
-# "
-#  "
-# "
-# # Talking about your studies or company and job"
-# "
-# I’m studying for… at…"
-# "
-# I work for ABC Limited./ I work in the… department/ division/ section of ABC Limited."
-# "
-# I’m in charge of/ I’m responsible for…"
-# "
-#  "
-# "
-# # Not answering questions politely"
-# "
-# I’d rather not say if you don’t mind."
-# "
-# "
-# # Asking the same question back to someone"
-# "
-# How about you?/ And you?/ What about you?"
-# "
-#  "
-# "
-# # Reacting to what people say"
-# "
-# Positive reactions reacting to good news, etc"
-# "
-# I’m happy/ relieved/ delighted to hear that."
-# "
-# That sounds great/ lovely/ delicious/ nice/ fantastic/ wonderful/ fabulous/ perfect/ ideal."
-# "
-#  "
-# "
-# # Negative reactions reacting to bad news, etc"
-# "
-# I’m sorry to hear that."
-# "
-# That’s a pity./ That’s a shame./ That’s too bad."
-# "
-# That sounds awful/ terrible/ unbearable/ stressful/ like a nightmare."
-# "
-#  "
-# "
-# # Active listening"
-# "
-# Encouraging someone to continue"
-# "
-# Go on."
-# "
-#  "
-# "
-# # Showing you’re listening/ Not listening in silence"
-# "
-# Mmmm hmmm."
-# "
-# Really?"
-# "
-#  "
-# "
-# # Changing topic"
-# "
-# Talking of…, that reminds me,…"
-# "
-#  "
-# "
-# # Offers"
-# "
-# Offering/ Helping making a guest comfortable, etc"
-# "
-# Would you like something to drink/ tea or coffee?"
-# "
-# Can I take your bags/ your coats/ your…?"
-# "
-# Please take a seat anywhere you like and she’ll come out and see you shortly."
-# "
-# Please make yourself at home. You can leave your coat/ bag/ stuff/… here/ over there/… if you like."
-# "
-# Please help yourself to sugar/ to…"
-# "
-#  "
-# "
-# # Responding to offers"
-# "
-# That would be great/ lovely/ a great help/… but…"
-# "
-# Thank you, that’s very kind but if you don’t mind, I’d prefer…"
-# "
-#  "
-# "
-# # Discussing business cards"
-# "
-# Do you have a business card on you?"
-# "
-# It’s all written on my business card. Let me give you one. Here you are./ Here you go."
-# "
-# Thanks. And here’s mine.  "
-# "
-# Oh, I see from your card that you…"
-
-puts "=========================="
-puts "~~~~~~~~~~SEEDED~~~~~~~~~~"
-puts "=========================="
+# phrases = ["Excuse me.Is anyone sitting here?", 
+  # "Is this seat free?",
+  # "Sorry do you speak English?",
+  # "Sorry, is this the right place?",
+  # "Good morning",
+  # "Good afternoon", 
+  # "Good evening",
+  #  "I\’m here to see ...",
+  #  "I\’m here to meet ...",
+  # "Sorry, I forgot to introduce myself",
+  # "I should probably introduce myself",
+  # "My name is,but please call me ....",
+  # "I\’m from ...",
+  # "Are you ...?",
+  # "Im sorry, I didn’t catch your name.",
+  # "Nice to meet you",
+  # ]
+  # phrasesSpanish = ["Disculpe, ¿hay alguien sentado aquí?",
+  #   "¿Está libre este asiento?",
+  #   "¿Perdón Habla inglés?",
+  #   "Lo siento, ¿es este el lugar correcto?",
+  #   "Buenos días",
+  #   "Buenas tardes",
+  #   "Buena noches",
+  #     "Estoy aquí para ver a ...",
+  #     "Estoy aquí para encontrarme ...",
+  #   "Lo siento, olvidé presentarme",
+  #   "Probablemente debería presentarme",
+  #   "Mi nombre es, pero por favor llámame ....",
+  #   "Soy de ...",
+  #   "Es usted ...?",
+  #   "Lo siento, no entendí tu nombre",
+  #   "Encantada de conocerte"]

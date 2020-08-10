@@ -3,7 +3,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 import LanguageContainer from "./flashcard/LanguageContainer";
-import FlashCard from "./flashcard/FlashCard";
 import Navbar from "../src/nav//Navbar";
 import { Route, Switch } from "react-router-dom";
 

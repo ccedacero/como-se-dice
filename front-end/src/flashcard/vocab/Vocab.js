@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FlashCard from "./FlashCard";
+import VocabCard from "./VocabCard";
 
 const Vocab = () => {
   const [vocab, setVocab] = useState({
@@ -17,16 +17,13 @@ const Vocab = () => {
         }));
       });
   }, []);
-
-  console.log(vocab);
   const renderVocab = () => {
     if (vocab.words.length > 0) {
-      // return vocab.words.map((word) => {
       let currentWord = vocab.words[vocab.count];
       return (
-        <FlashCard
+        <VocabCard
           key={currentWord.id}
-          word={currentWord}
+          currentWord={currentWord}
           setVocab={setVocab}
           vocab={vocab.words}
         />

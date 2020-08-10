@@ -35,30 +35,32 @@ vowelList = "aeiou".split'';
 vowelList.map {|vowel| Vowel.create(letter: vowel, letterUrl:"https://comosedice.s3.amazonaws.com/Vowels/#{vowel}.mp3")}
 
 # SEEDING VOCAB 
-most_common_english_words = ["a", "about", "all", "also", "and", "as", 
-"at", "be", "because", "but", "by", "can", "come", "could", "day", 
-"do", "even", "find", "first", "for", "from", "get", "give", "go", 
-"have", "he", "her", "here", "him", "his", "how", "I", "if", "in", 
-"into", "it", "its", "just", "know", "like", "look", "make", "man", 
-"many", "me", "more", "my", "new", "no", "not", "now", "of", "on", "one",
- "only", "or", "other", "our", "out", "people", "say", "see", "she", 
- "so", "some", "take", "tell", "than", "that", "the", "their", "them", 
- "then", "there", "these", "they", "thing", "think", "this", "those",
-  "time", "to", "two", "up", "use", "very", "want", "way", "we", "well", 
-  "what", "when", "which", "who", "will", "with", "would", "year", "you",
-  "your" ]
-  most_common_english_translated = ["a", "sobre", "todos", "también", "y", "como",
-    "en", "ser", "porque", "pero", "por", "puede", "venir", "podría", "día",
-    "hacer", "incluso", "buscar", "primero", "para", "de", "obtener", "dar", "ir",
-    "tengo", "él", "ella", "aquí", "él", "su", "cómo", "yo", "si", "en",
-    "en", "eso", "su", "solo", "saber", "me gusta", "mirar", "hacer", "hombre",
-    "muchos", "yo", "más", "mi", "nuevo", "no", "no", "ahora", "de", "en", "uno",
-      "solo", "o", "otro", "nuestro", "fuera", "gente", "decir", "ver", "ella",
-      "entonces", "algunos", "tomar", "decir", "que", "eso", "el", "su", "ellos",
-      "entonces", "allí", "estos", "ellos", "cosa", "piensan", "esto", "esos",
-       "tiempo", "hasta", "dos", "arriba", "uso", "mucho", "deseo", "camino", "nosotros", "bien",
-       "qué", "cuándo", "cuál", "quién", "será", "con", "sería", "año", "usted",
-       "tu"]
+# most_common_english_words = ["a", "about", "all", "also", "and", "as", 
+# "at", "be", "because", "but", "by", "can", "come", "could", "day", 
+# "do", "even", "find", "first", "for", "from", "get", "give", "go", 
+# "have", "he", "her", "here", "him", "his", "how", "I", "if", "in", 
+# "into", "it", "its", "just", "know", "like", "look", "make", "man", 
+# "many", "me", "more", "my", "new", "no", "not", "now", "of", "on", "one",
+#  "only", "or", "other", "our", "out", "people", "say", "see", "she", 
+#  "so", "some", "take", "tell", "than", "that", "the", "their", "them", 
+#  "then", "there", "these", "they", "thing", "think", "this", "those",
+#   "time", "to", "two", "up", "use", "very", "want", "way", "we", "well", 
+#   "what", "when", "which", "who", "will", "with", "would", "year", "you",
+#   "your" ]
+#   most_common_english_translated = ["a", "sobre", "todos", "también", "y", "como",
+#     "en", "ser", "porque", "pero", "por", "puede", "venir", "podría", "día",
+#     "hacer", "incluso", "buscar", "primero", "para", "de", "obtener", "dar", "ir",
+#     "tengo", "él", "ella", "aquí", "él", "su", "cómo", "yo", "si", "en",
+#     "en", "eso", "su", "solo", "saber", "me gusta", "mirar", "hacer", "hombre",
+#     "muchos", "yo", "más", "mi", "nuevo", "no", "no", "ahora", "de", "en", "uno",
+#       "solo", "o", "otro", "nuestro", "fuera", "gente", "decir", "ver", "ella",
+#       "entonces", "algunos", "tomar", "decir", "que", "eso", "el", "su", "ellos",
+#       "entonces", "allí", "estos", "ellos", "cosa", "piensan", "esto", "esos",
+#        "tiempo", "hasta", "dos", "arriba", "uso", "mucho", "deseo", "camino", "nosotros", "bien",
+#        "qué", "cuándo", "cuál", "quién", "será", "con", "sería", "año", "usted",
+      #  "tu"]
+
+      
 
 
   most_common_english_words.each_with_index do |word, index|

@@ -9,7 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Vocab as Pago } from "../src/flashcard/vocab/Vocab";
 import { QuizzesContainer as Pruebas } from "../src/quizes/QuizzesContainer";
-import { Quiz as PagoQuiz } from "../src/quizes/payquiz/Quiz";
+import Quiz from "./quizes/payquiz/Quiz";
 const styles = (theme) => ({
   paddingTop: {
     padding: "2em",
@@ -30,11 +30,12 @@ export const App = () => {
               exact
               component={Abecedario}
             />
-            <Route path="/pruebas" exact component={Pruebas} />
+
             <Route path="/vocabulario/Vocales" exact component={Vocales} />
             <Route path="/vocabulario/Pago" exact component={Pago} />
             {/* Quizes below */}
-            <Route path="/pruebas/Pago" exact component={PagoQuiz} />
+            <Route path="/pruebas" exact component={Pruebas} />
+            <Route path="/pruebas/:id" component={Quiz} />
           </Switch>
         </Container>
       </div>

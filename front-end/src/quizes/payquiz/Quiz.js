@@ -17,50 +17,120 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Quiz = (props) => {
+export const Quiz = ({
+  match: {
+    params: { id },
+  },
+}) => {
   const classes = useStyles();
   const [state, setState] = useState([]);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState("Choose wisely");
+  const [question, setQuestion] = useState({
+    currentQuestion: "",
+    question: "",
+    Option1: "",
+    Option2: "",
+    Option3: "",
+    Option4: "",
+  });
+  const [results, setResults] = useState({
+    no_correct: 0,
+    no_incorrect: 0,
+  });
 
   useEffect(() => {
     fetch("http://localhost:3000/questions")
       .then((r) => r.json())
       .then((quizQuestionsObj) => {
         setState(quizQuestionsObj);
+        setQuestion({
+          currentQuestion: 0,
+          question: quizQuestionsObj[0].question,
+          Option1: quizQuestionsObj[0].answers[0].answer,
+          Option2: quizQuestionsObj[0].answers[1].answer,
+          Option3: quizQuestionsObj[0].answers[2].answer,
+          Option4: quizQuestionsObj[0].answers[3].answer,
+        });
       });
   }, []);
-
-  console.log(state);
   const handleRadioChange = (event) => {
     setValue(event.target.value);
     setHelperText(" ");
     setError(false);
   };
+
+  const handleQuestionChange = () => {
+    return (
+      state[question.currentQuestion] &&
+      state[question.currentQuestion].question
+    );
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
+    // console.log(state.length, question.currentQuestion);
+    if (question.currentQuestion + 1 !== state.length) {
+      let comparison = state[question.currentQuestion].answers.find((ans) => {
+        if (ans.is_correct !== undefined && ans.is_correct === true) {
+          return ans;
+        } else {
+          setHelperText("Please select an option.");
+          setError(true);
+          return;
+        }
+      });
+      if (comparison.answer && comparison.answer === value) {
+        setQuestion((prevState) => {
+          console.log(prevState);
+          return {
+            currentQuestion: prevState.currentQuestion + 1,
+            Option1: state[prevState.currentQuestion + 1].answers[0].answer,
+            Option2: state[prevState.currentQuestion + 1].answers[1].answer,
+            Option3: state[prevState.currentQuestion + 1].answers[2].answer,
+            Option4: state[prevState.currentQuestion + 1].answers[3].answer,
+          };
+        });
 
-    if (value === "best") {
-      setHelperText("You got it!");
-      setError(false);
-    } else if (value === "worst") {
-      setHelperText("Sorry, wrong answer!");
-      setError(true);
+        setResults((prevState) => {
+          return {
+            ...prevState,
+            no_correct: prevState.no_correct + 1,
+          };
+        });
+        setHelperText("You got it!");
+        setError(false);
+      } else if (comparison.answer && comparison.answer !== value) {
+        setHelperText("Sorry, wrong answer!");
+        setError(true);
+        setResults((prevState) => {
+          return {
+            ...prevState,
+            no_incorrect: prevState.no_incorrect + 1,
+          };
+        });
+      } else {
+        setHelperText("Please select an option.");
+        setError(true);
+      }
     } else {
-      setHelperText("Please select an option.");
-      setError(true);
+      setHelperText(
+        `You're done!, you got ${results.no_correct} questions right!`
+      );
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <FormLabel component="legend">
+        Prueba / Pop Quiz de Vocabulario de {id}
+      </FormLabel>
       <FormControl
         component="fieldset"
         error={error}
         className={classes.formControl}
       >
-        <FormLabel component="legend">Pop quiz: Material-UI is...</FormLabel>
+        <FormLabel component="legend">{handleQuestionChange()}</FormLabel>
         <RadioGroup
           aria-label="quiz"
           name="quiz"
@@ -68,14 +138,24 @@ export const Quiz = (props) => {
           onChange={handleRadioChange}
         >
           <FormControlLabel
-            value="best"
+            value={question.Option1}
             control={<Radio />}
-            label="The best!"
+            label={question.Option1}
           />
           <FormControlLabel
-            value="worst"
+            value={question.Option2}
             control={<Radio />}
-            label="The worst."
+            label={question.Option2}
+          />
+          <FormControlLabel
+            value={question.Option3}
+            control={<Radio />}
+            label={question.Option3}
+          />
+          <FormControlLabel
+            value={question.Option4}
+            control={<Radio />}
+            label={question.Option4}
           />
         </RadioGroup>
         <FormHelperText>{helperText}</FormHelperText>

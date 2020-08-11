@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import VowelCard from "./VowelCard";
-const Vowels = () => {
+export const Vowels = () => {
   const [vowels, setVowels] = useState({
     letters: [],
     count: 0,

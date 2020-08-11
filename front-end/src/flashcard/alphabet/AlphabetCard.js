@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import Container from "@material-ui/core/Container";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -40,6 +41,11 @@ const useStyles = makeStyles({
   },
   nextArrow: {
     marginLeft: "4em",
+  },
+  MuiCardActionsRoot: {
+    display: "flex",
+    padding: "8px",
+    justifyContent: "center",
   },
 });
 
@@ -79,39 +85,41 @@ export default function AlphabetCard({
   };
 
   return (
-    <Card className={(classes.root, classes.centerCard)} variant="outlined">
-      <div>
-        <CardContent className={classes.center}>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            Como se dice?
-          </Typography>
-          <Typography className={classes.word} variant="h5" component="h2">
-            {letter}
-            <PlayCircleOutlineIcon
-              className={classes.iconSize}
-              onClick={handleplaySong}
-            />
-          </Typography>
-          <CardActions>
-            <Button onClick={previousCard} size="medium">
-              <ArrowBackIcon className={classes.iconSize} />
-              <span className={classes.languageSize}>Back</span>
-            </Button>
-            <Button
-              onClick={nextCard}
-              className={classes.nextArrow}
-              size="medium"
+    <Container maxWidth="sm">
+      <Card className={(classes.root, classes.centerCard)} variant="outlined">
+        <div>
+          <CardContent className={classes.center}>
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
             >
-              <ArrowForwardIcon className={classes.iconSize} />
-              <span className={classes.languageSize}>Next</span>
-            </Button>
-          </CardActions>
-        </CardContent>
-      </div>
-    </Card>
+              Como se dice?
+            </Typography>
+            <Typography className={classes.word} variant="h5" component="h2">
+              {letter}
+              <PlayCircleOutlineIcon
+                className={classes.iconSize}
+                onClick={handleplaySong}
+              />
+            </Typography>
+            <CardActions className={classes.MuiCardActionsRoot}>
+              <Button onClick={previousCard} size="medium">
+                <ArrowBackIcon className={classes.iconSize} />
+                <span className={classes.languageSize}>Back</span>
+              </Button>
+              <Button
+                onClick={nextCard}
+                className={classes.nextArrow}
+                size="medium"
+              >
+                <ArrowForwardIcon className={classes.iconSize} />
+                <span className={classes.languageSize}>Next</span>
+              </Button>
+            </CardActions>
+          </CardContent>
+        </div>
+      </Card>
+    </Container>
   );
 }

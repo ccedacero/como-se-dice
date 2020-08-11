@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import { NavDrawer } from "./NavDrawer";
+import QuizzesContainer from "../quizes/QuizzesContainer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,6 +71,7 @@ export default function Navbar(props) {
             aria-label="menu"
             component={Link}
             // onClick={toggleDrawer(true)}
+            to={"/vocabulario"}
             // to={user_name ? "/" : "/login"}
           >
             ComoSeDice
@@ -81,10 +83,10 @@ export default function Navbar(props) {
             {/* CONDITIONALS FOR NAV BAR DISPLAY */}
             {/* {props.loggedIn !== "null" || !props.loggedIn ? */}
             <>
-              <Button color="inherit" component={Link} to="/applications">
+              <Button color="inherit" component={Link} to="/vocabulario">
                 Vocabulario
               </Button>
-              <Button color="inherit" component={Link} to="/interviews">
+              <Button color="inherit" component={Link} to="/pruebas">
                 Pruebas
               </Button>
 

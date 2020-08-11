@@ -1,3 +1,5 @@
+// We pay once a week is not playing audio
+// Can you come in at seven?
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -9,6 +11,8 @@ import ReactCardFlip from "react-card-flip";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import Container from "@material-ui/core/Container";
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -23,11 +27,11 @@ const useStyles = makeStyles({
     fontSize: "2em",
   },
   word: {
-    fontSize: "5.5rem",
+    fontSize: "4rem",
     textAlign: "center",
   },
   centerCard: {
-    marginTop: "40vh",
+    marginTop: "30vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -40,7 +44,12 @@ const useStyles = makeStyles({
     fontSize: 40,
   },
   nextArrow: {
-    marginLeft: "4em",
+    marginLeft: "3em",
+  },
+  MuiCardActionsRoot: {
+    display: "flex",
+    padding: "8px",
+    justifyContent: "center",
   },
 });
 
@@ -85,81 +94,83 @@ export default function VocabCard({
   };
 
   return (
-    <ReactCardFlip
-      isFlipped={isFlipped}
-      flipDirection="horizontal"
-      //   flipSpeedFrontToBack="1"
-    >
-      <Card className={(classes.root, classes.centerCard)} variant="outlined">
-        <div>
-          <CardContent className={classes.center}>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              Como se dice?
-            </Typography>
-            <Typography className={classes.word} variant="h5" component="h2">
-              {wordSpanish}
-            </Typography>
-            <CardActions>
-              <Button onClick={previousCard} size="medium">
-                <ArrowBackIcon className={classes.iconSize} />
-                <span className={classes.languageSize}>Back</span>
-              </Button>
-              <Button onClick={handleClick} size="medium">
-                <span className={classes.languageSize}>Ingles </span>
-              </Button>
-              <Button
-                onClick={nextCard}
-                className={classes.nextArrow}
-                size="medium"
+    <Container maxWidth="sm">
+      <ReactCardFlip
+        isFlipped={isFlipped}
+        flipDirection="horizontal"
+        //   flipSpeedFrontToBack="1"
+      >
+        <Card className={(classes.root, classes.centerCard)} variant="outlined">
+          <div>
+            <CardContent className={classes.center}>
+              <Typography
+                className={classes.title}
+                color="textSecondary"
+                gutterBottom
               >
-                <ArrowForwardIcon className={classes.iconSize} />
-                <span className={classes.languageSize}>Next</span>
-              </Button>
-            </CardActions>
-          </CardContent>
-        </div>
-      </Card>
-      <Card className={(classes.root, classes.centerCard)} variant="outlined">
-        <div>
-          <CardContent className={classes.center}>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              Como se dice?
-            </Typography>
-            <Typography className={classes.word} variant="h5" component="h2">
-              {word}
-              <PlayCircleOutlineIcon
-                className={classes.iconSize}
-                onClick={handleplaySong}
-              />
-            </Typography>
-            <CardActions>
-              <Button onClick={previousCard} size="medium">
-                <ArrowBackIcon className={classes.iconSize} />
-                <span className={classes.languageSize}>Back</span>
-              </Button>
-              <Button onClick={handleClick} size="medium">
-                <span className={classes.languageSize}>Ingles </span>
-              </Button>
-              <Button
-                onClick={nextCard}
-                className={classes.nextArrow}
-                size="medium"
+                Como se dice?
+              </Typography>
+              <Typography className={classes.word} variant="h5" component="h2">
+                {wordSpanish}
+              </Typography>
+              <CardActions className={classes.MuiCardActionsRoot}>
+                <Button onClick={previousCard} size="medium">
+                  <ArrowBackIcon className={classes.iconSize} />
+                  <span className={classes.languageSize}>Back</span>
+                </Button>
+                <Button onClick={handleClick} size="medium">
+                  <span className={classes.languageSize}>Ingles </span>
+                </Button>
+                <Button
+                  onClick={nextCard}
+                  className={classes.nextArrow}
+                  size="medium"
+                >
+                  <ArrowForwardIcon className={classes.iconSize} />
+                  <span className={classes.languageSize}>Next</span>
+                </Button>
+              </CardActions>
+            </CardContent>
+          </div>
+        </Card>
+        <Card className={(classes.root, classes.centerCard)} variant="outlined">
+          <div>
+            <CardContent className={classes.center}>
+              <Typography
+                className={classes.title}
+                color="textSecondary"
+                gutterBottom
               >
-                <ArrowForwardIcon className={classes.iconSize} />
-                <span className={classes.languageSize}>Next</span>
-              </Button>
-            </CardActions>
-          </CardContent>
-        </div>
-      </Card>
-    </ReactCardFlip>
+                Como se dice?
+              </Typography>
+              <Typography className={classes.word} variant="h5" component="h2">
+                {word}
+                <PlayCircleOutlineIcon
+                  className={classes.iconSize}
+                  onClick={handleplaySong}
+                />
+              </Typography>
+              <CardActions className={classes.MuiCardActionsRoot}>
+                <Button onClick={previousCard} size="medium">
+                  <ArrowBackIcon className={classes.iconSize} />
+                  <span className={classes.languageSize}>Back</span>
+                </Button>
+                <Button onClick={handleClick} size="medium">
+                  <span className={classes.languageSize}>Ingles </span>
+                </Button>
+                <Button
+                  onClick={nextCard}
+                  className={classes.nextArrow}
+                  size="medium"
+                >
+                  <ArrowForwardIcon className={classes.iconSize} />
+                  <span className={classes.languageSize}>Next</span>
+                </Button>
+              </CardActions>
+            </CardContent>
+          </div>
+        </Card>
+      </ReactCardFlip>
+    </Container>
   );
 }

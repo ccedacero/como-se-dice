@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AlphabetCard from "./AlphabetCard";
 
-const Alphabet = () => {
+export const Alphabet = () => {
   const [alphabet, setAlphabet] = useState({
     letters: [],
     count: 0,

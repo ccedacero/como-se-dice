@@ -1,19 +1,17 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import CameraIcon from "@material-ui/icons/PhotoCamera";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
+// import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import Categories from "./Categories";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -63,12 +61,11 @@ const useStyles = makeStyles((theme) => ({
 let cards = Categories;
 //  cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-export default function Album() {
+export const QuizzesContainer = () => {
   const classes = useStyles();
 
   return (
     <React.Fragment>
-      <CssBaseline />
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
@@ -88,9 +85,10 @@ export default function Album() {
               color="textSecondary"
               paragraph
             >
-              La Universidad de Berkeley, ha desarrolado un courso de ingles
-              simple, gratiuto, y practico para ayudarle a aprender ingles
-              rapido. <br></br> Buena Suerte!
+              Listo para mostrarnos lo que has aprendido? Aqui encontraras una
+              multitud de pruebas basadas en los diferentes temas que has
+              aprendido.
+              <br></br> Si Se Puede!
             </Typography>
           </Container>
         </div>
@@ -112,9 +110,11 @@ export default function Album() {
                     <Typography>{card.description}</Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
-                      Practicar
-                    </Button>
+                    <Link to={`pruebas/${card.title}`}>
+                      <Button size="small" edge="center" color="primary">
+                        Practicar
+                      </Button>
+                    </Link>
                     <Button size="small" color="primary">
                       Mas Info
                     </Button>
@@ -144,4 +144,5 @@ export default function Album() {
       {/* End footer */}
     </React.Fragment>
   );
-}
+};
+export default QuizzesContainer;

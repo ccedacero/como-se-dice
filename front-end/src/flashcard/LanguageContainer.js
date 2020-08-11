@@ -5,9 +5,9 @@ import Vocab from "./vocab/Vocab";
 const LanguageContainer = () => {
   return (
     <div>
-      <Vocab />
-      <Alphabet />
-      <VowelCard />
+      {/* <Vocab /> */}
+      {/* <Alphabet /> */}
+      {/* <VowelCard /> */}
     </div>
   );
 };

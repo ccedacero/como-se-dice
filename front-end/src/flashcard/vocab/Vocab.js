@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VocabCard from "./VocabCard";
 
-const Vocab = () => {
+export const Vocab = () => {
   const [vocab, setVocab] = useState({
     words: [],
     count: 0,

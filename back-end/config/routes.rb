@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  resources :quizzes
-  resources :user_quizzes
-  resources :comments
-  resources :topics
-  resources :forums
+  resources :results
+  resources :user_answers
+  resources :answers
+  resources :questions
+  resources :test_questions
+  resources :tests
   resources :phrases
   resources :vocabs
   resources :vowels

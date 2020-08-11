@@ -4,6 +4,8 @@ Alphabet.destroy_all
 Vowel.destroy_all
 Vocab.destroy_all
 Phrase.destroy_all
+Answer.destroy_all
+Question.destroy_all
 # Forum.destroy_all
 # Interview.destroy_all
 # Comment.destroy_all
@@ -49,6 +51,22 @@ saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "
  greetings.each_with_index do |word, index|
       Vocab.create(word: word, wordSpanish: pago[index], wordUrl: "https://comosedice.s3.amazonaws.com/Greetings/#{word}.mp3")
   end
+
+
+  Test.create(name: "Prueba Sobre Vocabulario de Pago", no_of_questions:7);
+
+  TestQuestion.create(test_id:Test.first.id, question_id:nil)
+
+  Question.create(question:"Como se dice Turno del atardecer?")
+  options =[
+    "Day shift",
+    "Afternoon shift",
+    "Evening shift",
+    "Night shift",
+  ]
+  options.map{|q| Answer.create(question_id:Question.first.id, answer:q, is_correct: false)}
+
+
 
   # Seeding Praises + url 
   # praises = ["Good", "Very Good", "Wonderful!", "Great!", "Fantastic!", "Well done!", "Perfect!", "Pretty!", "Beautiful!", "Congratulations!", "Best Wishes!", "You do good work!", "I like your work", "You are a good worker!", "Well done!"]

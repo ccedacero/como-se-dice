@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_173942) do
+ActiveRecord::Schema.define(version: 2020_08_11_171015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,16 +22,10 @@ ActiveRecord::Schema.define(version: 2020_08_06_173942) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.integer "topic_id"
-    t.integer "user_id"
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "forums", force: :cascade do |t|
-    t.string "title"
+  create_table "answers", force: :cascade do |t|
+    t.integer "question_id"
+    t.string "answer"
+    t.boolean "is_correct"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -50,27 +44,52 @@ ActiveRecord::Schema.define(version: 2020_08_06_173942) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "quizzes", force: :cascade do |t|
-    t.integer "language_id"
-    t.string "phrase"
-    t.string "word"
+  create_table "questions", force: :cascade do |t|
+    t.string "question"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "topics", force: :cascade do |t|
-    t.integer "forum_id"
-    t.integer "user_id"
-    t.string "title"
+  create_table "results", force: :cascade do |t|
+    t.bigint "test_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "no_correct"
+    t.integer "no_incorrect"
+    t.integer "no_unanswered"
+    t.integer "score"
+    t.integer "rank"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["test_id"], name: "index_results_on_test_id"
+    t.index ["user_id"], name: "index_results_on_user_id"
+  end
+
+  create_table "test_questions", force: :cascade do |t|
+    t.integer "test_id"
+    t.integer "question_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "user_quizzes", force: :cascade do |t|
-    t.integer "quiz_id"
-    t.integer "user_id"
+  create_table "tests", force: :cascade do |t|
+    t.string "name"
+    t.datetime "date_from"
+    t.datetime "date_to"
+    t.integer "timing"
+    t.integer "no_of_questions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_answers", force: :cascade do |t|
+    t.bigint "test_question_id", null: false
+    t.bigint "answer_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_user_answers_on_answer_id"
+    t.index ["test_question_id"], name: "index_user_answers_on_test_question_id"
+    t.index ["user_id"], name: "index_user_answers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -99,4 +118,9 @@ ActiveRecord::Schema.define(version: 2020_08_06_173942) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "results", "tests"
+  add_foreign_key "results", "users"
+  add_foreign_key "user_answers", "answers"
+  add_foreign_key "user_answers", "test_questions"
+  add_foreign_key "user_answers", "users"
 end

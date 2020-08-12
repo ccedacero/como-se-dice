@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :vowels
   resources :alphabets
   resources :languages
-  resources :users
+  resources :users, only: [:create]
+  post "/login", to "users#login"
+  get "/autologin/:id", to "users#autologin"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

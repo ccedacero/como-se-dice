@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import VowelCard from "./VowelCard";
+import { payload } from "../../constants/index";
 export const Vowels = () => {
   const [vowels, setVowels] = useState({
     letters: [],
@@ -7,7 +8,7 @@ export const Vowels = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3000/vowels")
+    fetch("http://localhost:3000/vowels", payload)
       .then((r) => r.json())
       .then((VowelsObj) => {
         setVowels((prevState) => ({

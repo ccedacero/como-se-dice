@@ -12,6 +12,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -59,12 +60,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ handleLogin }) {
+export default function SignIn({ handleLogin, setState }) {
   const classes = useStyles();
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
+  const history = useHistory();
 
   const handleFormChange = (e) => {
     e.preventDefault();
@@ -84,11 +86,14 @@ export default function SignIn({ handleLogin }) {
       },
       body: JSON.stringify(loginForm),
     };
-    fetch("http://localhost:3000/users", payLoad)
+    fetch("http://localhost:3000/login", payLoad)
       .then((r) => r.json())
       .then((userObj) => {
-        localStorage.setItem("token", JSON.stringify(userObj));
+        const { user, token } = userObj;
+        setState({ currentUser: user });
         handleLogin(userObj);
+        localStorage.token = token;
+        history.push("/vocabulario");
       });
   };
 

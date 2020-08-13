@@ -7,10 +7,15 @@ import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(3),
+    margin: theme.spacing(5),
+  },
+  fomrTopSpace: {
+    marginTop: "15vh",
   },
   button: {
     margin: theme.spacing(1, 1, 0, 0),
@@ -26,7 +31,7 @@ export const Quiz = ({
   const [state, setState] = useState([]);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
-  const [helperText, setHelperText] = useState("Choose wisely");
+  const [helperText, setHelperText] = useState("Buena Suerte!");
   const [question, setQuestion] = useState({
     currentQuestion: "",
     question: "",
@@ -41,7 +46,14 @@ export const Quiz = ({
   });
 
   useEffect(() => {
-    fetch("http://localhost:3000/questions")
+    const payload = {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    };
+    fetch("http://localhost:3000/questions", payload)
       .then((r) => r.json())
       .then((quizQuestionsObj) => {
         setState(quizQuestionsObj);
@@ -55,6 +67,7 @@ export const Quiz = ({
         });
       });
   }, []);
+  console.log(state);
   const handleRadioChange = (event) => {
     setValue(event.target.value);
     setHelperText(" ");
@@ -98,10 +111,10 @@ export const Quiz = ({
             no_correct: prevState.no_correct + 1,
           };
         });
-        setHelperText("You got it!");
+        setHelperText("Buen Trabajo!");
         setError(false);
       } else if (comparison.answer && comparison.answer !== value) {
-        setHelperText("Sorry, wrong answer!");
+        setHelperText("Lo Siente, Intente Otra vez!");
         setError(true);
         setResults((prevState) => {
           return {
@@ -110,7 +123,7 @@ export const Quiz = ({
           };
         });
       } else {
-        setHelperText("Please select an option.");
+        setHelperText("Por favor, seleccione una opcion:");
         setError(true);
       }
     } else {
@@ -121,54 +134,58 @@ export const Quiz = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormLabel component="legend">
-        Prueba / Pop Quiz de Vocabulario de {id}
-      </FormLabel>
-      <FormControl
-        component="fieldset"
-        error={error}
-        className={classes.formControl}
-      >
-        <FormLabel component="legend">{handleQuestionChange()}</FormLabel>
-        <RadioGroup
-          aria-label="quiz"
-          name="quiz"
-          value={value}
-          onChange={handleRadioChange}
+    <Container maxWidth="sm">
+      <form className={classes.fomrTopSpace} onSubmit={handleSubmit}>
+        <FormLabel component="legend">
+          <Typography variant="h5" component="h6">
+            Prueba / Pop Quiz de Vocabulario de {id}
+          </Typography>
+        </FormLabel>
+        <FormControl
+          component="fieldset"
+          error={error}
+          className={classes.formControl}
         >
-          <FormControlLabel
-            value={question.Option1}
-            control={<Radio />}
-            label={question.Option1}
-          />
-          <FormControlLabel
-            value={question.Option2}
-            control={<Radio />}
-            label={question.Option2}
-          />
-          <FormControlLabel
-            value={question.Option3}
-            control={<Radio />}
-            label={question.Option3}
-          />
-          <FormControlLabel
-            value={question.Option4}
-            control={<Radio />}
-            label={question.Option4}
-          />
-        </RadioGroup>
-        <FormHelperText>{helperText}</FormHelperText>
-        <Button
-          type="submit"
-          variant="outlined"
-          color="primary"
-          className={classes.button}
-        >
-          Check Answer
-        </Button>
-      </FormControl>
-    </form>
+          <FormLabel component="legend">{handleQuestionChange()}</FormLabel>
+          <RadioGroup
+            aria-label="quiz"
+            name="quiz"
+            value={value}
+            onChange={handleRadioChange}
+          >
+            <FormControlLabel
+              value={question.Option1}
+              control={<Radio />}
+              label={question.Option1}
+            />
+            <FormControlLabel
+              value={question.Option2}
+              control={<Radio />}
+              label={question.Option2}
+            />
+            <FormControlLabel
+              value={question.Option3}
+              control={<Radio />}
+              label={question.Option3}
+            />
+            <FormControlLabel
+              value={question.Option4}
+              control={<Radio />}
+              label={question.Option4}
+            />
+          </RadioGroup>
+          <FormHelperText>{helperText}</FormHelperText>
+          <Button
+            type="submit"
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+          >
+            Check Answer
+          </Button>
+        </FormControl>
+      </form>
+    </Container>
   );
 };
 export default Quiz;

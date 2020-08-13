@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   resources :alphabets
   resources :languages
   resources :users, only: [:create]
-  post "/login", to "users#login"
-  get "/autologin/:id", to "users#autologin"
+  post "/login", to: "users#login"
+  get "/autologin", to: "users#autologin"
+  patch "/profile", to: "users#profile"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

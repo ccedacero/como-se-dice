@@ -8,7 +8,14 @@ export const Alphabet = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3000/alphabets")
+    const payload = {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    };
+    fetch("http://localhost:3000/alphabets", payload)
       .then((r) => r.json())
       .then((alphabetObj) => {
         setAlphabet((prevState) => ({

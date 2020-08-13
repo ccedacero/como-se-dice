@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -46,12 +47,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp({ handleLogin }) {
+export default function SignUp({ setState, handleLogin }) {
   const [signUpForm, setSignUpForm] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const history = useHistory();
 
   const classes = useStyles();
   const handleFormChange = (e) => {
@@ -76,9 +78,12 @@ export default function SignUp({ handleLogin }) {
     fetch("http://localhost:3000/users", payload)
       .then((r) => r.json())
       .then((userObj) => {
-        localStorage.setItem("token", JSON.stringify(userObj));
+        const { user, token } = userObj;
+        setState({ currentUser: user });
         handleLogin(userObj);
+        localStorage.token = token;
       });
+    setTimeout(() => history.push("/vocabulario"), 3000);
   };
 
   return (

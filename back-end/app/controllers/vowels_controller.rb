@@ -1,5 +1,7 @@
 class VowelsController < ApplicationController
-    def index 
+  before_action :authorized
+  
+  def index 
         vowels = Vowel.all
         render json: vowels
       end

@@ -6,7 +6,15 @@ import { Vowels as Vocales } from "./flashcard/vowels/Vowels";
 import Navbar from "../src/nav/Navbar";
 import { Alphabet as Abecedario } from "./flashcard/alphabet/Alphabet";
 import { withStyles } from "@material-ui/core/styles";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  withRouter,
+  useHistory,
+} from "react-router-dom";
+
 import { Vocab as Pago } from "../src/flashcard/vocab/Vocab";
 import { QuizzesContainer as Pruebas } from "../src/quizes/QuizzesContainer";
 import SignIn from "../src/signin/SignIn";
@@ -23,25 +31,32 @@ export const App = (props) => {
     currentUser: null,
   });
 
+  const history = useHistory();
+
   useEffect(() => {
-    const token = JSON.parse(localStorage.token);
-    fetch("http://localhost:3001/autologin")
-      .then((r) => r.json())
-      .then((userObj) => {
-        handleLogin(userObj);
-      });
-  });
+    if (localStorage.token) {
+      fetch(`http://localhost:3000/autologin`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (!data.error) {
+            setState(data);
+          }
+        });
+    }
+  }, []);
 
   const updateUser = (newUser) => {
     setState({ currentUser: newUser });
   };
 
   const handleLogin = (currentUser) => {
-    setState({ currentUser }, () => {
-      props.history.push("/vocabulario");
-    });
-    console.log(state);
+    setState(currentUser);
   };
+  console.log(state);
 
   const handleLogOut = () => {
     localStorage.clear();
@@ -55,10 +70,10 @@ export const App = (props) => {
         <Navbar />
         <Switch>
           <Route path="/SignUp">
-            <SignUp handleLogin={handleLogin} />
+            <SignUp setState={setState} handleLogin={handleLogin} />
           </Route>
           <Route path="/login">
-            <SignIn handleLogin={handleLogin} />
+            <SignIn setState={setState} handleLogin={handleLogin} />
           </Route>
 
           <Container maxWidth="lg">

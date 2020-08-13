@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
     t.string "name"
     t.string "username"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.integer "language_id"
     t.integer "user_quizzes_id"
     t.datetime "created_at", precision: 6, null: false

@@ -1,52 +1,49 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: [:autologin]
-  # def index 
-  #     users = User.all
-  #     render json: users
-  #     end
-      # REGISTER
-      def create
-        @user = User.create(user_params)
-        # byebug
-        if @user.valid?
-          token = encode_token({user_id: @user.id})
-          render json: { user: UserSerializer.new(@user), token: token }, status: :created    
-        else
-          render json: {error: "Invalid username or password"}
-        end
-      end
-   
+  skip_before_action :authenticate, only: [:create, :login]
 
-  # LOGGING IN
-  def login
-    @user = User.find_by(email: params[:email])
-    # byebug
-    if @user && @user.authenticate(params[:password])
-      token = encode_token({user_id: @user.id})
-      render json: {user: UserSerializer.new(@user), token: token }
+  def create
+    user = User.create(
+      name: params[:name],
+      password: params[:password],
+      email: params[:email],
+      # avatar: params[:avatar],
+    )
+
+    if user.valid?
+      token = encode_token({ user_id: user.id })
+
+      render json: { user: UserSerializer.new(user), token: token }, status: :created
     else
-      render json: {error: "Invalid username or password"}
+      render json: { error: user.errors.full_messages }, status: :bad_request
     end
   end
-
   
 
+  def login
+    user = User.find_by(username: params[:username])
+    
+    if user && user.authenticate(params[:password])
+      token = encode_token({ user_id: user.id })
 
-  def autologin
-    user = User.find_by(email: params[:email])
-    # render json: @user
-    # byebug
-    if user 
-      render json: user 
-    else 
-      render json: {message: "Not logged in, try again!"}, status:  :unauthorized
+      render json: { user: UserSerializer.new(user), token: token }
+      
+      # render json: user # implicitly run serializer
+    else
+      render json: { error: "Invalid username or password" }, status: :unauthorized
     end
   end
 
-  private
-
-  def user_params
-    params.permit(:name,:email,:password)
+  # before_action :authenticate
+  def autologin
+    render json: @current_user
   end
 
-end
+  # before_action :authenticate
+  def profile
+    # find that use in the database (happens in the authenticate before_action)
+    @current_user.update(bio: params[:bio], avatar: params[:avatar])
+
+    render json: @current_user
+  end
+
+end 

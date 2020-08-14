@@ -1,4 +1,4 @@
-export const payload = {
+export const payLoad = {
   method: "GET",
   headers: {
     "Content-Type": "application/json",

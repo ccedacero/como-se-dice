@@ -1,131 +1,36 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Hidden from "@material-ui/core/Hidden";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import Drawer from "@material-ui/core/Drawer";
-import { NavDrawer } from "./NavDrawer";
-import QuizzesContainer from "../quizes/QuizzesContainer";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  right: {
-    marginLeft: "auto",
-  },
-}));
-
-export default function Navbar(props) {
-  const [state, setState] = useState({
-    drawerOpened: false,
-  });
-
-  const classes = useStyles();
-  const history = useHistory();
-
-  //   const user_name = JSON.parse(window.localStorage.getItem("sojohub"))
-  //     ? JSON.parse(window.localStorage.getItem("sojohub")).name
-  //     : null;
-
-  const toggleDrawer = (booleanValue) => () => {
-    setState({
-      drawerOpened: booleanValue,
-    });
-  };
-
-  //   const handleLogout = () => {
-  //     window.localStorage.setItem("sojohub", null);
-  //     // return <Redirect to="/login" />;
-  //     history.push("/login");
-  //     props.setLoginState("null");
-  //   };
-
+import "./Navbar.css";
+const NavBar = ({ currentUser, handleLogout }) => {
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="end"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleDrawer(true)}
-          >
-            <Hidden smUp>
-              <MenuIcon />
-            </Hidden>
-          </IconButton>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            component={Link}
-            // onClick={toggleDrawer(true)}
-            to={"/vocabulario"}
-            // to={user_name ? "/" : "/login"}
-          >
-            ComoSeDice
-          </IconButton>
-          <Hidden smDown>
-            <Button color="inherit" component={Link} to="/forum">
-              Foro
-            </Button>
-            {/* CONDITIONALS FOR NAV BAR DISPLAY */}
-            {/* {props.loggedIn !== "null" || !props.loggedIn ? */}
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <div>
+              <Link to="/home">Home</Link>
+            </div>
+          </li>
+          {currentUser ? (
             <>
-              <Button color="inherit" component={Link} to="/vocabulario">
-                Vocabulario
-              </Button>
-              <Button color="inherit" component={Link} to="/pruebas">
-                Pruebas
-              </Button>
-
-              <Button
-                color="inherit"
-                // onClick={handleLogout}
-                className={classes.right}
-                to="/logout"
-              >
-                {/* Logout */}
-              </Button>
-              <Button color="inherit"></Button>
+              <li>
+                <Link to="/profile">Profile</Link>
+                <button onClick={handleLogout}>Logout</button>
+              </li>
             </>
-            {/* ) : ( */}
-            <>
-              <Button
-                color="inherit"
-                className={classes.right}
-                component={Link}
-                to="/login"
-              >
-                Login
-              </Button>
-              <Button color="inherit" component={Link} to="/signup">
-                Signup
-              </Button>
-            </>
-            {/* )} */}
-          </Hidden>
-        </Toolbar>
-      </AppBar>
-
-      <NavDrawer
-        drawerOpened={state.drawerOpened}
-        toggleDrawer={toggleDrawer}
-        // handleLogout={handleLogout}
-        // user_name={user_name}
-        loggedIn={props.loggedIn}
-      />
-    </div>
+          ) : (
+            <div id="rightMenu">
+              <li>
+                <Link to="/signup">Signup</Link>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            </div>
+          )}
+        </ul>
+      </nav>
+    </header>
   );
-}
+};
+export default NavBar;

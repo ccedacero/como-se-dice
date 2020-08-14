@@ -1,0 +1,17 @@
+nav {
+  font-size: 1.3em;
+  width: 100%;
+  overflow: hidden;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+
+#rightMenu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1em;
+}

@@ -60,13 +60,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ handleLogin, setState }) {
+export default function SignIn({ history, handleLogin, setState }) {
   const classes = useStyles();
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleFormChange = (e) => {
     e.preventDefault();
@@ -93,7 +93,9 @@ export default function SignIn({ handleLogin, setState }) {
         setState({ currentUser: user });
         handleLogin(userObj);
         localStorage.token = token;
-        history.push("/vocabulario");
+        console.log(history);
+
+        // history.push("/vocabulario");
       });
   };
 

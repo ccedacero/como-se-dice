@@ -1,5 +1,4 @@
 class VowelsController < ApplicationController
-  before_action :authorized
   
   def index 
         vowels = Vowel.all
@@ -7,3 +6,4 @@ class VowelsController < ApplicationController
       end
     
 end
+

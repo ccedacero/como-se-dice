@@ -81,7 +81,7 @@ const App = (props) => {
             {/* <Route exact path="/Pago" component={Pago} /> */}
             {/* Quizes below */}
             <Route exact path="/pruebas" component={pruebas} />
-            <Route exact path="pruebas/Pago" component={Quiz} />
+            <Route path="/pruebas/:id" component={Quiz} />
           </Container>
         </Switch>
       </main>

@@ -57,34 +57,76 @@ pago = ["Turno de día","Turno de tarde", "Turno del atardecer", "Turno de noche
 
   TestQuestion.create(test_id:Test.first.id, question_id:nil)
   # Need to add Question Category  
+  
   Question.create(question:"Como se dice Turno del atardecer?")
   options =["Day shift","Afternoon shift","Evening shift","Night shift"]
   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+  ans = "Evening shift"
+  updateQ = Question.last.answers.select do |a|
+    a.answer === ans
+  end
+  updateQ[0].update(is_correct: true)
+
 
   Question.create(question:"Que significa 'Overtime pay'?")
-  options1 = ["Pago","Horas extras","Tiempo de descanso", "Pago de horas extras"]
+  options1 = ["Pago","Horas extras", "Pago de horas extras", "Tiempo de descanso",]
   options1.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+  
+  ans = "Pago de horas extras"
+  updateQ = Question.last.answers.select do |a|
+    a.answer === ans
+  end
+  updateQ[0].update(is_correct: true)
 
   Question.create(question:"Como se dice 'Tiempo de descanso?'")
   options2 =["Break time", "Take a break", "I need a break", "Lunch"]
   options2.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
+  ans = "Break time"
+  updateQ = Question.last.answers.select do |a|
+    a.answer === ans
+  end
+  updateQ[0].update(is_correct: true)
+
   Question.create(question:"Como se dice reloj?")
   options3 =["Watch","Clock","Time","Hour"]
   options3.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+
+  ans = "Clock"
+  updateQ = Question.last.answers.select do |a|
+    a.answer === ans
+  end
+  updateQ[0].update(is_correct: true)
 
   Question.create(question: "Cual de las siguientes palabras no tiene que ver con salario o pago?")
   options4 =["We pay once a month","We pay every fifteen days","Here is your check","Punctual"]
   options4.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
+  ans = "Punctual"
+  updateQ = Question.last.answers.select do |a|
+    a.answer === ans
+  end
+  updateQ[0].update(is_correct: true)
+
   Question.create(question:"Que significa 'How many hours did you work' ")
   options5 =["No tenemos trabajo disponible","Puede venir a las siete?","¿Cuántas horas trabajó?","Stop working at five"]
   options5.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
+  ans = "¿Cuántas horas trabajó?"
+  updateQ = Question.last.answers.select do |a|
+    a.answer === ans
+  end
+  updateQ[0].update(is_correct: true)
+  
   Question.create(question: "Como se dice 'Pagamos cada dos semanas'")
   options =["We pay every week","We pay every two weeks","We pay evey month","We pay by the hour"]
   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
+  ans = "We pay every two weeks"
+  updateQ = Question.last.answers.select do |a|
+    a.answer === ans
+  end
+  updateQ[0].update(is_correct: true)
 
   # Seeding Praises + url 
   # praises = ["Good", "Very Good", "Wonderful!", "Great!", "Fantastic!", "Well done!", "Perfect!", "Pretty!", "Beautiful!", "Congratulations!", "Best Wishes!", "You do good work!", "I like your work", "You are a good worker!", "Well done!"]

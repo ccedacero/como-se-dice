@@ -9,6 +9,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
+import { payLoad } from "../../constants/index";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -67,7 +68,7 @@ export const Quiz = ({
         });
       });
   }, []);
-  console.log(state);
+  console.log(question);
   const handleRadioChange = (event) => {
     setValue(event.target.value);
     setHelperText(" ");
@@ -80,6 +81,15 @@ export const Quiz = ({
       state[question.currentQuestion].question
     );
   };
+
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // console.log(state.length, question.currentQuestion);
@@ -94,14 +104,18 @@ export const Quiz = ({
         }
       });
       if (comparison.answer && comparison.answer === value) {
+        let arr = shuffle([0, 1, 2, 3]);
         setQuestion((prevState) => {
-          console.log(prevState);
           return {
             currentQuestion: prevState.currentQuestion + 1,
-            Option1: state[prevState.currentQuestion + 1].answers[0].answer,
-            Option2: state[prevState.currentQuestion + 1].answers[1].answer,
-            Option3: state[prevState.currentQuestion + 1].answers[2].answer,
-            Option4: state[prevState.currentQuestion + 1].answers[3].answer,
+            Option1:
+              state[prevState.currentQuestion + 1].answers[arr[0]].answer,
+            Option2:
+              state[prevState.currentQuestion + 1].answers[arr[1]].answer,
+            Option3:
+              state[prevState.currentQuestion + 1].answers[arr[2]].answer,
+            Option4:
+              state[prevState.currentQuestion + 1].answers[arr[3]].answer,
           };
         });
 

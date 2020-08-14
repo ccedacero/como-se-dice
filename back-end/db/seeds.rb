@@ -33,7 +33,7 @@ vowelList.map {|vowel| Vowel.create(letter: vowel, letterUrl:"https://comosedice
 pay = ["Day shift","Afternoon shift", "Evening shift", "Night shift", "Overtime pay", "Overtime hours", "Break time", "Take a break", "We pay by the hour", "Pay", "Salary", "Hours", "The clock", "A second", "A minute", "An hour", "A day", "A week", "A month", "A year", "On time", "Just in time", "Punctual", "Noon", "Midnight", "Calendar", "We pay", "We pay once a week", "We pay every two weeks", "We pay every fifteen days", "We pay once a month", "How many hours did you work", "We do not any work available", "Can you come in at seven?", "Here is your check", "Stop working at five"]
 pago = ["Turno de día","Turno de tarde", "Turno del atardecer", "Turno de noche", "Pago de horas extras", "Horas extras", "Tiempo de descanso", "Descanso", "Pagamos por hora", "Pago", "Salario", "Horas", "Reloj", "Un segundo", "Un minuto", "Una hora", "Un día", "Una semana", "Un mes", "Un año", "A tiempo", "Justo a tiempo", "Puntual", "Mediodía", "Medianoche", "Calendario", "Pagamos", "Pagamos una vez a la semana", "Pagamos cada dos semanas", "Pagamos cada quince días", "Pagamos una vez al mes", "¿Cuántas horas trabajó?", "No tenemos trabajo disponible", "¿Puede venir a las siete?", "Aquí está su cheque", "Deje de trabajar a las cinco"]
   pay.each_with_index do |word, index|
-      Vocab.create(word: word, wordSpanish: pago[index],wordUrl: "https://comosedice.s3.amazonaws.com/Pay/#{word}.mp3")
+      Vocab.create(word: word, wordSpanish: pago[index],wordUrl: "https://comosedice.s3.amazonaws.com/Pay/#{word}.mp3", category: "payments")
   end
 
 # Formatting info below
@@ -45,12 +45,12 @@ pago = ["Turno de día","Turno de tarde", "Turno del atardecer", "Turno de noche
 # arr.map(wrd => wrd.slice(0,-4))
 
 # Seeding Greetings + url
-greetings = ["Hello", "Nice to meet you!", "The pleasure is mine", "Good morning", "Good afternoon", "Good night", "See you tomorrow", "We’ll see you", "See you soon", "It has been a pleasure", "Likewise", "Goodbye!", "How are you?", "How have you been?", "How is your family?", "You’re welcome!", "Very well, Thank you"]
-saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "Buenas tardes", "Buenas noches", "Hasta mañana", "Nos vemos", "Hasta pronto", "Ha sido un placer", "Igualmente", "¡Adiós! ¿Cómo estás?", "¿Cómo has estado?", "¿Cómo está tu familia?", "¡De nada!", "Muy bien, Gracias"]
+# greetings = ["Hello", "Nice to meet you!", "The pleasure is mine", "Good morning", "Good afternoon", "Good night", "See you tomorrow", "We’ll see you", "See you soon", "It has been a pleasure", "Likewise", "Goodbye!", "How are you?", "How have you been?", "How is your family?", "You’re welcome!", "Very well, Thank you"]
+# saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "Buenas tardes", "Buenas noches", "Hasta mañana", "Nos vemos", "Hasta pronto", "Ha sido un placer", "Igualmente", "¡Adiós! ¿Cómo estás?", "¿Cómo has estado?", "¿Cómo está tu familia?", "¡De nada!", "Muy bien, Gracias"]
 
- greetings.each_with_index do |word, index|
-      Vocab.create(word: word, wordSpanish: pago[index], wordUrl: "https://comosedice.s3.amazonaws.com/Greetings/#{word}.mp3")
-  end
+#  greetings.each_with_index do |word, index|
+#       Vocab.create(word: word, wordSpanish: pago[index], wordUrl: "https://comosedice.s3.amazonaws.com/Greetings/#{word}.mp3")
+#   end
 
 
   Test.create(name: "Prueba Sobre Vocabulario de Pago", no_of_questions:7);

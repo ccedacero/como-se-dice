@@ -47,9 +47,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp({ handleLogin }) {
+export default function SignUp({ history, handleLogin }) {
   const [signUpForm, setSignUpForm] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -79,6 +79,9 @@ export default function SignUp({ handleLogin }) {
         const { user, token } = userObj;
         handleLogin(user);
         localStorage.token = token;
+        if (user !== undefined || user !== null) {
+          history.push("/vocabulario");
+        }
       });
   };
   return (
@@ -95,13 +98,13 @@ export default function SignUp({ handleLogin }) {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="name"
-                name="name"
+                autoComplete="username"
+                name="username"
                 variant="outlined"
                 required
                 fullWidth
-                id="name"
-                label="Name"
+                id="username"
+                label="Username"
                 autoFocus
                 onChange={handleFormChange}
               />

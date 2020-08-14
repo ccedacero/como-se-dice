@@ -4,7 +4,7 @@ class CreateVocabs < ActiveRecord::Migration[6.0]
       t.string :word
       t.string :wordUrl
       t.string :wordSpanish
-
+      t.string :category
       t.timestamps
     end
   end

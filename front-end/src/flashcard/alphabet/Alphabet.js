@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from "react";
 import AlphabetCard from "./AlphabetCard";
+import Categories from "../../home/Categories";
+import { payLoad } from "../../constants/index";
+export const Alphabet = (props) => {
+  let queryStr = "";
 
-export const Alphabet = () => {
+  if (
+    props.match.params.name === null ||
+    props.match.params.name === undefined
+  ) {
+    queryStr = props.history.location.pathname.split("/")[2];
+    console.log(queryStr, "using split");
+  } else {
+    queryStr = props.match.params.name;
+  }
+  // {
   const [alphabet, setAlphabet] = useState({
     letters: [],
     count: 0,
   });
 
+  const vocabSection = Categories.find(
+    (categ) => categ.title.toLowerCase() === queryStr
+  );
+
+  const fetchName = vocabSection.fetchCategory;
   useEffect(() => {
-    const payload = {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    };
-    fetch("http://localhost:3000/alphabets", payload)
+    fetch(`http://localhost:3000/${fetchName}`, payLoad)
       .then((r) => r.json())
       .then((alphabetObj) => {
         setAlphabet((prevState) => ({
@@ -25,7 +36,6 @@ export const Alphabet = () => {
       });
   }, []);
 
-  // console.log(alphabet);
   const renderAlphabet = () => {
     if (alphabet.letters.length > 0) {
       let currentLetter = alphabet.letters[alphabet.count];

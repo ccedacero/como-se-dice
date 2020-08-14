@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.create(
-      name: params[:name],
+      username: params[:username],
       password: params[:password],
       email: params[:email],
       # avatar: params[:avatar],
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(username: params[:username])
-    
+    # byebug
     if user && user.authenticate(params[:password])
       token = encode_token({ user_id: user.id })
 

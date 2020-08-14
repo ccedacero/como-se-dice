@@ -1,21 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-const NavBar = ({ currentUser, handleLogout }) => {
+import Button from "@material-ui/core/Button";
+const NavBar = ({ currentUser, handleLogOut }) => {
+  console.log(currentUser);
+  // debugger;
   return (
     <header>
       <nav>
         <ul>
           <li>
             <div>
-              <Link to="/home">Home</Link>
+              <button>
+                <Link to="/vocabulario">Home</Link>
+              </button>
             </div>
           </li>
           {currentUser ? (
             <>
               <li>
-                <Link to="/profile">Profile</Link>
-                <button onClick={handleLogout}>Logout</button>
+                {/* <Link to="/profile">Profile</Link> */}
+                <button onClick={handleLogOut}>Logout</button>
               </li>
             </>
           ) : (

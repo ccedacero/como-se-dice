@@ -60,10 +60,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ history, handleLogin, setState }) {
+export default function SignIn({ history, handleLogin }) {
   const classes = useStyles();
   const [loginForm, setLoginForm] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   // const history = useHistory();
@@ -90,12 +90,12 @@ export default function SignIn({ history, handleLogin, setState }) {
       .then((r) => r.json())
       .then((userObj) => {
         const { user, token } = userObj;
-        setState({ currentUser: user });
-        handleLogin(userObj);
+        handleLogin(user);
+        console.log(user);
         localStorage.token = token;
-        console.log(history);
-
-        // history.push("/vocabulario");
+        if (user !== undefined && user !== null) {
+          history.push("/vocabulario");
+        }
       });
   };
 
@@ -117,12 +117,12 @@ export default function SignIn({ history, handleLogin, setState }) {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="username"
+              name="username"
+              autoComplete="username"
               autoFocus
-              value={loginForm.email}
+              value={loginForm.username}
               onChange={handleFormChange}
             />
             <TextField

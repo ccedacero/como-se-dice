@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
     t.string "word"
     t.string "wordUrl"
     t.string "wordSpanish"
+    t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

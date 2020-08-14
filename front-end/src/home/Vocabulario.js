@@ -109,7 +109,7 @@ export default function Vocabulario() {
                     <Typography>{card.description}</Typography>
                   </CardContent>
                   <CardActions>
-                    <Link to={`vocabulario/${card.title}`}>
+                    <Link to={`vocabulario/${card.title.toLowerCase()}`}>
                       <Button size="small" edge="center" color="primary">
                         Practicar
                       </Button>

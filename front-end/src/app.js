@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Vocabulario from "./home/Vocabulario";
-import { Vowels as Vocales } from "./flashcard/vowels/Vowels";
 import Navbar from "./nav/Navbar";
-import { Alphabet as Abecedario } from "./flashcard/alphabet/Alphabet";
 import { withStyles } from "@material-ui/core/styles";
 import { Switch, Route, withRouter, Redirect } from "react-router-dom";
-
-import { Vocab as Pago } from "./flashcard/vocab/Vocab";
-import { QuizzesContainer as Pruebas } from "./quizes/QuizzesContainer";
+import { Alphabet } from "./flashcard/alphabet/Alphabet";
+import { Vocab } from "./flashcard/vocab/Vocab";
+import { QuizzesContainer as pruebas } from "./quizes/QuizzesContainer";
 import SignIn from "./signin/SignIn";
 import SignUp from "./signup/SignUp";
 import Quiz from "./quizes/payquiz/Quiz";
@@ -43,50 +41,50 @@ const App = (props) => {
   };
 
   const handleLogin = (currentUser) => {
-    setState(currentUser);
-    if (state.currentUser !== null) {
-      props.history.push("/vocabulario");
-    }
+    setState({ currentUser });
+    // if (state.currentUser !== null) {
+    //   props.history.push("/vocabulario");
+    // }
   };
-  console.log(state);
+  // console.log(state);
 
   const handleLogOut = () => {
     localStorage.clear();
     setState({ currentUser: null });
     props.history.push("/login");
   };
-
+  if (state.currentUser !== null) {
+    console.log(state.currentUser.username);
+  }
   return (
-    // <Router>
     <div>
       <CssBaseline />
       <Navbar currentUser={state.currentUser} handleLogOut={handleLogOut} />
-      <Switch>
-        <Route path="/SignUp">
-          <SignUp handleLogin={handleLogin} />
-        </Route>
-        <Route path="/login">
-          <SignIn handleLogin={handleLogin} />
-        </Route>
-
-        <Container maxWidth="lg">
-          <Route path="/vocabulario" exact component={Vocabulario} />
-          <Route path="/vocabulario/Abecedario" exact component={Abecedario} />
-
-          <Route path="/vocabulario/Vocales" exact component={Vocales} />
-          <Route path="/vocabulario/Pago" exact component={Pago} />
-          {/* Quizes below */}
-          <Route path="/pruebas" exact component={Pruebas} />
-          <Route path="/pruebas/:id" component={Quiz} />
-          <Route path="/home">
-            {state.currentUser ? (
-              <h1>Welcome, {state.currentUser}</h1>
-            ) : (
-              <Redirect to="/" />
-            )}
+      <main>
+        <Switch>
+          <Route exact path="/signup">
+            <SignUp exact history={props.history} handleLogin={handleLogin} />
           </Route>
-        </Container>
-      </Switch>
+          <Route exact path="/login">
+            <SignIn history={props.history} handleLogin={handleLogin} />
+          </Route>
+
+          <Container maxWidth="lg">
+            <Route exact path="/vocabulario" component={Vocabulario} />
+            <Route exact path="/vocabulario/vocales" component={Alphabet} />
+            <Route exact path="/vocabulario/abecedario" component={Alphabet} />
+            <Route path="/vocabulario/:name" component={Vocab} />
+
+            {/* <Route exact path="/vocabulario/Vocales" component={Vocales} /> */}
+
+            {/* <Route exact path="/Vocales"  component={Vocales} /> */}
+            {/* <Route exact path="/Pago" component={Pago} /> */}
+            {/* Quizes below */}
+            <Route exact path="/pruebas" component={pruebas} />
+            <Route exact path="pruebas/Pago" component={Quiz} />
+          </Container>
+        </Switch>
+      </main>
     </div>
     // </Router>
   );

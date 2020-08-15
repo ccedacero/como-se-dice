@@ -18,15 +18,17 @@ const NavBar = ({ currentUser, handleLogOut }) => {
           </li>
           {currentUser ? (
             <>
-              <li>
+              <div class="rightMenu">
                 <li>
                   <Link to="/pruebas">Pruebas</Link>
                 </li>
-                <button onClick={handleLogOut}>Logout</button>
-              </li>
+                <li>
+                  <button onClick={handleLogOut}>Logout</button>
+                </li>
+              </div>
             </>
           ) : (
-            <div id="rightMenu">
+            <div class="rightMenu">
               <li>
                 <Link to="/signup">Signup</Link>
               </li>

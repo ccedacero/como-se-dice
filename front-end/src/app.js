@@ -70,10 +70,10 @@ const App = (props) => {
           </Route>
 
           <Container maxWidth="lg">
+            {/* THESE TWO ARE K USING THE SAME ALPHABET COMPONENT  */}
             <Route exact path="/vocabulario" component={Vocabulario} />
-            <Route exact path="/vocabulario/vocales" component={Alphabet} />
-            <Route exact path="/vocabulario/abecedario" component={Alphabet} />
-            <Route path="/vocabulario/:name" component={Vocab} />
+            <Route path="/vocabulario/:id" component={Alphabet} />
+            <Route exact path="/vocabulario/:name/" component={Vocab} />
 
             {/* <Route exact path="/vocabulario/Vocales" component={Vocales} /> */}
 

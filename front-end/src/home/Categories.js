@@ -94,7 +94,7 @@ const Categories = [
   },
   {
     title: "Alabanzas",
-    fetchCategory: "complements",
+    fetchCategory: "compliments",
     description:
       "Aprenda vocabulario que puede usar para complementar a sus amigos y amigas",
     img:

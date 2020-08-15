@@ -69,6 +69,9 @@ export const Quiz = ({
       });
   }, []);
   console.log(question);
+
+  //  BUG FOUND IN LAST QUESTION RENDER - DOES NOT CHECK CORRECT
+  //  ANSWER
   const handleRadioChange = (event) => {
     setValue(event.target.value);
     setHelperText(" ");

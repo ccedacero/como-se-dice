@@ -20,12 +20,12 @@ cristian = User.create(username:"ccedacero", email: "ccedacero@gmail.com",passwo
 
 # SEEDING Alphabet + url 
 alphabetList = "abcdefghijklmnopqrstuvwxyz".split'';
-alphabetList.map {|letter| Alphabet.create(letter: letter, letterUrl:"https://comosedice.s3.amazonaws.com/Alphabet/#{letter+letter}.mp3")} 
+alphabetList.map {|letter| Alphabet.create(word: letter, wordUrl:"https://comosedice.s3.amazonaws.com/Alphabet/#{letter+letter}.mp3")} 
 
 
 # SEEDING VOWELS + url
 vowelList = "aeiou".split'';
-vowelList.map {|vowel| Vowel.create(letter: vowel, letterUrl:"https://comosedice.s3.amazonaws.com/Vowels/#{vowel}.mp3")}
+vowelList.map {|vowel| Vowel.create(word: vowel, wordUrl:"https://comosedice.s3.amazonaws.com/Vowels/#{vowel}.mp3")}
 
 # Seeding PAYVOCAB + url
 pay = ["Day shift","Afternoon shift", "Evening shift", "Night shift", "Overtime pay", "Overtime hours", "Break time", "Take a break", "We pay by the hour", "Pay", "Salary", "Hours", "The clock", "A second", "A minute", "An hour", "A day", "A week", "A month", "A year", "On time", "Just in time", "Punctual", "Noon", "Midnight", "Calendar", "We pay", "We pay once a week", "We pay every two weeks", "We pay every fifteen days", "We pay once a month", "How many hours did you work", "We do not any work available", "Can you come in at seven?", "Here is your check", "Stop working at five"]
@@ -42,7 +42,7 @@ pago = ["Turno de día","Turno de tarde", "Turno del atardecer", "Turno de noche
 # titles = document.querySelectorAll("table")[0].children[1].querySelectorAll("a").forEach(entry => titleArr.push(entry.innerText))
 # arr.map(wrd => wrd.slice(0,-4))
 
-# Seeding GREETINGS + url
+# Seeding GREETINGS + url - had small issue at goodbye- should be good after migration again
 greetings = ["Hello", "Nice to meet you!", "The pleasure is mine", "Good morning", "Good afternoon", "Good night", "See you tomorrow", "We’ll see you", "See you soon", "It has been a pleasure", "Likewise", "Goodbye!", "How are you?", "How have you been?", "How is your family?", "You’re welcome!", "Very well, Thank you"]
 saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "Buenas tardes", "Buenas noches", "Hasta mañana", "Nos vemos", "Hasta pronto", "Ha sido un placer", "Igualmente", "¡Adiós!", "¿Cómo has estado?", "¿Cómo está tu familia?", "¡De nada!", "Muy bien, Gracias"]
 

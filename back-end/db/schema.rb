@@ -16,8 +16,9 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
   enable_extension "plpgsql"
 
   create_table "alphabets", force: :cascade do |t|
-    t.string "letter"
-    t.string "letterUrl"
+    t.string "word"
+    t.string "wordUrl"
+    t.string "wordSpanish"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -113,8 +114,9 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
   end
 
   create_table "vowels", force: :cascade do |t|
-    t.string "letter"
-    t.string "letterUrl"
+    t.string "word"
+    t.string "wordUrl"
+    t.string "wordSpanish"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

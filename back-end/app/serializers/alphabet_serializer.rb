@@ -1,3 +1,3 @@
 class AlphabetSerializer < ActiveModel::Serializer
-  attributes :id, :letter, :letterUrl
+  attributes :id, :word, :wordUrl
 end

@@ -1,3 +1,3 @@
 class VowelSerializer < ActiveModel::Serializer
-  attributes :id, :letter, :letterUrl
+  attributes :id, :word, :wordUrl
 end

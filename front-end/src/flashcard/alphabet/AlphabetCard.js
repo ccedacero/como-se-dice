@@ -56,6 +56,7 @@ export default function AlphabetCard({
   setAlphabet,
   cardType,
 }) {
+  console.log(id, word, wordSpanish, wordUrl);
   // console.log(alphabet, "this is alphabet"); array of everything working
   // console.log(setAlphabet, "this is set alphabet"); set state function working
   const [isFlipped, setisFlipped] = useState(false);
@@ -221,7 +222,7 @@ export default function AlphabetCard({
                         <span className={classes.languageSize}>Back</span>
                       </Button>
                       <Button onClick={handleClick} size="medium">
-                        <span className={classes.languageSize}>Ingles </span>
+                        <span className={classes.languageSize}>Español </span>
                       </Button>
                       <Button
                         onClick={nextCard}

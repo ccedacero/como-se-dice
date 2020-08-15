@@ -80,6 +80,26 @@ saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "
  time.each_with_index do |word, index|
     Vocab.create(word: word, wordSpanish: tiempo[index],wordUrl: "https://comosedice.s3.amazonaws.com/Time/#{word}.mp3",category: "time")
   end
+ 
+  # SEEDING FARM JOBS + url 
+  farmjobs = ["Farm owner", "Farmer", "Dairy farmer", "Dairy farming", "Worker", "Workers", "Foreman", "Supervisor", "Crew", "Crew boss", "Manager", "Feeder", "Milker", "Irrigator", "Pruner", "Harvester", "Tractor driver", "Mechanic"]
+  trabajos = ["Propietario de la granja", "El agricultor", "Productor de leche", "Lecheria", "El trabajador", "Los trabajadores", "El Capataz", "El Supervisor", "La Cuadrilla", "El jefe de cuadrilla", "El administrador", "El Alimentador", "El Ordeñador", "El reggador", "El Podador", "El Cosechador", "El tractorista", "El Mecánico"] 
+  farmjobs.each_with_index do |word, index|
+    Vocab.create(word: word, wordSpanish: trabajos[index],wordUrl: "https://comosedice.s3.amazonaws.com/FarmJobs/#{word}.mp3",category: "farmjobs")
+  end
+
+
+  # SEEDING DIRECTIONS
+  directions = ["Right", "Left", "Turn right", "Turn left", "Turn here", "Turn around here", "Stop", "Slow down", "Speed up", "Move forward", "Put it in neutral", "Back-up", "Stop light", "Stop Sign", "To the right", "To the left", "Straight ahead", "Go straight ahead", "Look straight ahead"]
+  direc = ["Derecha", "Izquierda", "Gire a la derecha", "Gire a la izquierda", "Gire aquí", "De la vuelta aquí", "Deténgase", "Disminuya la velocidad", "Acelere", "Marche hacia adelante", "Pongalo en neutral", "Retroceda", "Semáforo", "Rotulo de alto", "A la derecha", "A la izquierda", "Derecho", "Siga hacia adelante", "Mire hacia adelante"]
+  directions.each_with_index do |word, index|
+    Vocab.create(word: word, wordSpanish: direc[index],wordUrl: "https://comosedice.s3.amazonaws.com/Directions/#{word}.mp3",category: "directions")
+  end
+
+
+
+
+
 
 
 

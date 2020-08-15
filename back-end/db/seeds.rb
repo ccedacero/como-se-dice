@@ -15,10 +15,8 @@ Question.destroy_all
 Language.create(language:"Spanish");
 
 # USERS
-senada = User.create(name:"Senada Kadric", email: "senada23@yahoo.com",language_id: Language.first.id, password: "hello", user_quizzes_id:1)
-hannah = User.create(name:"Hannah Kofkin", email: "hkofkin@gmail.com",language_id: Language.first.id,password: "hello", user_quizzes_id:2)
-cristian = User.create(name:"Cristian Cedacero", email: "cristian.cedacero@gmail.com",language_id: Language.first.id,password: "hello", user_quizzes_id:3)
-bashir = User.create(name:"Bashir", email: "bashiralhanshali@gmail.com",language_id: Language.first.id,password: "hello", user_quizzes_id:4)
+
+cristian = User.create(username:"ccedacero", email: "ccedacero@gmail.com",password: "hello")
 
 # SEEDING Alphabet + url 
 alphabetList = "abcdefghijklmnopqrstuvwxyz".split'';
@@ -44,16 +42,24 @@ pago = ["Turno de día","Turno de tarde", "Turno del atardecer", "Turno de noche
 # titles = document.querySelectorAll("table")[0].children[1].querySelectorAll("a").forEach(entry => titleArr.push(entry.innerText))
 # arr.map(wrd => wrd.slice(0,-4))
 
-# Seeding Greetings + url
-# greetings = ["Hello", "Nice to meet you!", "The pleasure is mine", "Good morning", "Good afternoon", "Good night", "See you tomorrow", "We’ll see you", "See you soon", "It has been a pleasure", "Likewise", "Goodbye!", "How are you?", "How have you been?", "How is your family?", "You’re welcome!", "Very well, Thank you"]
-# saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "Buenas tardes", "Buenas noches", "Hasta mañana", "Nos vemos", "Hasta pronto", "Ha sido un placer", "Igualmente", "¡Adiós! ¿Cómo estás?", "¿Cómo has estado?", "¿Cómo está tu familia?", "¡De nada!", "Muy bien, Gracias"]
+# Seeding GREETINGS + url
+greetings = ["Hello", "Nice to meet you!", "The pleasure is mine", "Good morning", "Good afternoon", "Good night", "See you tomorrow", "We’ll see you", "See you soon", "It has been a pleasure", "Likewise", "Goodbye!", "How are you?", "How have you been?", "How is your family?", "You’re welcome!", "Very well, Thank you"]
+saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "Buenas tardes", "Buenas noches", "Hasta mañana", "Nos vemos", "Hasta pronto", "Ha sido un placer", "Igualmente", "¡Adiós!", "¿Cómo has estado?", "¿Cómo está tu familia?", "¡De nada!", "Muy bien, Gracias"]
 
-#  greetings.each_with_index do |word, index|
-#       Vocab.create(word: word, wordSpanish: pago[index], wordUrl: "https://comosedice.s3.amazonaws.com/Greetings/#{word}.mp3")
-#   end
+ greetings.each_with_index do |word, index|
+  Vocab.create(word: word, wordSpanish: saludos[index], wordUrl: "https://comosedice.s3.amazonaws.com/Greetings/#{word}.mp3", category: "greetings")
+  end
 
 
-  Test.create(name: "Prueba Sobre Vocabulario de Pago", no_of_questions:7);
+  # SEEDING COMPLIMENTS + url 
+  compliments = ["Good", "Very Good", "Wonderful!", "Great!", "Fantastic!", "Well done!", "Perfect!", "Pretty", "Beautiful!", "Congratulations!", "Best Wishes", "You do good work!", "I like your work", "You are a good worker!", "Well done!"]
+  alabanzas = ["Bien", "Muy Bien", "Maravilloso!", "Estupendo!", "¡Fantástico!", "¡Bien hecho!", "¡Perfecto!", "¡Bonito!/Bello!", "¡Hermoso!", "¡Felicitaciones!", "¡Mis mejores deseos!", "¡Haces buen trabajo!", "Me gusta tu trabajo", "Tu eres ¡un buen trabajador!", "¡Bien hecho!"]
+  compliments.each_with_index do |word, index|
+    Vocab.create(word: word, wordSpanish: alabanzas[index],wordUrl: "https://comosedice.s3.amazonaws.com/Praises/#{word}.mp3" , category: "compliments")
+  end
+
+# SEEDING QUIZES!!!  
+Test.create(name: "Prueba Sobre Vocabulario de Pago", no_of_questions:7);
 
   TestQuestion.create(test_id:Test.first.id, question_id:nil)
   # Need to add Question Category  
@@ -127,16 +133,6 @@ pago = ["Turno de día","Turno de tarde", "Turno del atardecer", "Turno de noche
     a.answer === ans
   end
   updateQ[0].update(is_correct: true)
-
-  # Seeding Praises + url 
-  # praises = ["Good", "Very Good", "Wonderful!", "Great!", "Fantastic!", "Well done!", "Perfect!", "Pretty!", "Beautiful!", "Congratulations!", "Best Wishes!", "You do good work!", "I like your work", "You are a good worker!", "Well done!"]
-  # alabanzas = ["Bien", "Muy Bien", "Maravilloso!", "¡Genial!", "¡Fantástico!", "¡Bien hecho!", "¡Perfecto!", "¡Bonito!", "¡Hermoso!", "¡Felicitaciones!", "¡Mis mejores deseos!", "¡Haces buen trabajo!", "Me gusta tu trabajo", "Tu eres ¡buen trabajador!", "¡Bien hecho!"]
-
-
-# SEEDING PHRASES
-# Starting the conversation
-# 
-
 
 # phrases.each_with_index do |phrase, index|
 #   Phrase.create(sentence: phrase, sentenceSpanish: phrasesSpanish[index])

@@ -25,8 +25,17 @@ export const Alphabet = (props) => {
   );
 
   const fetchName = vocabSection.fetchCategory;
+  let fetchUrl = "";
+  if (fetchName === "alphabets" || fetchName === "vowels") {
+    fetchUrl = `http://localhost:3000/${fetchName}`;
+  } else {
+    fetchUrl = `http://localhost:3000/vocabs/${fetchName}`;
+  }
+
+  console.log(fetchUrl);
+
   useEffect(() => {
-    fetch(`http://localhost:3000/${fetchName}`, payLoad)
+    fetch(fetchUrl, payLoad)
       .then((r) => r.json())
       .then((alphabetObj) => {
         setAlphabet((prevState) => ({
@@ -45,6 +54,7 @@ export const Alphabet = (props) => {
           letter={currentLetter}
           setAlphabet={setAlphabet}
           alphabet={alphabet.letters}
+          cardType={fetchName}
         />
       );
     }

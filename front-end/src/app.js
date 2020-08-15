@@ -73,7 +73,7 @@ const App = (props) => {
             {/* THESE TWO ARE K USING THE SAME ALPHABET COMPONENT  */}
             <Route exact path="/vocabulario" component={Vocabulario} />
             <Route path="/vocabulario/:id" component={Alphabet} />
-            <Route exact path="/vocabulario/:name/" component={Vocab} />
+            {/* <Route exact path="/vocabulario/:name/" component={Vocab} /> */}
 
             {/* <Route exact path="/vocabulario/Vocales" component={Vocales} /> */}
 

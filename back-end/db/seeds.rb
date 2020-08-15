@@ -38,9 +38,13 @@ pago = ["Turno de día","Turno de tarde", "Turno del atardecer", "Turno de noche
 # proper.split(",")
 # proper = proper.map(wrd => wrd[0].toUpperCase()+wrd.slice(1))
 # proper = proper.map(wrd => wrd[0]=== " "? wrd.slice(1) : wrd)
+
 # Get amazon titles with below 
 # titles = document.querySelectorAll("table")[0].children[1].querySelectorAll("a").forEach(entry => titleArr.push(entry.innerText))
 # arr.map(wrd => wrd.slice(0,-4))
+
+# Use this to format from Google Translate!!!
+# str.split(",").map(wrd => wrd[0]=== " " ? wrd.slice(1) : wrd).map(wrd=> wrd[0].toUpperCase() + wrd.slice(1))
 
 # Seeding GREETINGS + url - had small issue at goodbye- should be good after migration again
 greetings = ["Hello", "Nice to meet you!", "The pleasure is mine", "Good morning", "Good afternoon", "Good night", "See you tomorrow", "We’ll see you", "See you soon", "It has been a pleasure", "Likewise", "Goodbye!", "How are you?", "How have you been?", "How is your family?", "You’re welcome!", "Very well, Thank you"]
@@ -58,20 +62,34 @@ saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "
     Vocab.create(word: word, wordSpanish: alabanzas[index],wordUrl: "https://comosedice.s3.amazonaws.com/Praises/#{word}.mp3" , category: "compliments")
   end
 
+  climate = ["It is sunny", "It is cloudy", "It is rainy", "It is raining", "It is hot", "It is wet", "It is humid", "It is cold", "It’s windy", "It’s dusty", "It’s dusty", "I am hot", "I am cold", "Are you hot\?", "Are you cold?", "Are you tired?", "It froze", "It hailed", "It snowed", "It rained", "It will rain", "It will snow", "It will freeze", "It will be overcast", "Will it rain?", "Will it freeze?", "Will it snow?", "We will not work if it rains", "It is too wet to work", "There is too much mud"]
+  clima = ["Hace sol", "Está nublado", "Está lluvioso", "Está lloviendo", "Hace calor", "Está mojado", "Está húmedo", "Hace frío", "Hace viento", "Hay una polvadera", "Está polvoriento", "Tengo calor", "Tengo frío", "Tiene calor?", "¿Tiene frío?", "¿Está cansado?", "Helo", "Granizó", "Nevó", "Llovió", "Lloverá", "Nevará", "Va a helar", "Estará nublado", "¿lloverá?", "¿Ira a helar?", "¿Ira a nevar?", "No trabajaremos si llueve", "Está demasiado mejado para trabajar", "Hay mucho lodo"]
+  climate.each_with_index do |word, index|
+    Vocab.create(word: word, wordSpanish: clima[index],wordUrl: "https://comosedice.s3.amazonaws.com/Climate/#{word}.mp3" , category: "climate")
+  end
+
+  
+
+
+
+
+
 # SEEDING QUIZES!!!  
 Test.create(name: "Prueba Sobre Vocabulario de Pago", no_of_questions:7);
 
   TestQuestion.create(test_id:Test.first.id, question_id:nil)
-  # Need to add Question Category  
   
   Question.create(question:"Como se dice Turno del atardecer?")
   options =["Day shift","Afternoon shift","Evening shift","Night shift"]
   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
   ans = "Evening shift"
+  def updateAnswer(ans)
   updateQ = Question.last.answers.select do |a|
     a.answer === ans
   end
   updateQ[0].update(is_correct: true)
+ end
+ updateAnswer(ans)
 
 
   Question.create(question:"Que significa 'Overtime pay'?")
@@ -79,60 +97,42 @@ Test.create(name: "Prueba Sobre Vocabulario de Pago", no_of_questions:7);
   options1.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
   
   ans = "Pago de horas extras"
-  updateQ = Question.last.answers.select do |a|
-    a.answer === ans
-  end
-  updateQ[0].update(is_correct: true)
+  updateAnswer(ans)
 
   Question.create(question:"Como se dice 'Tiempo de descanso?'")
   options2 =["Break time", "Take a break", "I need a break", "Lunch"]
   options2.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
   ans = "Break time"
-  updateQ = Question.last.answers.select do |a|
-    a.answer === ans
-  end
-  updateQ[0].update(is_correct: true)
+  updateAnswer(ans)
 
   Question.create(question:"Como se dice reloj?")
   options3 =["Watch","Clock","Time","Hour"]
   options3.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
   ans = "Clock"
-  updateQ = Question.last.answers.select do |a|
-    a.answer === ans
-  end
-  updateQ[0].update(is_correct: true)
+  updateAnswer(ans)
 
   Question.create(question: "Cual de las siguientes palabras no tiene que ver con salario o pago?")
   options4 =["We pay once a month","We pay every fifteen days","Here is your check","Punctual"]
   options4.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
   ans = "Punctual"
-  updateQ = Question.last.answers.select do |a|
-    a.answer === ans
-  end
-  updateQ[0].update(is_correct: true)
+  updateAnswer(ans)
 
   Question.create(question:"Que significa 'How many hours did you work' ")
   options5 =["No tenemos trabajo disponible","Puede venir a las siete?","¿Cuántas horas trabajó?","Stop working at five"]
   options5.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
   ans = "¿Cuántas horas trabajó?"
-  updateQ = Question.last.answers.select do |a|
-    a.answer === ans
-  end
-  updateQ[0].update(is_correct: true)
+  updateAnswer(ans)
   
   Question.create(question: "Como se dice 'Pagamos cada dos semanas'")
   options =["We pay every week","We pay every two weeks","We pay evey month","We pay by the hour"]
   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
   ans = "We pay every two weeks"
-  updateQ = Question.last.answers.select do |a|
-    a.answer === ans
-  end
-  updateQ[0].update(is_correct: true)
+  updateAnswer(ans)
 
 # phrases.each_with_index do |phrase, index|
 #   Phrase.create(sentence: phrase, sentenceSpanish: phrasesSpanish[index])

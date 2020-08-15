@@ -62,15 +62,24 @@ saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "
     Vocab.create(word: word, wordSpanish: alabanzas[index],wordUrl: "https://comosedice.s3.amazonaws.com/Praises/#{word}.mp3" , category: "compliments")
   end
 
+  # SEEDING CLIMATE + URL 
   climate = ["It is sunny", "It is cloudy", "It is rainy", "It is raining", "It is hot", "It is wet", "It is humid", "It is cold", "It’s windy", "It’s dusty", "It’s dusty", "I am hot", "I am cold", "Are you hot\?", "Are you cold?", "Are you tired?", "It froze", "It hailed", "It snowed", "It rained", "It will rain", "It will snow", "It will freeze", "It will be overcast", "Will it rain?", "Will it freeze?", "Will it snow?", "We will not work if it rains", "It is too wet to work", "There is too much mud"]
   clima = ["Hace sol", "Está nublado", "Está lluvioso", "Está lloviendo", "Hace calor", "Está mojado", "Está húmedo", "Hace frío", "Hace viento", "Hay una polvadera", "Está polvoriento", "Tengo calor", "Tengo frío", "Tiene calor?", "¿Tiene frío?", "¿Está cansado?", "Helo", "Granizó", "Nevó", "Llovió", "Lloverá", "Nevará", "Va a helar", "Estará nublado", "¿lloverá?", "¿Ira a helar?", "¿Ira a nevar?", "No trabajaremos si llueve", "Está demasiado mejado para trabajar", "Hay mucho lodo"]
   climate.each_with_index do |word, index|
     Vocab.create(word: word, wordSpanish: clima[index],wordUrl: "https://comosedice.s3.amazonaws.com/Climate/#{word}.mp3" , category: "climate")
   end
 
+
+#  cut beginning & end ÷below 
+  # tiempo = tiempo.map(wr => wr[0] === " " ? wr.slice(1) : wr)
+  # tiempo = tiempo.map(wr => wr[wr.length-1] === " " ? wr.slice(0,wr.length-1) : wr)
+  # SEEDING TIME + URL
+  time = ["What time is it?", "It’s one a clock", "It's two a clock", "It's three a clock", "At one", "At two", "At three", "At four", "At five", "At six", "At seven", "At eight", "At nine", "At ten","At eleven", "At twelve noon", "At twelve midnight", "In the morning",  "At eight in the morning", "At dawn", "In the afternoon", "At four in the afternoon", "At night", "At eleven at night","It's half past one", "It's one fifteen", "It's one forty-five", "It's half past two", "It's two fifteen", "It's three fifteen", "It's three forty two", "Are you an early riser%3F"]
+  tiempo = ["¿Qué hora es?", "Es la una", "Son las dos", "Son las tres", "A la una", "A las dos", "A las tres", "A las cuatro", "A las cinco", "A las seis", "A las siete", "A las ocho", "A las nueve", "A las diez", "A las once", "A las doce del mediodía", "A las doce de la noche", "En el mañana", "A las ocho de la mañana", "Al amanecer", "A la tarde", "A las cuatro de la tarde", "A la noche", "A las once de la noche", "Es la una y media", "Es la una y cuarto", "Es la una cuarenta y cinco", "Son las dos y media", "Son las dos y cuarto", "Son las tres y cuarto", "Son las tres cuarenta y dos", "¿Es usted madrugador?"]
   
-
-
+ time.each_with_index do |word, index|
+    Vocab.create(word: word, wordSpanish: tiempo[index],wordUrl: "https://comosedice.s3.amazonaws.com/Time/#{word}.mp3",category: "time")
+  end
 
 
 
@@ -176,7 +185,7 @@ puts "=========================="
   # "Good morning",
   # "Good afternoon", 
   # "Good evening",
-  #  "I\’m here to see ...",
+  #  "I\"m here to see ...",
   #  "I\’m here to meet ...",
   # "Sorry, I forgot to introduce myself",
   # "I should probably introduce myself",

@@ -25,14 +25,9 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "question_id"
+    t.integer "user_id"
     t.string "answer"
     t.boolean "is_correct"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "languages", force: :cascade do |t|
-    t.string "language"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -47,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
 
   create_table "questions", force: :cascade do |t|
     t.string "question"
-    t.integer "test_question_id"
+    t.integer "test_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -57,20 +52,11 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
     t.bigint "user_id", null: false
     t.integer "no_correct"
     t.integer "no_incorrect"
-    t.integer "no_unanswered"
     t.integer "score"
-    t.integer "rank"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["test_id"], name: "index_results_on_test_id"
     t.index ["user_id"], name: "index_results_on_user_id"
-  end
-
-  create_table "test_questions", force: :cascade do |t|
-    t.integer "test_id"
-    t.integer "question_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tests", force: :cascade do |t|
@@ -78,20 +64,9 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
     t.datetime "date_from"
     t.datetime "date_to"
     t.integer "timing"
-    t.integer "test_questions_id"
+    t.integer "no_of_questions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "user_answers", force: :cascade do |t|
-    t.bigint "test_question_id", null: false
-    t.bigint "answer_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["answer_id"], name: "index_user_answers_on_answer_id"
-    t.index ["test_question_id"], name: "index_user_answers_on_test_question_id"
-    t.index ["user_id"], name: "index_user_answers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -99,8 +74,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
-    t.integer "language_id"
-    t.integer "user_quizzes_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -124,7 +97,4 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
 
   add_foreign_key "results", "tests"
   add_foreign_key "results", "users"
-  add_foreign_key "user_answers", "answers"
-  add_foreign_key "user_answers", "test_questions"
-  add_foreign_key "user_answers", "users"
 end

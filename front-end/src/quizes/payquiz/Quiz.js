@@ -10,7 +10,6 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
 import { payLoad } from "../../constants/index";
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(5),
@@ -44,17 +43,12 @@ export const Quiz = ({
   const [results, setResults] = useState({
     no_correct: 0,
     no_incorrect: 0,
+    incorrectQ: [],
+    incCategory: id,
   });
 
   useEffect(() => {
-    const payload = {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    };
-    fetch("http://localhost:3000/questions", payload)
+    fetch("http://localhost:3000/questions", payLoad)
       .then((r) => r.json())
       .then((quizQuestionsObj) => {
         setState(quizQuestionsObj);
@@ -68,7 +62,6 @@ export const Quiz = ({
         });
       });
   }, []);
-  console.log(question);
 
   //  BUG FOUND IN LAST QUESTION RENDER - DOES NOT CHECK CORRECT
   //  ANSWER
@@ -93,9 +86,35 @@ export const Quiz = ({
     return a;
   }
 
+  const setIncorrectResults = () => {
+    setResults((prevState) => {
+      return {
+        ...prevState,
+        no_incorrect: prevState.no_incorrect + 1,
+      };
+    });
+  };
+
+  const setCorrectResults = () => {
+    setResults((prevState) => {
+      return {
+        ...prevState,
+        no_correct: prevState.no_correct + 1,
+      };
+    });
+  };
+  const setCurrentQuestion = () => {
+    setResults((prevState) => {
+      return {
+        ...prevState,
+        incorrectQ: [...results.incorrectQ, question.question],
+      };
+    });
+  };
+
   const handleSubmit = (event) => {
+    console.log(results);
     event.preventDefault();
-    // console.log(state.length, question.currentQuestion);
     if (question.currentQuestion + 1 !== state.length) {
       let comparison = state[question.currentQuestion].answers.find((ans) => {
         if (ans.is_correct !== undefined && ans.is_correct === true) {
@@ -111,6 +130,7 @@ export const Quiz = ({
         setQuestion((prevState) => {
           return {
             currentQuestion: prevState.currentQuestion + 1,
+            question: state[prevState.currentQuestion + 1].question,
             Option1:
               state[prevState.currentQuestion + 1].answers[arr[0]].answer,
             Option2:
@@ -122,30 +142,23 @@ export const Quiz = ({
           };
         });
 
-        setResults((prevState) => {
-          return {
-            ...prevState,
-            no_correct: prevState.no_correct + 1,
-          };
-        });
         setHelperText("Buen Trabajo!");
         setError(false);
+        setCorrectResults();
       } else if (comparison.answer && comparison.answer !== value) {
         setHelperText("Lo Siente, Intente Otra vez!");
         setError(true);
-        setResults((prevState) => {
-          return {
-            ...prevState,
-            no_incorrect: prevState.no_incorrect + 1,
-          };
-        });
+        setIncorrectResults();
+        setCurrentQuestion();
       } else {
         setHelperText("Por favor, seleccione una opcion:");
         setError(true);
       }
     } else {
       setHelperText(
-        `You're done!, you got ${results.no_correct} questions right!`
+        `Terminaste!Felicidades!, tuviste ${
+          results.no_correct - results.no_incorrect
+        } preguntas correctas!`
       );
     }
   };

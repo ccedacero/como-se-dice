@@ -12,6 +12,7 @@ import SignIn from "./signin/SignIn";
 import SignUp from "./signup/SignUp";
 import Quiz from "./quizes/payquiz/Quiz";
 import { payLoad } from "./constants/index";
+import { Dashboard } from "./dashboard/Dashboard";
 const styles = (theme) => ({
   paddingTop: {
     padding: "2em",
@@ -68,18 +69,16 @@ const App = (props) => {
           <Route exact path="/login">
             <SignIn history={props.history} handleLogin={handleLogin} />
           </Route>
-
+          <Route exact path="/home">
+            <Dashboard history={props.history} />
+          </Route>
           <Container maxWidth="lg">
             {/* THESE TWO ARE K USING THE SAME ALPHABET COMPONENT  */}
             <Route exact path="/vocabulario" component={Vocabulario} />
+            {/* ALPHABET RENDERS ALL FLASHCARDS */}
             <Route path="/vocabulario/:id" component={Alphabet} />
-            {/* <Route exact path="/vocabulario/:name/" component={Vocab} /> */}
 
-            {/* <Route exact path="/vocabulario/Vocales" component={Vocales} /> */}
-
-            {/* <Route exact path="/Vocales"  component={Vocales} /> */}
-            {/* <Route exact path="/Pago" component={Pago} /> */}
-            {/* Quizes below */}
+            {/* {THIS IS THE QUIZ SECTION} */}
             <Route exact path="/pruebas" component={pruebas} />
             <Route path="/pruebas/:id" component={Quiz} />
           </Container>

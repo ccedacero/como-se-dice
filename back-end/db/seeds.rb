@@ -6,6 +6,7 @@ Vocab.destroy_all
 Phrase.destroy_all
 Answer.destroy_all
 Question.destroy_all
+Test.destroy_all
 # Forum.destroy_all
 # Interview.destroy_all
 # Comment.destroy_all
@@ -96,19 +97,45 @@ saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "
     Vocab.create(word: word, wordSpanish: direc[index],wordUrl: "https://comosedice.s3.amazonaws.com/Directions/#{word}.mp3",category: "directions")
   end
 
+# SEED HOLIDAYS + url 
+holidays = ["Tomorrow is a holiday and we do not work", "Happy birthday", "Merry Christmas", "Happy Thanksgiving day", "Happy New Year", "Happy Easter", "My condolences", "I’m so sorry", "Best wishes", "Have a nice trip", "May you arrive well"]
+festivos = ["Mañana es feriado y no trabajamos", "Feliz cumpleaños", "Feliz Navidad", "Feliz día de Acción de Gracias", "Feliz año nuevo", "Felices Pascuas", "Mi más sentido pésame", "Lo siento mucho", "Mis mejores deseos", "Buen viaje", "Que llegues bien"]
 
+#SEED ANIMALS + URL 
+animals = ["Livestock", "Cow", "Calf", "Heifer", "Steer", "Bull", "Pig", "Sow", "Goat", "Sheep", "Lamb", "Buck", "Ram", "Horse", "Stallion", "Colt", "Dairy"]
+animales = ["Ganadería", "Vaca", "Ternero", "Novilla", "Novillo", "Toro", "Cerdo", "Cerda", "Cabra", "Oveja", "Cordero", "Macho", "Carnero", "Caballo", "Semental", "Potro", "Lechería"]
+  
+#SEED TOOLS + URL 
+tools = ["Ladder", "Tray", "Pruning shear", "Tractor", "Tractor driver", "Equipment", "Tool", "Hose", "Hoe", "Shovel", "Rake", "Post", "Pole", "Stake", "Wire", "Hammer", "Nail", "Screwdriver", "Screw", "Players", "Tape", "Broom", "Reach", "Tank", "Reservoir", "Barn", "Water", "This water", "Map", "This map", "Hoeing", "Cultivating"]
+herramientas = ["Escalera", "Bandeja", "Tijera de podar", "Tractor", "Conductor de tractor", "Equipo", "Herramienta", "Manguera", "Azadón", "Pala", "Rastrillo", "Poste", "Poste", "Estaca", "Alambre", "Martillo", "Clavo", "Destornillador", "Tornillo", "Jugadores", "Cinta", "Escoba", "Alcance", "Tanque ", "Depósito", "Granero", "Agua", "Esta agua", "Mapa", "Este mapa", "Cavar", "Cultivar"]
+  
+#SEED irrigation + URL 
+irrigation = ["Irrigation", "Drip irrigation", "Flood irrigation", "Sprinkler irrigation", "Water", "Sprinkler", "It needs to be irrigated for seven consecutive hours"]
+irrigacion = ["Riego", "Riego por goteo", "Riego por inundación", "Riego por aspersión", "Agua", "Aspersor", "Necesita ser regado por siete horas consecutivas"]
 
+#SEED office + URL 
+office = ["Have you worked here before", "Do you have a driver’s license?", "Where are you going?", "When will you back?", "What is your address?", "Where do you live?", "How much do I owe you?", "Do you need an advance?", "I need an advance", "You have to fill out this application", "Would you want to take your vacation?", "What is your social security number?", "How many people can you bring?", "Where shall I pick you up in the morning?", "May I look at your documents?", "Do you have a legal right to work?"]
+officina = ["¿Has trabajado aquí antes?", "¿Tienes una licencia de conducir?", "¿A dónde vas?", "¿Cuándo volverás?", "¿Cuál es tu dirección?", "¿Dónde vives?", "¿Cuánto te debo?", "¿Necesitas un adelanto?", "Necesito un adelanto", "Tienes que llenar esta solicitud", "¿Te gustaría tomarte tus vacaciones?", "¿Cuál es tu número de seguro social?", "¿cuántas personas puedes traer?", "¿En dónde te recojo en el mañana?", "¿Puedo ver sus documentos?", "¿Tiene derecho legal a trabajar?"]
 
+#SEED QUESTIONS
+questions = ["Can you bring me?", "Wil you need me?", "May I show you how it is done?", "Where is?, How much", "How many", "Who?", "When?", "Why?", "Where?", "Where is?", "Do you want?", "Do you understand?", "Do you understand me?", "Do you understand what I explained? ", "Can you hear me?", "Are you listening to me?", "Is there a problem?", "Can you?", "Could you?", "Do you like?", "Would you like?", "Do you have?", "Would you have?", "Do you need?", "Will you need?", "Can you do it?", "Could you do it?", "Do you know how to do this?", "Is it needed right away?", "What do you need to finish the day?", "What is the problem?", "When will you finish?", "At what time will you finish", "How much did you harvest today?"]
+preguntas = ["¿Me puedes traer?", "¿Me necesitarás?", "¿Puedo mostrarte cómo se hace?", "¿Dónde est? ¿Cuánto", "Cuántos", "Quién?", "¿Cuándo?", "¿Por qué?", "¿Dónde?", "¿Dónde está?", "¿Quieres?", "¿Entiendes?", "¿Me entiendes?", "¿Entiendes lo que te expliqu? ", "¿Me escuchas?", "¿Me escuchas?", "¿Hay algún problema?", "¿Puedes?", "¿Podrías?", "¿Te gusta?", "¿Te gustaría?", "¿Tienes?", "¿Tendrías?", "¿Tu ¿Necesitas?", "¿Lo necesitarás?", "¿Puedes hacerlo?", "¿Podrías hacerlo?", "¿Sabes cómo hacerlo?", "¿Se necesita de inmediato?", "¿Qué necesitas para terminar el día?", "¿Cuál es el problema?", "¿Cuándo terminarás?", "¿A qué hora terminarás?", "¿Cuánto cosechaste hoy?"]
 
+#SEED SEASONS
+seasons = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "Spring", "Summer", "Winter", "Fall"]
+estaciones = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", "Primavera", "Verano", "Invierno", "Otoño"]
 
+#SEED MEASUREMENTS
+measurements = ["Measurement", "Inch", "Foot", "Yard", "Mile", "Ounce", "Paint", "Quart", "Gallon", "Pound", "To", "Millimeter", "Centimeter", "Meter", "Kilometer", "Acre", "Hectare", "Liter", "Kilo"]
+medidas = ["Medida", "Pulgada", "Pie", "Yarda", "Milla", "Onza", "Pintura", "Cuarto", "Galón", "Libra", "Hasta", "Milímetro", "Centímetro", "Metro", "Kilómetro", "Acre", "Hectárea", "Litro", "Kilo"]
 
 
 # SEEDING QUIZES!!!  
-Test.create(name: "Prueba Sobre Vocabulario de Pago", no_of_questions:7);
+Test.create(name: "Prueba Sobre Vocabulario de Pago");
 
-  TestQuestion.create(test_id:Test.first.id, question_id:nil)
+  TestQuestion.create(test_id:Test.first.id)
   
-  Question.create(question:"Como se dice Turno del atardecer?")
+  Question.create(question:"Como se dice Turno del atardecer?", test_question_id: TestQuestion.last.id)
   options =["Day shift","Afternoon shift","Evening shift","Night shift"]
   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
   ans = "Evening shift"
@@ -117,6 +144,7 @@ Test.create(name: "Prueba Sobre Vocabulario de Pago", no_of_questions:7);
     a.answer === ans
   end
   updateQ[0].update(is_correct: true)
+  TestQuestion.create(test_id:Test.first.id, question_id:Question.last.id)
  end
  updateAnswer(ans)
 
@@ -128,7 +156,7 @@ Test.create(name: "Prueba Sobre Vocabulario de Pago", no_of_questions:7);
   ans = "Pago de horas extras"
   updateAnswer(ans)
 
-  Question.create(question:"Como se dice 'Tiempo de descanso?'")
+  Question.create(question:"Como se dice 'Tiempo de descanso?",test_question_id: nil)
   options2 =["Break time", "Take a break", "I need a break", "Lunch"]
   options2.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 

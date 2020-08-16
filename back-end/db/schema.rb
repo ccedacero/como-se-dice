@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
 
   create_table "questions", force: :cascade do |t|
     t.string "question"
+    t.integer "test_question_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -77,7 +78,7 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
     t.datetime "date_from"
     t.datetime "date_to"
     t.integer "timing"
-    t.integer "no_of_questions"
+    t.integer "test_questions_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

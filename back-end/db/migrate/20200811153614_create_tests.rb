@@ -5,7 +5,7 @@ class CreateTests < ActiveRecord::Migration[6.0]
       t.datetime :date_from
       t.datetime :date_to
       t.integer :timing
-      t.integer :no_of_questions
+      t.integer :test_questions_id
 
       t.timestamps
     end

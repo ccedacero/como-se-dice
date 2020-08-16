@@ -5,14 +5,22 @@ import { Container } from "@material-ui/core";
 import TestStats from "./TestStats";
 export const Dashboard = () => {
   const [state, setState] = useState({
-    labels: ["Incorrectas", "Correctas"],
+    labels: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
     datasets: [
       {
         label: "Respuestas",
         backgroundColor: "rgba(75,192,192,1)",
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
-        data: [5, 10, 3],
+        data: [20, 30, 56, 30, 26, 55, 40],
       },
     ],
   });
@@ -20,18 +28,32 @@ export const Dashboard = () => {
   return (
     <div>
       <Container maxWidth="lg">
-        <Container maxWidth="sm">
+        <Container maxWidth="md">
           <Bar
             data={state}
             options={{
               title: {
                 display: true,
-                text: "Numero de Respues Correctas y Incorrectas",
+                text: "Numero de Terminos Estudiados - Ultimod 7 Dias",
                 fontSize: 20,
               },
               legend: {
                 display: true,
                 position: "right",
+              },
+              scales: {
+                xAxes: [
+                  {
+                    display: true,
+                  },
+                ],
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                    },
+                  },
+                ],
               },
             }}
           />

@@ -42,15 +42,8 @@ export const Quiz = ({
     Option2: "",
     Option3: "",
     Option4: "",
+    questionId: "",
   });
-  const [results, setResults] = useState({
-    no_correct: 0,
-    no_incorrect: 0,
-    user_id: localStorage.user,
-    score: 0,
-  });
-
-  // WE ARE GOING TO FIRST GET THE DASHBORAD TO DISPLAY GENERAL TEST RESULTS
   useEffect(() => {
     fetch("http://localhost:3000/questions", payLoad)
       .then((r) => r.json())
@@ -68,13 +61,22 @@ export const Quiz = ({
       });
   }, []);
 
-  // console.log(state);
+  const [results, setResults] = useState({
+    no_correct: 0,
+    no_incorrect: 0,
+    user_id: localStorage.user,
+    score: 0,
+  });
   const [response, setResponse] = useState({
     user_id: localStorage.user,
     question_id: null,
     choice_id: null,
     is_right: null,
   });
+
+  // WE ARE GOING TO FIRST GET THE DASHBORAD TO DISPLAY GENERAL TEST RESULTS
+
+  // console.log(state);
 
   const getSelectedRadio = (e) => {
     let radioSelection = e.target.value;
@@ -93,22 +95,70 @@ export const Quiz = ({
     });
   };
 
+  // useEffect(() => {
+  //   persistResponse();
+  // }, [response.is_right]);
+
+  // const setResponseTrue = () => {
+  //   setResponse((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       is_right: true,
+  //     };
+  //   });
+  // };
+
+  // const setResponseFalse = () => {
+  //   setResponse((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       is_right: false,
+  //     };
+  //   });
+  // };
+
   const setResponseTrue = () => {
-    setResponse((prevState) => {
-      return {
-        ...prevState,
-        is_right: !prevState.is_right,
-      };
-    });
+    const sample = {
+      user_id: localStorage.user,
+      question_id: response.question_id,
+      choice_id: response.choice_id,
+      is_right: true,
+    };
+    const answerPayLoad = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify(sample),
+    };
+    fetch("http://localhost:3000/user_answers", answerPayLoad)
+      .then((r) => r.json())
+      .then((persistedObj) => {
+        console.log(persistedObj);
+      });
   };
 
   const setResponseFalse = () => {
-    setResponse((prevState) => {
-      return {
-        ...prevState,
-        is_right: false,
-      };
-    });
+    const sample = {
+      user_id: localStorage.user,
+      question_id: response.question_id,
+      choice_id: response.choice_id,
+      is_right: false,
+    };
+    const answerPayLoad = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify(sample),
+    };
+    fetch("http://localhost:3000/user_answers", answerPayLoad)
+      .then((r) => r.json())
+      .then((persistedObj) => {
+        console.log(persistedObj);
+      });
   };
 
   //  BUG FOUND IN LAST QUESTION RENDER - DOES NOT CHECK CORRECT
@@ -168,22 +218,22 @@ export const Quiz = ({
       });
   };
 
-  const persistResponse = () => {
-    const answerPayLoad = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-      body: JSON.stringify(response),
-    };
+  // const persistResponse = () => {
+  //   const answerPayLoad = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.token}`,
+  //     },
+  //     body: JSON.stringify(response),
+  //   };
 
-    fetch("http://localhost:3000/user_answers", answerPayLoad)
-      .then((r) => r.json())
-      .then((persistedObj) => {
-        console.log(persistedObj);
-      });
-  };
+  //   fetch("http://localhost:3000/user_answers", answerPayLoad)
+  //     .then((r) => r.json())
+  //     .then((persistedObj) => {
+  //       console.log(persistedObj);
+  //     });
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -199,7 +249,8 @@ export const Quiz = ({
       });
       if (comparison.answer && comparison.answer === value) {
         setResponseTrue();
-        persistResponse();
+
+        // persistResponse();
         let arr = shuffle([0, 1, 2, 3]);
         setQuestion((prevState) => {
           return {
@@ -220,7 +271,7 @@ export const Quiz = ({
         setHelperText("Lo Siento, Intente Otra vez!");
         setError(true);
         setIncorrectResults();
-        persistResponse();
+        // persistResponse();
       } else {
         setHelperText("Por favor, seleccione una opcion:");
         setError(true);
@@ -232,7 +283,6 @@ export const Quiz = ({
         } preguntas correctas!`
       );
     }
-    console.log(response);
   };
   console.log(response);
   //  setTimeout(persistResponse, 2000);

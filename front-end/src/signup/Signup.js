@@ -79,6 +79,7 @@ export default function SignUp({ history, handleLogin }) {
         const { user, token } = userObj;
         handleLogin(user);
         localStorage.token = token;
+        localStorage.user = user.id;
         if (user !== undefined || user !== null) {
           history.push("/vocabulario");
         }

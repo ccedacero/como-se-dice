@@ -93,6 +93,7 @@ export default function SignIn({ history, handleLogin }) {
         handleLogin(user);
         console.log(user);
         localStorage.token = token;
+        localStorage.user = user.id;
         if (user !== undefined && user !== null) {
           history.push("/vocabulario");
         }

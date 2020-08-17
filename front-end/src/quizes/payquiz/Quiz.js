@@ -26,6 +26,7 @@ export const Quiz = ({
   match: {
     params: { id },
   },
+  currentUser,
 }) => {
   const classes = useStyles();
   const [state, setState] = useState([]);
@@ -43,10 +44,11 @@ export const Quiz = ({
   const [results, setResults] = useState({
     no_correct: 0,
     no_incorrect: 0,
-    incorrectQ: [],
+    // incorrectQ: [],
     incCategory: id,
   });
 
+  // WE ARE GOING TO FIRST GET THE DASHBORAD TO DISPLAY GENERAL TEST RESULTS
   useEffect(() => {
     fetch("http://localhost:3000/questions", payLoad)
       .then((r) => r.json())
@@ -55,13 +57,56 @@ export const Quiz = ({
         setQuestion({
           currentQuestion: 0,
           question: quizQuestionsObj[0].question,
-          Option1: quizQuestionsObj[0].answers[0].answer,
-          Option2: quizQuestionsObj[0].answers[1].answer,
-          Option3: quizQuestionsObj[0].answers[2].answer,
-          Option4: quizQuestionsObj[0].answers[3].answer,
+          Option1: quizQuestionsObj[0].answers[0],
+          Option2: quizQuestionsObj[0].answers[1],
+          Option3: quizQuestionsObj[0].answers[2],
+          Option4: quizQuestionsObj[0].answers[3],
+          questionId: quizQuestionsObj[0].id,
         });
       });
   }, []);
+
+  const [response, setResponse] = useState({
+    user_id: localStorage.user,
+    question_id: null,
+    choice_id: null,
+    is_right: null,
+  });
+
+  const getSelectedRadio = (e) => {
+    let radioSelection = e.target.value;
+    const radioSelected = state[question.currentQuestion].answers.find(
+      (ans) => {
+        return ans.answer === radioSelection;
+      }
+    );
+
+    setResponse((prevState) => {
+      return {
+        ...prevState,
+        choice_id: radioSelected.id,
+        question_id: state[question.currentQuestion].id,
+      };
+    });
+  };
+
+  const setResponseTrue = () => {
+    setResponse((prevState) => {
+      return {
+        ...prevState,
+        is_right: !prevState.is_right,
+      };
+    });
+  };
+
+  const setResponseFalse = () => {
+    setResponse((prevState) => {
+      return {
+        ...prevState,
+        is_right: false,
+      };
+    });
+  };
 
   //  BUG FOUND IN LAST QUESTION RENDER - DOES NOT CHECK CORRECT
   //  ANSWER
@@ -103,26 +148,59 @@ export const Quiz = ({
       };
     });
   };
-  const setCurrentQuestion = () => {
-    setResults((prevState) => {
-      return {
-        ...prevState,
-        incorrectQ: [...results.incorrectQ, question.question],
-      };
-    });
+  // const setCurrentQuestion = () => {
+  //   setResults((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       incorrectQ: [...results.incorrectQ, question.question],
+  //     };
+  //   });
+  // };
+
+  // const persistResults = () => {
+  //   const createPayload = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.token}`,
+  //     },
+  //     body: JSON.stringify(results), // body data type must match "Content-Type" header
+  //   };
+  //   fetch("http://localhost:3000/results", createPayload)
+  //     .then((r) => r.json())
+  //     .then(() => {
+  //       setState(quizQuestionsObj);
+  //     });
+  // };
+
+  const persistResponse = () => {
+    const answerPayLoad = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify(response),
+    };
+
+    fetch("http://localhost:3000/user_answers", answerPayLoad)
+      .then((r) => r.json())
+      .then((persistedObj) => {
+        console.log(persistedObj);
+      });
   };
 
   const handleSubmit = (event) => {
-    console.log(results);
     event.preventDefault();
     if (question.currentQuestion + 1 !== state.length) {
       let comparison = state[question.currentQuestion].answers.find((ans) => {
         if (ans.is_correct !== undefined && ans.is_correct === true) {
+          setResponseTrue();
           return ans;
         } else {
           setHelperText("Please select an option.");
           setError(true);
-          return;
+          // return;
         }
       });
       if (comparison.answer && comparison.answer === value) {
@@ -131,14 +209,10 @@ export const Quiz = ({
           return {
             currentQuestion: prevState.currentQuestion + 1,
             question: state[prevState.currentQuestion + 1].question,
-            Option1:
-              state[prevState.currentQuestion + 1].answers[arr[0]].answer,
-            Option2:
-              state[prevState.currentQuestion + 1].answers[arr[1]].answer,
-            Option3:
-              state[prevState.currentQuestion + 1].answers[arr[2]].answer,
-            Option4:
-              state[prevState.currentQuestion + 1].answers[arr[3]].answer,
+            Option1: state[prevState.currentQuestion + 1].answers[arr[0]],
+            Option2: state[prevState.currentQuestion + 1].answers[arr[1]],
+            Option3: state[prevState.currentQuestion + 1].answers[arr[2]],
+            Option4: state[prevState.currentQuestion + 1].answers[arr[3]],
           };
         });
 
@@ -146,10 +220,11 @@ export const Quiz = ({
         setError(false);
         setCorrectResults();
       } else if (comparison.answer && comparison.answer !== value) {
+        setResponseFalse();
         setHelperText("Lo Siente, Intente Otra vez!");
         setError(true);
         setIncorrectResults();
-        setCurrentQuestion();
+        // setCurrentQuestion();
       } else {
         setHelperText("Por favor, seleccione una opcion:");
         setError(true);
@@ -163,6 +238,8 @@ export const Quiz = ({
     }
   };
 
+  //  setTimeout(persistResponse, 2000);
+  console.log(results);
   return (
     <Container maxWidth="sm">
       <form className={classes.fomrTopSpace} onSubmit={handleSubmit}>
@@ -184,24 +261,28 @@ export const Quiz = ({
             onChange={handleRadioChange}
           >
             <FormControlLabel
-              value={question.Option1}
+              value={question.Option1.answer}
               control={<Radio />}
-              label={question.Option1}
+              label={question.Option1.answer}
+              onChange={(e) => getSelectedRadio(e)}
             />
             <FormControlLabel
-              value={question.Option2}
+              value={question.Option2.answer}
               control={<Radio />}
-              label={question.Option2}
+              label={question.Option2.answer}
+              onChange={(e) => getSelectedRadio(e)}
             />
             <FormControlLabel
-              value={question.Option3}
+              value={question.Option3.answer}
               control={<Radio />}
-              label={question.Option3}
+              label={question.Option3.answer}
+              onChange={(e) => getSelectedRadio(e)}
             />
             <FormControlLabel
-              value={question.Option4}
+              value={question.Option4.answer}
               control={<Radio />}
-              label={question.Option4}
+              label={question.Option4.answer}
+              onChange={(e) => getSelectedRadio(e)}
             />
           </RadioGroup>
           <FormHelperText>{helperText}</FormHelperText>

@@ -74,9 +74,18 @@ const App = (props) => {
           </Route>
           <Container maxWidth="lg">
             {/* THESE TWO ARE K USING THE SAME ALPHABET COMPONENT  */}
-            <Route exact path="/vocabulario" component={Vocabulario} />
+            <Route
+              exact
+              path="/vocabulario"
+              currentUser={state.currentUser}
+              component={Vocabulario}
+            />
             {/* ALPHABET RENDERS ALL FLASHCARDS */}
-            <Route path="/vocabulario/:id" component={Alphabet} />
+            <Route
+              path="/vocabulario/:id"
+              currentUser={state.currentUser}
+              component={Alphabet}
+            />
 
             {/* {THIS IS THE QUIZ SECTION} */}
             <Route exact path="/pruebas" component={pruebas} />

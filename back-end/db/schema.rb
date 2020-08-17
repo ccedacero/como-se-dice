@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_171015) do
+ActiveRecord::Schema.define(version: 2020_08_16_204631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "question_id"
-    t.integer "user_id"
     t.string "answer"
     t.boolean "is_correct"
     t.datetime "created_at", precision: 6, null: false
@@ -61,10 +60,20 @@ ActiveRecord::Schema.define(version: 2020_08_11_171015) do
 
   create_table "tests", force: :cascade do |t|
     t.string "name"
+    t.string "category"
     t.datetime "date_from"
     t.datetime "date_to"
     t.integer "timing"
     t.integer "no_of_questions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_answers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "question_id"
+    t.integer "choice_id"
+    t.boolean "is_right"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

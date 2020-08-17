@@ -6,6 +6,7 @@ Phrase.destroy_all
 Answer.destroy_all
 Question.destroy_all
 Test.destroy_all
+Result.destroy_all
 # Forum.destroy_all
 # Interview.destroy_all
 # Comment.destroy_all
@@ -136,56 +137,56 @@ Test.create(name: "Prueba Sobre Vocabulario de Pago");
   options =["Day shift","Afternoon shift","Evening shift","Night shift"]
   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
   ans = "Evening shift"
-  def updateAnswer(ans)Question.create(question:"Como se dice Turno del atardecer?")
-  # updateQ = Question.last.answers.select do |a|
-  #   a.answer === ans
-  # end
-  # updateQ[0].update(is_correct: true)
+  def updateAnswer(ans)
+  updateQ = Question.last.answers.select do |a|
+    a.answer === ans
+  end
+  updateQ[0].update(is_correct: true)
  end
-#  updateAnswer(ans)
+ updateAnswer(ans)
 
 
-  Question.create(question:"Que significa 'Overtime pay'?")
+  Question.create(question:"Que significa 'Overtime pay'?", test_id: Test.last.id)
   options1 = ["Pago","Horas extras", "Pago de horas extras", "Tiempo de descanso",]
   options1.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
   
   ans = "Pago de horas extras"
-  # updateAnswer(ans)
+  updateAnswer(ans)
 
-  # Question.create(question:"Como se dice 'Tiempo de descanso?", test_id: Test.last.id)
-  # options2 =["Break time", "Take a break", "I need a break", "Lunch"]
-  # options2.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+  Question.create(question:"Como se dice 'Tiempo de descanso?", test_id: Test.last.id)
+  options2 =["Break time", "Take a break", "I need a break", "Lunch"]
+  options2.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  # ans = "Break time"
-  # # updateAnswer(ans)
+  ans = "Break time"
+  updateAnswer(ans)
 
-  # Question.create(question:"Como se dice reloj?")
-  # options3 =["Watch","Clock","Time","Hour"]
-  # options3.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+  Question.create(question:"Como se dice reloj?", test_id: Test.last.id)
+  options3 =["Watch","Clock","Time","Hour"]
+  options3.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  # ans = "Clock"
-  # # updateAnswer(ans)
+  ans = "Clock"
+  updateAnswer(ans)
 
-  # Question.create(question: "Cual de las siguientes palabras no tiene que ver con salario o pago?")
-  # options4 =["We pay once a month","We pay every fifteen days","Here is your check","Punctual"]
-  # options4.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+  Question.create(question: "Cual de las siguientes palabras no tiene que ver con salario o pago?", test_id: Test.last.id)
+  options4 =["We pay once a month","We pay every fifteen days","Here is your check","Punctual"]
+  options4.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  # ans = "Punctual"
-  # # updateAnswer(ans)
+  ans = "Punctual"
+  updateAnswer(ans)
 
-  # Question.create(question:"Que significa 'How many hours did you work' ")
-  # options5 =["No tenemos trabajo disponible","Puede venir a las siete?","¿Cuántas horas trabajó?","Stop working at five"]
-  # options5.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+  Question.create(question:"Que significa 'How many hours did you work' ", test_id: Test.last.id)
+  options5 =["No tenemos trabajo disponible","Puede venir a las siete?","¿Cuántas horas trabajó?","Stop working at five"]
+  options5.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  # ans = "¿Cuántas horas trabajó?"
-  # # updateAnswer(ans)
+  ans = "¿Cuántas horas trabajó?"
+  updateAnswer(ans)
   
-  # Question.create(question: "Como se dice 'Pagamos cada dos semanas'")
-  # options =["We pay every week","We pay every two weeks","We pay evey month","We pay by the hour"]
-  # options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+  Question.create(question: "Como se dice 'Pagamos cada dos semanas'", test_id: Test.last.id)
+  options =["We pay every week","We pay every two weeks","We pay evey month","We pay by the hour"]
+  options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  # ans = "We pay every two weeks"
-  # updateAnswer(ans)
+  ans = "We pay every two weeks"
+  updateAnswer(ans)
 
 # phrases.each_with_index do |phrase, index|
 #   Phrase.create(sentence: phrase, sentenceSpanish: phrasesSpanish[index])

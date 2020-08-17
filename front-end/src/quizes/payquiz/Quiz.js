@@ -44,6 +44,7 @@ export const Quiz = ({
     Option4: "",
     questionId: "",
   });
+
   useEffect(() => {
     fetch("http://localhost:3000/questions", payLoad)
       .then((r) => r.json())
@@ -62,6 +63,7 @@ export const Quiz = ({
   }, []);
 
   const [results, setResults] = useState({
+    test_id: 0,
     no_correct: 0,
     no_incorrect: 0,
     user_id: localStorage.user,
@@ -75,8 +77,6 @@ export const Quiz = ({
   });
 
   // WE ARE GOING TO FIRST GET THE DASHBORAD TO DISPLAY GENERAL TEST RESULTS
-
-  // console.log(state);
 
   const getSelectedRadio = (e) => {
     let radioSelection = e.target.value;
@@ -203,13 +203,19 @@ export const Quiz = ({
   };
 
   const persistResults = () => {
+    const resultObj = {
+      ...results,
+      test_id: state[0].test.id,
+      score: results.no_correct - results.no_incorrect,
+    };
+
     const createPayload = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.token}`,
       },
-      body: JSON.stringify(results), // body data type must match "Content-Type" header
+      body: JSON.stringify(resultObj), // body data type must match "Content-Type" header
     };
     fetch("http://localhost:3000/results", createPayload)
       .then((r) => r.json())
@@ -283,8 +289,10 @@ export const Quiz = ({
         } preguntas correctas!`
       );
     }
+    if (question.currentQuestion + 1 === state.length) {
+      persistResults();
+    }
   };
-  console.log(response);
   //  setTimeout(persistResponse, 2000);
   return (
     <Container class="radioForm" maxWidth="md">

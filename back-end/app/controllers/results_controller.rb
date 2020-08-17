@@ -6,7 +6,6 @@ class ResultsController < ApplicationController
     end
 
     def create 
-        byebug
     result = Result.create(result_params)
     render json: result
     end
@@ -14,6 +13,6 @@ class ResultsController < ApplicationController
 
    private 
    def result_params 
-   params.require(:results).permiet(:test_id, :user_id,:no_correct,:no_incorrect,:score)
+   params.require(:result).permit(:test_id, :user_id,:no_correct,:no_incorrect,:score)
    end
 end

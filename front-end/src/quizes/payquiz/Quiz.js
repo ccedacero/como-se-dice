@@ -10,12 +10,14 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
 import { payLoad } from "../../constants/index";
+import "./Quiz.css";
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(5),
   },
   fomrTopSpace: {
-    marginTop: "15vh",
+    marginTop: "5vh",
   },
   button: {
     margin: theme.spacing(1, 1, 0, 0),
@@ -44,8 +46,8 @@ export const Quiz = ({
   const [results, setResults] = useState({
     no_correct: 0,
     no_incorrect: 0,
-    // incorrectQ: [],
-    incCategory: id,
+    user_id: localStorage.user,
+    score: 0,
   });
 
   // WE ARE GOING TO FIRST GET THE DASHBORAD TO DISPLAY GENERAL TEST RESULTS
@@ -66,6 +68,7 @@ export const Quiz = ({
       });
   }, []);
 
+  // console.log(state);
   const [response, setResponse] = useState({
     user_id: localStorage.user,
     question_id: null,
@@ -148,30 +151,22 @@ export const Quiz = ({
       };
     });
   };
-  // const setCurrentQuestion = () => {
-  //   setResults((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       incorrectQ: [...results.incorrectQ, question.question],
-  //     };
-  //   });
-  // };
 
-  // const persistResults = () => {
-  //   const createPayload = {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.token}`,
-  //     },
-  //     body: JSON.stringify(results), // body data type must match "Content-Type" header
-  //   };
-  //   fetch("http://localhost:3000/results", createPayload)
-  //     .then((r) => r.json())
-  //     .then(() => {
-  //       setState(quizQuestionsObj);
-  //     });
-  // };
+  const persistResults = () => {
+    const createPayload = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify(results), // body data type must match "Content-Type" header
+    };
+    fetch("http://localhost:3000/results", createPayload)
+      .then((r) => r.json())
+      .then((quizQuestionsObj) => {
+        console.log(quizQuestionsObj);
+      });
+  };
 
   const persistResponse = () => {
     const answerPayLoad = {
@@ -195,7 +190,6 @@ export const Quiz = ({
     if (question.currentQuestion + 1 !== state.length) {
       let comparison = state[question.currentQuestion].answers.find((ans) => {
         if (ans.is_correct !== undefined && ans.is_correct === true) {
-          setResponseTrue();
           return ans;
         } else {
           setHelperText("Please select an option.");
@@ -204,6 +198,8 @@ export const Quiz = ({
         }
       });
       if (comparison.answer && comparison.answer === value) {
+        setResponseTrue();
+        persistResponse();
         let arr = shuffle([0, 1, 2, 3]);
         setQuestion((prevState) => {
           return {
@@ -221,10 +217,10 @@ export const Quiz = ({
         setCorrectResults();
       } else if (comparison.answer && comparison.answer !== value) {
         setResponseFalse();
-        setHelperText("Lo Siente, Intente Otra vez!");
+        setHelperText("Lo Siento, Intente Otra vez!");
         setError(true);
         setIncorrectResults();
-        // setCurrentQuestion();
+        persistResponse();
       } else {
         setHelperText("Por favor, seleccione una opcion:");
         setError(true);
@@ -236,15 +232,15 @@ export const Quiz = ({
         } preguntas correctas!`
       );
     }
+    console.log(response);
   };
-
+  console.log(response);
   //  setTimeout(persistResponse, 2000);
-  console.log(results);
   return (
-    <Container maxWidth="sm">
+    <Container class="radioForm" maxWidth="md">
       <form className={classes.fomrTopSpace} onSubmit={handleSubmit}>
         <FormLabel component="legend">
-          <Typography variant="h5" component="h6">
+          <Typography variant="h4" component="h6">
             Prueba / Pop Quiz de Vocabulario de {id}
           </Typography>
         </FormLabel>

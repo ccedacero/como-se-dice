@@ -1,21 +1,19 @@
 class ResultsController < ApplicationController
   
+    def index 
+        results = Result.all 
+        render json: results 
+    end
+
     def create 
-        byebug 
-    # result = Result.create(no_incorrect: 
+        byebug
+    result = Result.create(result_params)
+    render json: result
     end
 
 
-    private 
+   private 
    def result_params 
-   params.require(:results)
+   params.require(:results).permiet(:test_id, :user_id,:no_correct,:no_incorrect,:score)
    end
-
 end
-# .bigint "test_id", null: false
-#     t.bigint "user_id", null: false
-#     t.integer "no_correct"
-#     t.integer "no_incorrect"
-#     t.integer "no_unanswered"
-#     t.integer "score"
-#     t.integer "rank"

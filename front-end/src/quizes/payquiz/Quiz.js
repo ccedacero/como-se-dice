@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
 import { payLoad } from "../../constants/index";
+import Categories from "../../home/Categories";
 import "./Quiz.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,9 +45,9 @@ export const Quiz = ({
     Option4: "",
     questionId: "",
   });
-
+  console.log(id);
   useEffect(() => {
-    fetch("http://localhost:3000/questions", payLoad)
+    fetch(`http://localhost:3000/tests/${id}`, payLoad)
       .then((r) => r.json())
       .then((quizQuestionsObj) => {
         setState(quizQuestionsObj);

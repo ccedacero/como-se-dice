@@ -7,6 +7,7 @@ Answer.destroy_all
 Question.destroy_all
 Test.destroy_all
 Result.destroy_all
+UserAnswer.destroy_all
 # Forum.destroy_all
 # Interview.destroy_all
 # Comment.destroy_all
@@ -100,6 +101,9 @@ saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "
 # SEED HOLIDAYS + url 
 holidays = ["Tomorrow is a holiday and we do not work", "Happy birthday", "Merry Christmas", "Happy Thanksgiving day", "Happy New Year", "Happy Easter", "My condolences", "I’m so sorry", "Best wishes", "Have a nice trip", "May you arrive well"]
 festivos = ["Mañana es feriado y no trabajamos", "Feliz cumpleaños", "Feliz Navidad", "Feliz día de Acción de Gracias", "Feliz año nuevo", "Felices Pascuas", "Mi más sentido pésame", "Lo siento mucho", "Mis mejores deseos", "Buen viaje", "Que llegues bien"]
+holidays.each_with_index do |word, index|
+  Vocab.create(word: word, wordSpanish: direc[index],wordUrl: "https://comosedice.s3.amazonaws.com/Directions/#{word}.mp3",category: "directions")
+end
 
 #SEED ANIMALS + URL 
 animals = ["Livestock", "Cow", "Calf", "Heifer", "Steer", "Bull", "Pig", "Sow", "Goat", "Sheep", "Lamb", "Buck", "Ram", "Horse", "Stallion", "Colt", "Dairy"]
@@ -131,7 +135,9 @@ medidas = ["Medida", "Pulgada", "Pie", "Yarda", "Milla", "Onza", "Pintura", "Cua
 
 
 # SEEDING QUIZES!!!  
-Test.create(name: "Prueba Sobre Vocabulario de Pago");
+
+#PAY QUIZ HERE 
+Test.create(name: "Payments");
   
   Question.create(question:"Como se dice Turno del atardecer?", test_id: Test.last.id)
   options =["Day shift","Afternoon shift","Evening shift","Night shift"]
@@ -188,9 +194,65 @@ Test.create(name: "Prueba Sobre Vocabulario de Pago");
   ans = "We pay every two weeks"
   updateAnswer(ans)
 
-# phrases.each_with_index do |phrase, index|
-#   Phrase.create(sentence: phrase, sentenceSpanish: phrasesSpanish[index])
-# end
+  #SEEDING GREETINGS QUIZ 
+
+  Test.create(name: "Saludos");
+  
+  Question.create(question:"Como se dice 'Gusto en conocerte!?'", test_id: Test.last.id)
+  options =["I liked meeting you","Nice to meet you!","Nice seeing you","See you next week"]
+  options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+  ans = "Nice to meet you!"
+
+  def updateAnswer(ans)
+  updateQ = Question.last.answers.select do |a|
+    a.answer === ans
+  end
+  updateQ.first.update(is_correct: true)
+  # 
+ end
+ updateAnswer(ans)
+
+  Question.create(question:"Como se dice 'Nos vemos mañana?' ", test_id: Test.last.id)
+  options1 = ["See you tomorrow","See you next week", "See you later", "See you tonight",]
+  options1.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+  ans = "See you tomorrow"
+  updateAnswer(ans)
+
+  Question.create(question:"Que significa 'Good night'?", test_id: Test.last.id)
+  options2 =["Hasta mañana", "Buenos dias", "Buenos tardes", "Buenos Noches"]
+  options2.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+
+  ans ="Buenos Noches"
+  updateAnswer(ans)
+
+  Question.create(question:"Que significa 'See you soon!'?", test_id: Test.last.id)
+  options3 =["Nos vemos pronto","Nos vemos hoy","Nos vemos esta tarde","Nos vemos mañana "]
+  options3.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+
+  ans = "Nos vemos pronto"
+  updateAnswer(ans)
+
+  Question.create(question: "Que significa 'You're welcome'?", test_id: Test.last.id)
+  options4 =["Gracias","Bienvenido","De nada","Bienvenido a mi casa"]
+  options4.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+
+  ans = "De nada"
+  updateAnswer(ans)
+
+  Question.create(question:"Como dirias 'Muy bien, gracias!'?", test_id: Test.last.id)
+  options5 =["cool, Thank you!","Very well, Thank you!","Thank you!","Great"]
+  options5.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+
+  ans = "Very well, Thank you!"
+  updateAnswer(ans)
+  
+  Question.create(question: "Que sigfnica 'How have you been?'", test_id: Test.last.id)
+  options6 =["Como has estado?","Que has estado haciendo?","Que hiciste hoy","Como te sientes"]
+  options6.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+
+  ans = "Como has estado?"
+  updateAnswer(ans)
+
 
 puts "=========================="
 puts "~~~~~~~~~~SEEDED~~~~~~~~~~"

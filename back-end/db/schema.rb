@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_08_16_204631) do
 
   create_table "questions", force: :cascade do |t|
     t.string "question"
+    t.string "category"
     t.integer "test_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

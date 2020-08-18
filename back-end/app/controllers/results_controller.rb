@@ -11,12 +11,10 @@ class ResultsController < ApplicationController
       test_average: get_avg,
       number_correct: get_correct(recentResults),
       number_incorrect: get_incorrect(recentResults),
-      week_activity: get_week_summary
-  },
-  answerStats = {
-    stats: generate_incorrect_stats
+      week_activity: get_week_summary,
+      answer_stats: generate_incorrect_stats
   }
-  byebug
+  # byebug
   render json: stats
   end
 
@@ -138,14 +136,16 @@ end
 def generate_incorrect_stats
 wrong_answers = get_incresults
 stats_hash = incorrect_hash(get_incresults)
-qStats = {}
+arr = []
 stats_hash.to_a.each_with_index do |qid,index|
-qStats["question#{index}"]= Question.find(qid[0]).question
-qStats["category#{index}"] = Question.find(qid[0]).test.name
+  qStats = {}
+qStats["question"]= Question.find(qid[0]).question
+qStats["category"] = Question.find(qid[0]).test.name
+qStats["inc_answers_chosen"] = find_wrong_answers(qid[0])
+arr << qStats 
 # qStats["#times_incorrect#{index}"]= qid[1],
-qStats["#inc_answers_chosen#{index}"] = find_wrong_answers(qid[0])
 end
-qStats
+arr 
 end 
 # ABOVE WE Have below info 
 # createData("Question", "category", incorrectNumber)

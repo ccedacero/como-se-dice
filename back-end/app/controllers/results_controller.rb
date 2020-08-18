@@ -24,7 +24,7 @@ class ResultsController < ApplicationController
     end
     
     private 
-
+    
     def get_week_summary 
       reviewed = {}
       # recentReviewed = get_dates(Cardtrack.all)
@@ -43,7 +43,6 @@ class ResultsController < ApplicationController
         values: reviewedHelper.values 
       }
       reviewedObj
-      # byebug
     end
 
    
@@ -83,5 +82,34 @@ def get_avg
     arr.reduce(0) { |curr,n| n.is_right != true ? (curr+1) : curr }
   end
 
+  def all_incorrect
+  allIncorrect = UserAnswer.all.select  do |ans|
+    if ans.is_right === false 
+      ans 
+    end
+  end
+end
+
+def top_incorrect(arr) 
+ incorrectStats = {}
+ arr.each do |q|
+  if 'Q'+incorrectStats[q.question_id]
+    incorrectStats[q.question_id] = incorrectStats[q.question_id] + 1
+  else 
+    incorrectStats[q.question_id] = 1
+  end
+  end
+  findQs = incorrectStats.to_a.map do |qid|
+  Question.find(qid[0])
+  end
+  qStats1 = []
+
+  incorrectStats.to_a.each_with_index do |qid,index|
+  qStats1 << [findQs[index].question,findQs[index].category, qid[1]]
+    end
+ 
+end 
+ABOVE WE Have below info 
+# createData("Question", "category", incorrectNumber)
 
 end

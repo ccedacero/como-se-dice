@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cardtracks
   resources :results
   resources :user_answers
   resources :answers
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   resources :alphabets
   resources :languages
   resources :users, only: [:create]
+  get "/total", to: "results#total"
   post "/login", to: "users#login"
   get "/autologin", to: "users#autologin"
   get "/logout", to: "users#logout"

@@ -19,6 +19,11 @@ export const Alphabet = (props) => {
     letters: [],
     count: 0,
   });
+  const [cardState, setCardState] = useState({
+    user_id: localStorage.user,
+    vocab_id: null,
+    reviewed: true,
+  });
 
   const vocabSection = Categories.find(
     (categ) => categ.title.toLowerCase() === queryStr
@@ -31,8 +36,6 @@ export const Alphabet = (props) => {
   } else {
     fetchUrl = `http://localhost:3000/vocabs/${fetchName}`;
   }
-
-  console.log(fetchUrl);
 
   useEffect(() => {
     fetch(fetchUrl, payLoad)
@@ -59,6 +62,7 @@ export const Alphabet = (props) => {
       );
     }
   };
+
   return <div>{renderAlphabet()}</div>;
 };
 

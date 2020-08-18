@@ -1,6 +1,6 @@
 // We pay once a week is not playing audio
 // Can you come in at seven?
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -60,8 +60,8 @@ export default function VocabCard({
 }) {
   const classes = useStyles();
   const [isFlipped, setisFlipped] = useState(false);
-  const [playing, setPlaying] = useState(false);
-  const bull = <span className={classes.bullet}>•</span>;
+  // const [playing, setPlaying] = useState(false);
+
   let audio = new Audio();
   // console.log(vocab, word, wordSpanish, wordUrl);
   const handleplaySong = () => {
@@ -74,6 +74,7 @@ export default function VocabCard({
     setisFlipped((preveState) => {
       return !preveState;
     });
+    persistCard();
   };
   const nextCard = (e) => {
     if (id < vocab[vocab.length - 1].id) {
@@ -92,7 +93,28 @@ export default function VocabCard({
       }));
     }
   };
+  const persistCard = () => {
+    const persistObj = {
+      user_id: localStorage.user,
+      card_id: id,
+      reviewed: true,
+    };
+    const trackPayload = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify(persistObj),
+    };
 
+    fetch("http://localhost:3000/cardtracks", trackPayload)
+      .then((r) => r.json())
+      .then((tconfirmation) => {
+        console.log(tconfirmation);
+      });
+  };
+  debugger;
   return (
     <Container maxWidth="sm">
       <ReactCardFlip

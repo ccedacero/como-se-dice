@@ -1,30 +1,50 @@
 // const { useEffect, useState } = require("react");
 import { Bar } from "react-chartjs-2";
+import { MyPie } from "./MyPie";
 import React, { useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
 import TestStats from "./TestStats";
+import { payLoad } from "../constants/index";
 export const Dashboard = () => {
   const [state, setState] = useState({
-    labels: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
+    labels: [],
     datasets: [
       {
-        label: "Respuestas",
+        label: "Terms Studies last 7 Days",
         backgroundColor: "rgba(75,192,192,1)",
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
-        data: [20, 30, 56, 30, 26, 55, 40],
+        data: [],
       },
     ],
   });
 
+  useEffect(() => {
+    fetch("http://localhost:3000/total", payLoad)
+      .then((r) => r.json())
+      .then((statsObj) => {
+        setStatValues(statsObj);
+      });
+  }, []);
+
+  const setStatValues = (stats) => {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        labels: stats.week_activity.days,
+        datasets: [
+          {
+            label: "Terms Studies last 7 Days",
+            backgroundColor: "rgba(75,192,192,1)",
+            borderColor: "rgba(0,0,0,1)",
+            borderWidth: 2,
+            data: stats.week_activity.values,
+          },
+        ],
+      };
+    });
+  };
+  console.log(state);
   return (
     <div>
       <Container maxWidth="lg">
@@ -34,7 +54,7 @@ export const Dashboard = () => {
             options={{
               title: {
                 display: true,
-                text: "Numero de Terminos Estudiados - Ultimod 7 Dias",
+                text: "Numero de Terminos Estudiados - Ultimos 7 Dias",
                 fontSize: 20,
               },
               legend: {
@@ -59,6 +79,7 @@ export const Dashboard = () => {
           />
         </Container>
         <TestStats />
+        <MyPie />
       </Container>
     </div>
   );

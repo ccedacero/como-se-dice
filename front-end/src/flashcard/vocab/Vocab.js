@@ -24,6 +24,31 @@ export const Vocab = ({
         }));
       });
   }, []);
+
+  const [cardState, setCardState] = useState({
+    user_id: localStorage.user,
+    vocab_id: vocab[0].id,
+    reviewed: true,
+  });
+
+  // useEffect(() => {
+  //   const trackPayload = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.token}`,
+  //     },
+  //     body: JSON.stringify(cardState),
+  //   };
+
+  //   fetch("http://localhost:3000/cardtracks", trackPayload)
+  //     .then((r) => r.json())
+  //     .then((tconfirmation) => {
+  //       console.log(tconfirmation);
+  //     });
+  // }, [cardState]);
+  console.log(cardState);
+
   const renderVocab = () => {
     if (vocab.words.length > 0) {
       let currentWord = vocab.words[vocab.count];

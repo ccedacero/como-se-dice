@@ -77,6 +77,7 @@ export default function AlphabetCard({
         count: prevState.count + 1,
       }));
     }
+    persistCard();
   };
 
   const previousCard = (e) => {
@@ -95,6 +96,27 @@ export default function AlphabetCard({
     });
   };
 
+  const persistCard = () => {
+    const persistObj = {
+      user_id: localStorage.user,
+      vocab_id: id,
+      reviewed: true,
+    };
+    const trackPayload = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify(persistObj),
+    };
+
+    fetch("http://localhost:3000/cardtracks", trackPayload)
+      .then((r) => r.json())
+      .then((tconfirmation) => {
+        console.log(tconfirmation);
+      });
+  };
   return (
     <div>
       {(cardType !== null && cardType === "alphabets") ||

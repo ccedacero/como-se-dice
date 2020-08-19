@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { render } from "@testing-library/react";
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -70,6 +70,7 @@ export default function SignUp({ history, handleLogin }) {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
       },
       body: JSON.stringify(signUpForm), // body data type must match "Content-Type" header
     };

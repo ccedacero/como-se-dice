@@ -56,8 +56,8 @@ const App = (props) => {
     setState({ currentUser: null });
     props.history.push("/login");
   };
-  if (state.currentUser !== null) {
-    console.log(state.currentUser.username);
+  if (state.currentUser !== undefined) {
+    console.log(state.currentUser);
   }
   return (
     <div>

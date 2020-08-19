@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import FolderIcon from "@material-ui/icons/Folder";
-
+import AudioRecorder from "./AudioRecorder";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -49,8 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NewCard() {
   const classes = useStyles();
-  const [state, setState] = useState({});
-
+  const [state, setState] = useState();
   const handleChange = (e) => {
     e.preventDefault();
     e.persist();
@@ -65,6 +64,7 @@ export default function NewCard() {
     const createObj = {
       ...state,
       category: "mycards",
+      // audio: blob,
     };
     const payLoad = {
       method: "POST",
@@ -82,64 +82,67 @@ export default function NewCard() {
       });
   };
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <FolderIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Agrega Nuevo Termino Aquí
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="word"
-            label="Agrega tu palabra en ingles"
-            name="word"
-            autoComplete="word"
-            autoFocus
-            onChange={handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="wordSpanish"
-            label="Significado en español"
-            type="wordSpanish"
-            id="wordSpanish"
-            autoComplete="current-password"
-            onChange={handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="wordUrl"
-            label="url de Audio"
-            type="wordUrl"
-            id="wordUrl"
-            autoComplete="current-password"
-            onChange={handleChange}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Agregar Termino
-          </Button>
-        </form>
-      </div>
-      <Box mt={8}></Box>
-    </Container>
+    <div>
+      <AudioRecorder state={state} />
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <FolderIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Agrega Nuevo Termino Aquí
+          </Typography>
+          <form className={classes.form} onSubmit={handleSubmit} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="word"
+              label="Agrega tu palabra en ingles"
+              name="word"
+              autoComplete="word"
+              autoFocus
+              onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="wordSpanish"
+              label="Significado en español"
+              type="wordSpanish"
+              id="wordSpanish"
+              autoComplete="current-password"
+              onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="wordUrl"
+              label="url de Audio"
+              type="wordUrl"
+              id="wordUrl"
+              autoComplete="current-password"
+              onChange={handleChange}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Agregar Termino
+            </Button>
+          </form>
+        </div>
+        <Box mt={8}></Box>
+      </Container>
+    </div>
   );
 }

@@ -102,7 +102,7 @@ saludos = ["Hola", "Gusto en conocerte!", "El placer es mío", "Buenos días", "
 holidays = ["Tomorrow is a holiday and we do not work", "Happy birthday", "Merry Christmas", "Happy Thanksgiving day", "Happy New Year", "Happy Easter", "My condolences", "I’m so sorry", "Best wishes", "Have a nice trip", "May you arrive well"]
 festivos = ["Mañana es feriado y no trabajamos", "Feliz cumpleaños", "Feliz Navidad", "Feliz día de Acción de Gracias", "Feliz año nuevo", "Felices Pascuas", "Mi más sentido pésame", "Lo siento mucho", "Mis mejores deseos", "Buen viaje", "Que llegues bien"]
 holidays.each_with_index do |word, index|
-  Vocab.create(word: word, wordSpanish: direc[index],wordUrl: "https://comosedice.s3.amazonaws.com/Directions/#{word}.mp3",category: "directions")
+  Vocab.create(word: word, wordSpanish: direc[index],wordUrl: "https://comosedice.s3.amazonaws.com/Directions/#{word}.mp3",category: "holidays")
 end
 
 #SEED ANIMALS + URL 

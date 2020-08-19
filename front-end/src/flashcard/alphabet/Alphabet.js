@@ -26,10 +26,9 @@ export const Alphabet = (props) => {
   });
 
   let str = queryStr.replace(/\s/g, "");
-
-  const vocabQuery = Categories.find(
-    (categ) => categ.fetchCategory.toLowerCase() === str
-  ).fetchCategory;
+  const vocabQuery =
+    Categories.find((categ) => categ.title.toLowerCase() === str)
+      .fetchCategory || str;
 
   let fetchUrl = "";
   if (vocabQuery === "alphabets" || vocabQuery === "vowels") {
@@ -37,9 +36,16 @@ export const Alphabet = (props) => {
   } else {
     fetchUrl = `http://localhost:3000/vocabs/${vocabQuery}`;
   }
-
+  console.log(payLoad);
   useEffect(() => {
-    fetch(fetchUrl, payLoad)
+    const payload = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    };
+    fetch(fetchUrl, payload)
       .then((r) => r.json())
       .then((alphabetObj) => {
         setAlphabet((prevState) => ({

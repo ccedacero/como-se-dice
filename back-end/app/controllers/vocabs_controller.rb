@@ -19,7 +19,7 @@ class VocabsController < ApplicationController
    private 
 
    def vocab_params
-   params.require(:vocab).permit(:word, :wordUrl, :wordSpanish, :category)
+   params.require(:vocab).permit(:word, :wordUrl, :wordSpanish, :category, :audio, :blobUrl)
    end
 
    def filterVocab(term)

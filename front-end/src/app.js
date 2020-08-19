@@ -13,6 +13,8 @@ import SignUp from "./signup/SignUp";
 import Quiz from "./quizes/payquiz/Quiz";
 import { payLoad } from "./constants/index";
 import { Dashboard } from "./dashboard/Dashboard";
+import { Translator } from "./translation/Translate";
+import NewCard from "./createvocab/NewCard";
 const styles = (theme) => ({
   paddingTop: {
     padding: "2em",
@@ -90,6 +92,11 @@ const App = (props) => {
             {/* {THIS IS THE QUIZ SECTION} */}
             <Route exact path="/pruebas" component={pruebas} />
             <Route path="/pruebas/:id" component={Quiz} />
+
+            {/* {Tranlation} */}
+            <Route exact path="/translate" component={Translator} />
+            {/* {Add Vocab Card} */}
+            <Route exact path="/addvocab" component={NewCard} />
           </Container>
         </Switch>
       </main>

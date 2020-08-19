@@ -126,5 +126,13 @@ const Categories = [
       "https://cdn.pixabay.com/photo/2013/07/13/11/45/seasons-158601_960_720.png",
     imgTitle: "Four Seasons Tree",
   },
+  {
+    title: "My Cards",
+    fetchCategory: "mycards",
+    description: "Practice las palabras que has agregado",
+    img:
+      "https://cdn.pixabay.com/photo/2013/07/13/11/45/seasons-158601_960_720.png",
+    imgTitle: "Four Seasons Tree",
+  },
 ];
 export default Categories;

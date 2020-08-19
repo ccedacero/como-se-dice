@@ -25,16 +25,17 @@ export const Alphabet = (props) => {
     reviewed: true,
   });
 
-  const vocabSection = Categories.find(
-    (categ) => categ.title.toLowerCase() === queryStr
-  );
+  let str = queryStr.replace(/\s/g, "");
 
-  const fetchName = vocabSection.fetchCategory;
+  const vocabQuery = Categories.find(
+    (categ) => categ.fetchCategory.toLowerCase() === str
+  ).fetchCategory;
+
   let fetchUrl = "";
-  if (fetchName === "alphabets" || fetchName === "vowels") {
-    fetchUrl = `http://localhost:3000/${fetchName}`;
+  if (vocabQuery === "alphabets" || vocabQuery === "vowels") {
+    fetchUrl = `http://localhost:3000/${vocabQuery}`;
   } else {
-    fetchUrl = `http://localhost:3000/vocabs/${fetchName}`;
+    fetchUrl = `http://localhost:3000/vocabs/${vocabQuery}`;
   }
 
   useEffect(() => {
@@ -57,7 +58,7 @@ export const Alphabet = (props) => {
           letter={currentLetter}
           setAlphabet={setAlphabet}
           alphabet={alphabet.letters}
-          cardType={fetchName}
+          cardType={vocabQuery}
         />
       );
     }

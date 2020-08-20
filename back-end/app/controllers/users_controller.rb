@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       token = encode_token({ user_id: user.id })
-      # byebug
+    # byebug
 
       render json: { user: UserSerializer.new(user), token: token }
       

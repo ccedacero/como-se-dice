@@ -1,5 +1,5 @@
 class VocabsController < ApplicationController
-  
+  # before :authenticate_user!
   def index 
         vocab = Vocab.all
         render json: vocab  

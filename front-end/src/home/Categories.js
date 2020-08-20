@@ -9,6 +9,15 @@ const Categories = [
     imgTitle: "Alphabet Wood Cubes",
   },
   {
+    title: "Animales",
+    fetchCategory: "animals",
+    description: "Aprenda sobre animales comunes en la finca",
+    img:
+      "https://cdn.pixabay.com/photo/2014/10/04/16/55/wood-cube-473703_960_720.jpg",
+    imgTitle: "Alphabet Wood Cubes",
+  },
+
+  {
     title: "Vocales",
     fetchCategory: "vowels",
     description:
@@ -52,7 +61,7 @@ const Categories = [
   },
 
   {
-    title: "Días festivos",
+    title: "Festivos",
     fetchCategory: "holidays",
     description: "Aprenda vocabulario sobre tiempo libre y días festivos",
     img:
@@ -119,15 +128,23 @@ const Categories = [
     imgTitle: "Pruning Shears",
   },
   {
-    title: "Dias y Estaciones",
-    fetchCategory: "seasons",
+    title: "Dias",
+    fetchCategory: "weekdays",
     description: " Aprenda vocabulario sobre los días y estaciones",
     img:
       "https://cdn.pixabay.com/photo/2013/07/13/11/45/seasons-158601_960_720.png",
     imgTitle: "Four Seasons Tree",
   },
   {
-    title: "My Cards",
+    title: "Preguntas",
+    fetchCategory: "questions",
+    description: " Aprenda preguntas frequentes",
+    img:
+      "https://cdn.pixabay.com/photo/2013/07/13/11/45/seasons-158601_960_720.png",
+    imgTitle: "Four Seasons Tree",
+  },
+  {
+    title: "Agregadas",
     fetchCategory: "mycards",
     description: "Practice las palabras que has agregado",
     img:

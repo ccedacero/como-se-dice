@@ -9,7 +9,11 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import ReactCardFlip from "react-card-flip";
+import QueuePlayNextIcon from "@material-ui/icons/QueuePlayNext";
 import Container from "@material-ui/core/Container";
+import Tooltip from "@material-ui/core/Tooltip";
+import Alert from "@material-ui/lab/Alert";
+import Alphabet from "./Alphabet.css";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -28,7 +32,7 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
   centerCard: {
-    marginTop: "20vh",
+    marginTop: "10vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -62,6 +66,7 @@ export default function AlphabetCard({
   const [isFlipped, setisFlipped] = useState(false);
   const classes = useStyles();
   const [playing, setPlaying] = useState(false);
+  const [alrt, setAlrt] = useState(false);
   //   const bull = <span className={classes.bullet}>•</span>;
   let audio = new Audio();
   const handleplaySong = () => {
@@ -95,18 +100,31 @@ export default function AlphabetCard({
       return !preveState;
     });
   };
-  let current = id;
+  // Globals storing flip and next card ids
+  let currentCard = id;
+  // let currentFlip = id;
 
   // AUTO CLICKING FUNCTIONS LIVE BELOW HERE
-  const modifiedFlip = () => {
-    setisFlipped((preveState) => {
-      return !preveState;
-    });
-  };
+  // const autoFlip = () => {
+  //   let interval1 = setInterval(() => {
+  //     modifiedFlip(interval1);
+  //   }, 3000);
+  // };
+  // const modifiedFlip = (interval1) => {
+  //   if (currentFlip === alphabet[alphabet.length - 1].id) {
+  //     clearInterval(interval1);
+  //     return;
+  //   }
+  //   setisFlipped((preveState) => {
+  //     return !preveState;
+  //   });
+  //   currentFlip++;
+  // };
 
   const modifiedNext = (interval) => {
-    if (current === alphabet[alphabet.length - 1].id) {
+    if (currentCard === alphabet[alphabet.length - 1].id) {
       clearInterval(interval);
+      setAlrt(true);
       return;
     }
     if (id < alphabet[alphabet.length - 1].id) {
@@ -115,25 +133,19 @@ export default function AlphabetCard({
         count: prevState.count + 1,
       }));
     }
-    current++;
-    autoFlip();
-
-    console.log(current, alphabet[alphabet.length - 1].id);
-  };
-  const autoFlip = () => {
-    setTimeout(() => {
-      modifiedFlip();
-    }, 3000);
+    currentCard++;
+    console.log(currentCard, alphabet[alphabet.length - 1].id);
   };
 
   const autoNext = () => {
     let interval = setInterval(() => {
       modifiedNext(interval);
-    }, 6000);
+    }, 5000);
   };
-  const automate = () => {
-    autoNext();
-  };
+  // const automate = () => {
+  //   autoFlip();
+  //   setTimeout(autoNext, 2000);
+  // };
 
   const persistCard = () => {
     const persistObj = {
@@ -207,8 +219,36 @@ export default function AlphabetCard({
         </>
       ) : (
         <>
-          <button onClick={automate}>Click to autoflip</button>
           <Container maxWidth="sm">
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+            >
+              {" "}
+              Auto Next
+            </Typography>
+            <Tooltip
+              title="Switch Card every 5 seconds"
+              aria-label="Switch Card every 5 seconds"
+            >
+              <QueuePlayNextIcon
+                style={{ fontSize: "60px", color: "rgb(149, 225, 211)" }}
+                onClick={autoNext}
+              />
+            </Tooltip>
+            {alrt === true ? (
+              <div>
+                <Alert severity="success">
+                  "No Hay Mas Tarjetas!" —{" "}
+                  <strong>"Continua Estudiando! :)"</strong>
+                </Alert>
+              </div>
+            ) : (
+              <>
+                <Alert severity="success">"Activado"</Alert>
+              </>
+            )}
             <ReactCardFlip
               isFlipped={isFlipped}
               flipDirection="horizontal"

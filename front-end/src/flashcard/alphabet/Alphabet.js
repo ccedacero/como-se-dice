@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import AlphabetCard from "./AlphabetCard";
 import Categories from "../../home/Categories";
 import { payLoad } from "../../constants/index";
+import useIsMounted from "ismounted";
 export const Alphabet = (props) => {
   let queryStr = "";
-
+  const isMounted = useIsMounted();
   if (
     props.match.params.name === null ||
     props.match.params.name === undefined
@@ -42,10 +43,12 @@ export const Alphabet = (props) => {
     fetch(fetchUrl, payLoad)
       .then((r) => r.json())
       .then((alphabetObj) => {
-        setAlphabet((prevState) => ({
-          ...prevState,
-          letters: alphabetObj,
-        }));
+        if (isMounted.current) {
+          setAlphabet((prevState) => ({
+            ...prevState,
+            letters: alphabetObj,
+          }));
+        }
       });
   }, []);
 

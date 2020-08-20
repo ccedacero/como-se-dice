@@ -30,6 +30,7 @@ export const Quiz = ({
     params: { id },
   },
   currentUser,
+  history,
 }) => {
   const classes = useStyles();
   const [state, setState] = useState([]);
@@ -201,6 +202,7 @@ export const Quiz = ({
       .then((quizQuestionsObj) => {
         console.log(quizQuestionsObj);
       });
+    setTimeout(() => history.push("/vocabulario"), 2000);
   };
 
   // const persistResponse = () => {

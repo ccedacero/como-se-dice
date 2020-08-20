@@ -14,7 +14,7 @@ import Quiz from "./quizes/payquiz/Quiz";
 import { payLoad } from "./constants/index";
 import { HomeLanding } from "./dashboard/Home";
 import { Translator } from "./translation/Translate";
-import NewCard from "./createvocab/NewCard";
+import { NewCard } from "./createvocab/NewCard";
 const styles = (theme) => ({
   paddingTop: {
     padding: "2em",

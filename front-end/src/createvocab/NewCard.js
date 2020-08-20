@@ -11,6 +11,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import FolderIcon from "@material-ui/icons/Folder";
 import AudioRecorder from "./AudioRecorder";
+import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -45,7 +47,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NewCard() {
+export const NewCard = () => {
+  const history = useHistory();
   const classes = useStyles();
   const [state, setState] = useState();
   const handleChange = (e) => {
@@ -78,6 +81,7 @@ export default function NewCard() {
       .then((newCardObj) => {
         console.log(newCardObj);
       });
+    history.push("/vocabulario");
   };
   return (
     <div>
@@ -155,4 +159,4 @@ export default function NewCard() {
       </Container>
     </div>
   );
-}
+};

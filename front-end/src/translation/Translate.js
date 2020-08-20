@@ -5,6 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import { Container } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Recording from "./EnglishRec";
+import { useEffect } from "react";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -41,14 +43,19 @@ export const Translator = () => {
   const [text, setText] = useState("");
   const [translated, setTranslated] = useState("");
   const [results, setResults] = useState();
-  const [age, setAge] = React.useState("");
   //   let text = "Hola my name is yoshi and i like to dance";
   const API_KEY = ["AIzaSyBDQ7tSF6xPu54KW1fR1pk60kEczSlXQ0s"];
   let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  useEffect(() => {
+    if (text !== "") {
+      translateSpanish();
+    }
+    if (translated !== "") {
+      translateEnglish();
+    }
+  }, [text, translated]);
+
   const handleSpanishChange = (e) => {
     e.preventDefault();
     setText(e.target.value);
@@ -104,25 +111,23 @@ export const Translator = () => {
         console.log("There was an error with the translation request: ", error);
       });
   };
-  // const getTranscribedSpanish = (data) => {
-  //   setTranslated("")
-  //   setText(data);
-  //   translateSpanish();
-  // };
+  const getTranscribedSpanish = (data) => {
+    setTranslated("");
+    setText(data);
+    translateSpanish();
+  };
 
-  // const getTranscribedEnglish = (data) => {
-  //   setText("")
-  //   setTranslated(data);
-  //   translateEnglish();
-  // };
+  const getTranscribedEnglish = (data) => {
+    setText("");
+    setTranslated(data);
+    translateEnglish();
+  };
+
+  const handleBtnClick = () => {
+    setResults("");
+  };
   return (
     <>
-      <Recording
-        // getTranscribedEnglish={getTranscribedSpanish}
-        // getTranscribedSpanish={getTranscribedSpanish}
-        spanish={text}
-        english={translated}
-      />
       <div className={classes.heroContent}>
         <>
           <Container maxWidth="sm">
@@ -134,11 +139,20 @@ export const Translator = () => {
               gutterBottom
             >
               Traductor <br></br>Ingles - Español
+              <br></br>
+              <Recording
+                translateEnglish={getTranscribedEnglish}
+                translateSpanish={getTranscribedSpanish}
+                handleBtnClick={handleBtnClick}
+                // getTranscribedEnglish={getTranscribedSpanish}
+                // getTranscribedSpanish={getTranscribedSpanish}
+                spanish={text}
+                english={translated}
+              />
             </Typography>
           </Container>
         </>
       </div>
-
       <div>
         <>
           <Container maxWidth="lg">

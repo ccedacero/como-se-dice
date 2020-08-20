@@ -112,19 +112,21 @@ export const Translator = () => {
       });
   };
   const getTranscribedSpanish = (data) => {
+    setResults("");
     setTranslated("");
     setText(data);
     translateSpanish();
   };
 
   const getTranscribedEnglish = (data) => {
+    setResults("");
     setText("");
     setTranslated(data);
     translateEnglish();
   };
 
   const handleBtnClick = () => {
-    setResults("");
+    // setResults("");
   };
   return (
     <>

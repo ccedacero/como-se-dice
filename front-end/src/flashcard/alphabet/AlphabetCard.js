@@ -77,7 +77,7 @@ export default function AlphabetCard({
         count: prevState.count + 1,
       }));
     }
-    persistCard();
+    // persistCard();
   };
 
   const previousCard = (e) => {
@@ -94,6 +94,45 @@ export default function AlphabetCard({
     setisFlipped((preveState) => {
       return !preveState;
     });
+  };
+  let current = id;
+
+  // AUTO CLICKING FUNCTIONS LIVE BELOW HERE
+  const modifiedFlip = () => {
+    setisFlipped((preveState) => {
+      return !preveState;
+    });
+  };
+
+  const modifiedNext = (interval) => {
+    if (current === alphabet[alphabet.length - 1].id) {
+      clearInterval(interval);
+      return;
+    }
+    if (id < alphabet[alphabet.length - 1].id) {
+      setAlphabet((prevState) => ({
+        ...prevState,
+        count: prevState.count + 1,
+      }));
+    }
+    current++;
+    autoFlip();
+
+    console.log(current, alphabet[alphabet.length - 1].id);
+  };
+  const autoFlip = () => {
+    setTimeout(() => {
+      modifiedFlip();
+    }, 3000);
+  };
+
+  const autoNext = () => {
+    let interval = setInterval(() => {
+      modifiedNext(interval);
+    }, 6000);
+  };
+  const automate = () => {
+    autoNext();
   };
 
   const persistCard = () => {
@@ -168,6 +207,7 @@ export default function AlphabetCard({
         </>
       ) : (
         <>
+          <button onClick={automate}>Click to autoflip</button>
           <Container maxWidth="sm">
             <ReactCardFlip
               isFlipped={isFlipped}

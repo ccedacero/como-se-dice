@@ -3,7 +3,6 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import MicIcon from "@material-ui/icons/Mic";
-import MicOffIcon from "@material-ui/icons/MicOff";
 const Dictaphone = (props) => {
   const [message, setMessage] = useState("");
   const commands = [
@@ -29,7 +28,7 @@ const Dictaphone = (props) => {
   }
 
   const start = () => {
-    props.handleBtnClick();
+    // props.handleBtnClick();
     SpeechRecognition.startListening();
   };
 

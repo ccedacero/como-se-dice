@@ -48,7 +48,11 @@ export const Quiz = ({
   });
   console.log(id);
   useEffect(() => {
-    fetch(`http://localhost:3000/tests/${id}`, payLoad)
+    let fetchId = id;
+    if (id === "Animales") {
+      fetchId = "animals";
+    }
+    fetch(`http://localhost:3000/tests/${fetchId}`, payLoad)
       .then((r) => r.json())
       .then((quizQuestionsObj) => {
         setState(quizQuestionsObj);

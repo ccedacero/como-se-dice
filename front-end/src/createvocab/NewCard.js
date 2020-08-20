@@ -81,7 +81,7 @@ export const NewCard = () => {
       .then((newCardObj) => {
         console.log(newCardObj);
       });
-    history.push("/vocabulario");
+    setTimeout(() => history.push("vocabulario/agregadas"), 1000);
   };
   return (
     <div>

@@ -8,6 +8,14 @@ const Categories = [
     imgTitle: "Alphabet Wood Cubes",
   },
   {
+    title: "Animales",
+    fetchCategory: "animals",
+    description: "Aprenda sobre animales comunes en la finca",
+    img:
+      "https://cdn.pixabay.com/photo/2014/10/04/16/55/wood-cube-473703_960_720.jpg",
+    imgTitle: "Alphabet Wood Cubes",
+  },
+  {
     title: "Vocales",
     description:
       " Aprenda las vocales escuchando la pronunciación de cada letra",

@@ -4,6 +4,7 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Typography from "@material-ui/core/Typography";
 import { Container } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import Recording from "./EnglishRec";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -37,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
 export const Translator = () => {
   const classes = useStyles();
 
-  const [text, setText] = useState();
-  const [translated, setTranslated] = useState();
+  const [text, setText] = useState("");
+  const [translated, setTranslated] = useState("");
   const [results, setResults] = useState();
   const [age, setAge] = React.useState("");
   //   let text = "Hola my name is yoshi and i like to dance";
@@ -103,9 +104,25 @@ export const Translator = () => {
         console.log("There was an error with the translation request: ", error);
       });
   };
+  // const getTranscribedSpanish = (data) => {
+  //   setTranslated("")
+  //   setText(data);
+  //   translateSpanish();
+  // };
 
+  // const getTranscribedEnglish = (data) => {
+  //   setText("")
+  //   setTranslated(data);
+  //   translateEnglish();
+  // };
   return (
     <>
+      <Recording
+        // getTranscribedEnglish={getTranscribedSpanish}
+        // getTranscribedSpanish={getTranscribedSpanish}
+        spanish={text}
+        english={translated}
+      />
       <div className={classes.heroContent}>
         <>
           <Container maxWidth="sm">

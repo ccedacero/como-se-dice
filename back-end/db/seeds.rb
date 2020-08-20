@@ -1,13 +1,13 @@
-User.destroy_all
-Alphabet.destroy_all
-Vowel.destroy_all
-Vocab.destroy_all
-Phrase.destroy_all
-Answer.destroy_all
-Question.destroy_all
-Test.destroy_all
-Result.destroy_all
-UserAnswer.destroy_all
+# User.destroy_all
+# Alphabet.destroy_all
+# Vowel.destroy_all
+# Vocab.destroy_all
+# Phrase.destroy_all
+# Answer.destroy_all
+# Question.destroy_all
+# Test.destroy_all
+# Result.destroy_all
+# UserAnswer.destroy_all
 # Forum.destroy_all
 # Interview.destroy_all
 # Comment.destroy_all

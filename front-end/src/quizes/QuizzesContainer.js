@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Quizzes from "./Quizzes.css";
 // import Link from "@material-ui/core/Link";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
@@ -55,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
+  button: {
+    margin: "auto",
+  },
 }));
 
 // const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -77,7 +81,7 @@ export const QuizzesContainer = () => {
               color="textPrimary"
               gutterBottom
             >
-              Ingles Diario y Practico
+              Mide tu progreso con Nuestras Pruebas!
             </Typography>
             <Typography
               variant="h5"
@@ -85,10 +89,7 @@ export const QuizzesContainer = () => {
               color="textSecondary"
               paragraph
             >
-              Listo para mostrarnos lo que has aprendido? Aqui encontraras una
-              multitud de pruebas basadas en los diferentes temas que has
-              aprendido.
-              <br></br> Si Se Puede!
+              Aqui encontraras pruebas para reforzar lo aprendido.
             </Typography>
           </Container>
         </div>
@@ -111,13 +112,18 @@ export const QuizzesContainer = () => {
                   </CardContent>
                   <CardActions>
                     <Link to={`pruebas/${card.title}`}>
-                      <Button size="small" edge="center" color="primary">
-                        Practicar
+                      <Button
+                        size="small"
+                        className={classes.button}
+                        edge="center"
+                        color="primary"
+                      >
+                        Comenzar Prueba
                       </Button>
                     </Link>
-                    <Button size="small" color="primary">
+                    {/* <Button size="small" color="primary">
                       Mas Info
-                    </Button>
+                    </Button> */}
                   </CardActions>
                 </Card>
               </Grid>

@@ -9,7 +9,7 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
@@ -17,9 +17,9 @@ import { useHistory } from "react-router-dom";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      {"Copyright © Como Se Dice?"}
+      <Link color="inherit" href="www.comosedice.com">
+        Aprenda Ingles hoy!
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     backgroundImage:
-      "url(https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)",
+      "url(https://cdn.pixabay.com/photo/2017/09/24/19/17/pencil-2782840_1280.jpg)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#95e1d3",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -58,6 +58,8 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#95e1d3",
+    fontWeight: "600",
   },
 }));
 
@@ -97,7 +99,7 @@ export default function SignIn({ history, handleLogin }) {
         localStorage.token = token;
         localStorage.user = user.id;
         if (user !== undefined && user !== null) {
-          history.push("/vocabulario");
+          history.push("/home");
         }
       });
   };
@@ -109,7 +111,7 @@ export default function SignIn({ history, handleLogin }) {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <LockOpenIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -155,13 +157,8 @@ export default function SignIn({ history, handleLogin }) {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

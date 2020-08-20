@@ -3,41 +3,57 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Button from "@material-ui/core/Button";
 const NavBar = ({ currentUser, handleLogOut }) => {
-  // console.log(currentUser);
+  console.log(currentUser);
   // debugger;
   return (
     <header>
       <nav>
         <ul>
           <li>
-            <div>
-              <button>
-                <Link to="/vocabulario">Home</Link>
-              </button>
-            </div>
+            <Link to="/home">Home</Link>
           </li>
-          {currentUser ? (
-            <>
-              <div class="rightMenu">
+        </ul>
+        {currentUser ? (
+          <>
+            <div class="leftMenu">
+              <ul>
+                <li>
+                  <Link to="/vocabulario">Vocabulario</Link>
+                </li>
                 <li>
                   <Link to="/pruebas">Pruebas</Link>
                 </li>
                 <li>
-                  <button onClick={handleLogOut}>Logout</button>
+                  <Link to="/translate">Traductor</Link>
                 </li>
-              </div>
-            </>
-          ) : (
-            <div class="rightMenu">
+                <li>
+                  <Link to="/addvocab">Agregar</Link>
+                </li>
+                <li>
+                  <Button
+                    variant="contained"
+                    onClick={handleLogOut}
+                    style={{ backgroundColor: "#95e1d3" }}
+                    href="#contained-buttons"
+                  >
+                    Logout
+                  </Button>
+                </li>
+              </ul>
+            </div>
+          </>
+        ) : (
+          <div class="rightMenu">
+            <ul>
               <li>
                 <Link to="/signup">Signup</Link>
               </li>
               <li>
                 <Link to="/login">Login</Link>
               </li>
-            </div>
-          )}
-        </ul>
+            </ul>
+          </div>
+        )}
       </nav>
     </header>
   );

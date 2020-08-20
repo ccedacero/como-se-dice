@@ -1,11 +1,10 @@
 // const { useEffect, useState } = require("react");
 import React, { useEffect, useState } from "react";
-import { Container } from "@material-ui/core";
-import TestStats from "./TestStats";
 import { payLoad } from "../constants/index";
-import { Pie, Doughnut } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 
 export const MyPie = () => {
+  const [average, setAverage] = useState(0);
   const [state, setState] = useState({
     labels: [
       // "Promedio de Pruebas",
@@ -14,7 +13,7 @@ export const MyPie = () => {
     ],
     datasets: [
       {
-        label: "Rainfall",
+        label: "Resultados",
         fill: false,
         lineTension: 0.5,
         backgroundColor: "rgba(75,192,192,1)",
@@ -36,9 +35,9 @@ export const MyPie = () => {
               {
                 label: "Resultados de Pruebas",
                 backgroundColor: [
-                  "#2FDE00",
                   // "#C9DE00",
-                  "#B21F00",
+                  "#fce38a",
+                  "#f38181",
                   "#00A6B4",
                   "#6800B4",
                 ],
@@ -58,6 +57,7 @@ export const MyPie = () => {
             ],
           };
         });
+        setAverage(statsObj.test_average);
       });
   }, []);
   return (
@@ -76,6 +76,7 @@ export const MyPie = () => {
           },
         }}
       />
+      Promedio de Pruebas: {average}
     </div>
   );
 };

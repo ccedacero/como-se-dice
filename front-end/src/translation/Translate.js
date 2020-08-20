@@ -1,8 +1,10 @@
 import React, { useState, setEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-
-const FormStyles = makeStyles((theme) => ({
+import Typography from "@material-ui/core/Typography";
+import { Container } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
   },
@@ -15,19 +17,37 @@ const FormStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
   },
   textarea: {
-    width: "40%",
+    width: "90%",
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(5, 0, 6),
+  },
+  heroButtons: {
+    marginTop: theme.spacing(4),
   },
 }));
 export const Translator = () => {
-  const classes = FormStyles();
+  const classes = useStyles();
 
   const [text, setText] = useState();
   const [translated, setTranslated] = useState();
   const [results, setResults] = useState();
+  const [age, setAge] = React.useState("");
   //   let text = "Hola my name is yoshi and i like to dance";
   const API_KEY = ["AIzaSyBDQ7tSF6xPu54KW1fR1pk60kEczSlXQ0s"];
   let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
 
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
   const handleSpanishChange = (e) => {
     e.preventDefault();
     setText(e.target.value);
@@ -85,35 +105,72 @@ export const Translator = () => {
   };
 
   return (
-    <div>
-      <h5>Escriba lo que quiere traducir al Ingles</h5>
-      <TextareaAutosize
-        rowsMin={7}
-        aria-label="minimum height"
-        name="spanishText"
-        placeholder="Enter text you would like to translate"
-        defaultValue={text}
-        onChange={handleSpanishChange}
-        className={classes.textarea}
-      />
-      <h5>Escriba lo que quiere traducir al español</h5>
-      <TextareaAutosize
-        rowsMin={7}
-        aria-label="minimum height"
-        name="englishText"
-        onChange={handleEnglishChange}
-        placeholder="Escriba la frase que quiere traducir al español"
-        defaultValue={translated}
-        className={classes.textarea}
-      />
-      <TextareaAutosize
-        rowsMin={7}
-        aria-label="minimum height"
-        name="results"
-        placeholder="Escriba la frase que quiere traducir al español"
-        defaultValue={results}
-        className={classes.textarea}
-      />
-    </div>
+    <>
+      <div className={classes.heroContent}>
+        <>
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="textPrimary"
+              gutterBottom
+            >
+              Traductor <br></br>Ingles - Español
+            </Typography>
+          </Container>
+        </>
+      </div>
+
+      <div>
+        <>
+          <Container maxWidth="lg">
+            <Typography variant="h6" component="h2"></Typography>
+
+            <Grid container>
+              <Grid item md={6}>
+                <Typography variant="h5" component="h2">
+                  Escriba lo que quiere traducir al Inglés
+                </Typography>
+                <TextareaAutosize
+                  rowsMin={7}
+                  aria-label="minimum height"
+                  name="spanishText"
+                  placeholder="Escriba lo que quiere traducir al español"
+                  defaultValue={text}
+                  onChange={handleSpanishChange}
+                  className={classes.textarea}
+                />
+              </Grid>
+              <Grid item md={6}>
+                <Typography variant="h5" component="h2">
+                  Escriba lo que quiere traducir al español
+                </Typography>
+
+                <TextareaAutosize
+                  rowsMin={7}
+                  aria-label="minimum height"
+                  name="englishText"
+                  onChange={handleEnglishChange}
+                  placeholder="Escriba la frase que quiere traducir al español"
+                  defaultValue={translated}
+                  className={classes.textarea}
+                />
+              </Grid>
+              <Grid item lg={12}></Grid>
+            </Grid>
+            <TextareaAutosize
+              style={{ width: "95%" }}
+              rowsMin={7}
+              aria-label="minimum height"
+              name="results"
+              placeholder="                                                        Tus resultados apareceran aqui :)"
+              defaultValue={results}
+              className={classes.textarea}
+            />
+          </Container>
+        </>
+      </div>
+    </>
   );
 };

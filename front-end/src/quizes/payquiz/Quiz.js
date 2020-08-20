@@ -96,28 +96,6 @@ export const Quiz = ({
     });
   };
 
-  // useEffect(() => {
-  //   persistResponse();
-  // }, [response.is_right]);
-
-  // const setResponseTrue = () => {
-  //   setResponse((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       is_right: true,
-  //     };
-  //   });
-  // };
-
-  // const setResponseFalse = () => {
-  //   setResponse((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       is_right: false,
-  //     };
-  //   });
-  // };
-
   const setResponseTrue = () => {
     const sample = {
       user_id: localStorage.user,
@@ -294,13 +272,17 @@ export const Quiz = ({
       persistResults();
     }
   };
+
   //  setTimeout(persistResponse, 2000);
   return (
     <Container class="radioForm" maxWidth="md">
       <form className={classes.fomrTopSpace} onSubmit={handleSubmit}>
         <FormLabel component="legend">
           <Typography variant="h4" component="h6">
-            Prueba / Pop Quiz de Vocabulario de {id}
+            Prueba de Vocabulario de {id}
+            <br></br>
+            Correctas:{results.no_correct} | Incorrectas:
+            {results.no_incorrect}
           </Typography>
         </FormLabel>
         <FormControl
@@ -347,7 +329,7 @@ export const Quiz = ({
             color="primary"
             className={classes.button}
           >
-            Check Answer
+            Revisar Respuesta
           </Button>
         </FormControl>
       </form>

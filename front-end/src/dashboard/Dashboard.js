@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
 import TestStats from "./TestStats";
 import { payLoad } from "../constants/index";
-export const Dashboard = () => {
+export const BarChart = () => {
   const [state, setState] = useState({
     labels: [],
     datasets: [
@@ -47,40 +47,37 @@ export const Dashboard = () => {
   console.log(state);
   return (
     <div>
-      <Container maxWidth="lg">
-        <Container maxWidth="md">
-          <Bar
-            data={state}
-            options={{
-              title: {
-                display: true,
-                text: "Numero de Terminos Estudiados - Ultimos 7 Dias",
-                fontSize: 20,
-              },
-              legend: {
-                display: true,
-                position: "right",
-              },
-              scales: {
-                xAxes: [
-                  {
-                    display: true,
+      <Container maxWidth="md">
+        <Bar
+          data={state}
+          options={{
+            title: {
+              display: true,
+              text: "Numero de Terminos Estudiados - Ultimos 7 Dias",
+              fontSize: 20,
+            },
+            legend: {
+              display: true,
+              position: "right",
+            },
+            scales: {
+              xAxes: [
+                {
+                  display: true,
+                },
+              ],
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
                   },
-                ],
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true,
-                    },
-                  },
-                ],
-              },
-            }}
-          />
-        </Container>
-        <TestStats />
-        <MyPie />
+                },
+              ],
+            },
+          }}
+        />
       </Container>
+      {/* <TestStats /> */}
     </div>
   );
 };

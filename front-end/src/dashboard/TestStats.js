@@ -34,6 +34,13 @@ export default function TestStats() {
       align: "right",
       format: (value) => value.toLocaleString("en-US"),
     },
+    {
+      id: "inc_ans",
+      label: "top inc choice#1",
+      minWidth: 170,
+      align: "right",
+      format: (value) => value.toLocaleString("en-US"),
+    },
 
     //   id: "size",
     //   // label: "#Correcto\u00a0(km\u00b2)",
@@ -51,9 +58,9 @@ export default function TestStats() {
     // },
   ];
 
-  function createData(name, code, population) {
+  function createData(name, code, population, inc_ans) {
     // const density = population ;
-    return { name, code, population };
+    return { name, code, population, inc_ans };
   }
 
   // let rows = [
@@ -71,13 +78,14 @@ export default function TestStats() {
             createData(
               ans.category,
               ans.question,
-              ans.inc_answers_chosen.length
+              ans.inc_answers_chosen.length,
+              ans.inc_answers_chosen[0]
             )
           );
         });
         setRows(arr);
+        console.log(statsObj);
       });
-    console.log(rows);
   }, []);
   // debugger;
 

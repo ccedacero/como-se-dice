@@ -12,7 +12,7 @@ import SignIn from "./signin/SignIn";
 import SignUp from "./signup/SignUp";
 import Quiz from "./quizes/payquiz/Quiz";
 import { payLoad } from "./constants/index";
-import { Dashboard } from "./dashboard/Dashboard";
+import { HomeLanding } from "./dashboard/Home";
 import { Translator } from "./translation/Translate";
 import NewCard from "./createvocab/NewCard";
 const styles = (theme) => ({
@@ -72,7 +72,7 @@ const App = (props) => {
             <SignIn history={props.history} handleLogin={handleLogin} />
           </Route>
           <Route exact path="/home">
-            <Dashboard history={props.history} />
+            <HomeLanding history={props.history} />
           </Route>
           <Container maxWidth="lg">
             {/* THESE TWO ARE K USING THE SAME ALPHABET COMPONENT  */}

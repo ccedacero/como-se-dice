@@ -206,7 +206,7 @@ export const Quiz = ({
       .then((quizQuestionsObj) => {
         console.log(quizQuestionsObj);
       });
-    setTimeout(() => history.push("/vocabulario"), 2000);
+    setTimeout(() => history.push("/vocabulario"), 4000);
   };
 
   // const persistResponse = () => {
@@ -278,7 +278,6 @@ export const Quiz = ({
       persistResults();
     }
   };
-
   //  setTimeout(persistResponse, 2000);
   return (
     <Container class="radioForm" maxWidth="md">

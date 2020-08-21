@@ -3,6 +3,7 @@ import AlphabetCard from "./AlphabetCard";
 import Categories from "../../home/Categories";
 import { payLoad } from "../../constants/index";
 import useIsMounted from "ismounted";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 export const Alphabet = (props) => {
   let queryStr = "";
   const isMounted = useIsMounted();
@@ -52,9 +53,11 @@ export const Alphabet = (props) => {
       });
   }, []);
 
+  let trackCardId = null;
   const renderAlphabet = () => {
     if (alphabet.letters.length > 0) {
       let currentLetter = alphabet.letters[alphabet.count];
+      trackCardId = currentLetter.id;
       return (
         <AlphabetCard
           key={currentLetter.id}
@@ -67,7 +70,36 @@ export const Alphabet = (props) => {
     }
   };
 
-  return <div>{renderAlphabet()}</div>;
+  const handleDelete = (e) => {
+    e.preventDefault();
+    // console.log(trackCardId);
+    const deletePayload = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    };
+    fetch(`http://localhost:3000/vocabs/${trackCardId}`, deletePayload)
+      .then((r) => r.json())
+      .then((confirmation) => {
+        console.log(confirmation);
+        // setTimeout(() => props.history.push("/vocabulario"), 500);
+      });
+  };
+  return (
+    <div>
+      {renderAlphabet()}
+      {vocabQuery === "mycards" ? (
+        <DeleteOutlineIcon
+          style={{ fontSize: "50px", color: "red" }}
+          onClick={handleDelete}
+        />
+      ) : (
+        false
+      )}
+    </div>
+  );
 };
 
 export default Alphabet;

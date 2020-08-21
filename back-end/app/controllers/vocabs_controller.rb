@@ -4,6 +4,7 @@ class VocabsController < ApplicationController
         vocab = Vocab.all
         render json: vocab  
       end
+
     
   def show 
     vocab = filterVocab(params[:id])
@@ -15,6 +16,12 @@ class VocabsController < ApplicationController
     vocab = Vocab.create(vocab_params)
     render json: vocab
   end
+
+  def destroy 
+    delete_term = Vocab.find(params[:id])
+    delete_term.destroy()
+    end
+
 
    private 
 

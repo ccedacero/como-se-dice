@@ -4,16 +4,15 @@ const Categories = [
     description:
       "Aprenda el abecedario escuchando la pronunciación de cada letra",
     img:
-      "https://cdn.pixabay.com/photo/2014/10/04/16/55/wood-cube-473703_960_720.jpg",
-    imgTitle: "Alphabet Wood Cubes",
+      "https://cdn.pixabay.com/photo/2012/05/02/22/11/zebra-46491_960_720.png",
+    imgTitle: "Alphabet Zebra",
   },
   {
     title: "Animales",
     fetchCategory: "animals",
     description: "Aprenda sobre animales comunes en la finca",
-    img:
-      "https://cdn.pixabay.com/photo/2014/10/04/16/55/wood-cube-473703_960_720.jpg",
-    imgTitle: "Alphabet Wood Cubes",
+    img: "https://cdn.pixabay.com/photo/2017/07/20/07/05/cow-2521454_1280.png",
+    imgTitle: "Animals",
   },
   {
     title: "Vocales",
@@ -100,10 +99,10 @@ const Categories = [
 
   {
     title: "Tiempo",
-    description: " Aprenda vocabulario sobre fechas de tiempo",
+    description: "Aprenda vocabulario sobre fechas de tiempo",
     img:
-      "https://cdn.pixabay.com/photo/2016/10/23/17/06/calendar-1763587_960_720.png",
-    imgTitle: "Calendar",
+      "https://cdn.pixabay.com/photo/2016/10/16/16/32/clock-1745702_1280.png",
+    imgTitle: "Clock",
   },
   {
     title: "Herramientas",
@@ -112,12 +111,12 @@ const Categories = [
       "https://cdn.pixabay.com/photo/2012/04/05/01/24/shears-25633_960_720.png",
     imgTitle: "Pruning Shears",
   },
-  {
-    title: "Dias y Estaciones",
-    description: " Aprenda vocabulario sobre los días y estaciones",
-    img:
-      "https://cdn.pixabay.com/photo/2013/07/13/11/45/seasons-158601_960_720.png",
-    imgTitle: "Four Seasons Tree",
-  },
+  // {
+  //   title: "Dias y Estaciones",
+  //   description: " Aprenda vocabulario sobre los días y estaciones",
+  //   img:
+  //     "https://cdn.pixabay.com/photo/2013/07/13/11/45/seasons-158601_960_720.png",
+  //   imgTitle: "Four Seasons Tree",
+  // },
 ];
 export default Categories;

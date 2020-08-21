@@ -13,6 +13,7 @@ import Quizzes from "./Quizzes.css";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
 import CardStyle from "../home/CardStyle.css";
+import logo from "../logo.png";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -58,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: "auto",
+  },
+  logo: {
+    maxWidth: 160,
   },
 }));
 
@@ -135,15 +139,15 @@ export const QuizzesContainer = () => {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          <img src={logo} className={classes.logo}></img>
         </Typography>
         <Typography
-          variant="subtitle1"
+          variant="subtitle2"
           align="center"
           color="textSecondary"
           component="p"
         >
-          Something here to give the footer a purpose!
+          ¡Aprenda Ingles!
         </Typography>
         <Copyright />
       </footer>

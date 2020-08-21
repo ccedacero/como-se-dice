@@ -5,8 +5,8 @@ const Categories = [
     description:
       "Aprenda el abecedario escuchando la pronunciación de cada letra",
     img:
-      "https://cdn.pixabay.com/photo/2014/10/04/16/55/wood-cube-473703_960_720.jpg",
-    imgTitle: "Alphabet Wood Cubes",
+      "https://cdn.pixabay.com/photo/2012/05/02/22/11/zebra-46491_960_720.png",
+    imgTitle: "Alphabet Zebra",
   },
   {
     title: "Animales",

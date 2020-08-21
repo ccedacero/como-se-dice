@@ -18,7 +18,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © Como Se Dice?"}
       <Link color="inherit" href="www.comosedice.com">
-        Aprenda Ingles hoy!
+        {/* Aprenda Ingles hoy! */}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

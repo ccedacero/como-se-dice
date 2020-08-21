@@ -15,6 +15,8 @@ import { payLoad } from "./constants/index";
 import { HomeLanding } from "./dashboard/Home";
 import { Translator } from "./translation/Translate";
 import { NewCard } from "./createvocab/NewCard";
+import CircularProgressWithLabel from "./createvocab/Progress";
+// import NewItemForm from "./createvocab/NewItemForm";
 const styles = (theme) => ({
   paddingTop: {
     padding: "2em",
@@ -97,6 +99,11 @@ const App = (props) => {
             <Route exact path="/translate" component={Translator} />
             {/* {Add Vocab Card} */}
             <Route exact path="/addvocab" component={NewCard} />
+            <Route
+              exact
+              path="/loading"
+              component={CircularProgressWithLabel}
+            />
           </Container>
         </Switch>
       </main>

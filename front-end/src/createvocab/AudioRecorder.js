@@ -28,22 +28,17 @@ class AudioRecorder extends React.Component {
     }
   };
   sendAudioFile = (blob) => {
-    console.log(blob);
-    const createObj = {
-      ...this.state,
-      category: "mycards",
-      audio: blob,
-    };
+    const form = new FormData();
+    form.append("audio", blob);
     const payLoad = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.token}`,
       },
-      body: JSON.stringify(createObj),
+      body: form,
     };
 
-    fetch("http://localhost:3000/vocabs", payLoad)
+    fetch("http://localhost:3000/items", payLoad)
       .then((r) => r.json())
       .then((newCardObj) => {
         console.log(newCardObj);

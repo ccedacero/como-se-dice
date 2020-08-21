@@ -13,6 +13,7 @@ import FolderIcon from "@material-ui/icons/Folder";
 import AudioRecorder from "./AudioRecorder";
 import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import Progress from "./Progress";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -51,6 +52,7 @@ export const NewCard = () => {
   const history = useHistory();
   const classes = useStyles();
   const [state, setState] = useState();
+  const [audioF, setAudioF] = useState();
   const handleChange = (e) => {
     e.preventDefault();
     e.persist();
@@ -60,6 +62,26 @@ export const NewCard = () => {
     }));
   };
 
+  const handleFileChange = (e) => {
+    e.persist();
+    console.log(e);
+    setAudioF({ [e.target.name]: e.target.files[0] });
+    debugger;
+  };
+
+  const fileSubmit = () => {
+    // e.preventDefault();
+    // debugger;
+    const form = new FormData();
+    form.append("audio", audioF.audio);
+    fetch(`http://localhost:3000/items`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      method: "POST",
+      body: form,
+    });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const createObj = {
@@ -81,8 +103,10 @@ export const NewCard = () => {
       .then((newCardObj) => {
         console.log(newCardObj);
       });
-    setTimeout(() => history.push("vocabulario/agregadas"), 1000);
+    fileSubmit();
+    history.push("/loading");
   };
+
   return (
     <div>
       {/* <AudioRecorder state={state} /> */}
@@ -144,6 +168,16 @@ export const NewCard = () => {
               autoComplete="current-password"
               onChange={handleChange}
             />
+            <input
+              // accept="audio/mpeg, audio/mp3"
+              className="audio"
+              name="audio"
+              // id="contained-button-file"
+              // multiple
+              type="file"
+              onChange={handleFileChange}
+            />
+
             <Button
               type="submit"
               fullWidth

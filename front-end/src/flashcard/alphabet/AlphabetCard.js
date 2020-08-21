@@ -67,6 +67,7 @@ export default function AlphabetCard({
   const classes = useStyles();
   const [playing, setPlaying] = useState(false);
   const [alrt, setAlrt] = useState(false);
+  const [end, setEnd] = useState(false);
   //   const bull = <span className={classes.bullet}>•</span>;
   let audio = new Audio();
   const handleplaySong = () => {
@@ -102,6 +103,7 @@ export default function AlphabetCard({
   };
   // Globals storing flip and next card ids
   let currentCard = id;
+
   // let currentFlip = id;
 
   // AUTO CLICKING FUNCTIONS LIVE BELOW HERE
@@ -123,10 +125,11 @@ export default function AlphabetCard({
 
   const modifiedNext = (interval) => {
     if (currentCard === alphabet[alphabet.length - 1].id) {
+      // setAlrt(true);
       clearInterval(interval);
-      setAlrt(true);
       return;
     }
+
     if (id < alphabet[alphabet.length - 1].id) {
       setAlphabet((prevState) => ({
         ...prevState,
@@ -138,9 +141,10 @@ export default function AlphabetCard({
   };
 
   const autoNext = () => {
+    setAlrt(true);
     let interval = setInterval(() => {
       modifiedNext(interval);
-    }, 5000);
+    }, 2000);
   };
   // const automate = () => {
   //   autoFlip();
@@ -168,6 +172,7 @@ export default function AlphabetCard({
         console.log(tconfirmation);
       });
   };
+  console.log(end);
   return (
     <div>
       {(cardType !== null && cardType === "alphabets") ||
@@ -226,7 +231,7 @@ export default function AlphabetCard({
               gutterBottom
             >
               {" "}
-              Auto Next
+              Auto Play
             </Typography>
             <Tooltip
               title="Switch Card every 5 seconds"
@@ -239,15 +244,18 @@ export default function AlphabetCard({
             </Tooltip>
             {alrt === true ? (
               <div>
-                <Alert severity="success">
-                  "No Hay Mas Tarjetas!" —{" "}
-                  <strong>"Continua Estudiando! :)"</strong>
-                </Alert>
+                <Alert severity="success">"Activado"</Alert>
               </div>
             ) : (
-              <>
-                <Alert severity="success">"Activado"</Alert>
-              </>
+              false
+            )}
+            {end === true ? (
+              <Alert severity="success">
+                "No Hay Mas Tarjetas!" —
+                <strong>"Continua Estudiando! :)"</strong>
+              </Alert>
+            ) : (
+              false
             )}
             <ReactCardFlip
               isFlipped={isFlipped}

@@ -12,7 +12,7 @@ import Quizzes from "./Quizzes.css";
 // import Link from "@material-ui/core/Link";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
-
+import CardStyle from "../home/CardStyle.css";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -116,7 +116,7 @@ export const QuizzesContainer = () => {
                         size="small"
                         className={classes.button}
                         edge="center"
-                        color="primary"
+                        style={{ backgroundColor: "#95e1d3" }}
                       >
                         Comenzar Prueba
                       </Button>

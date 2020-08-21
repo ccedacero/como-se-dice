@@ -66,7 +66,7 @@ export const NewCard = () => {
     e.persist();
     console.log(e);
     setAudioF({ [e.target.name]: e.target.files[0] });
-    debugger;
+    // debugger;
   };
 
   const fileSubmit = () => {

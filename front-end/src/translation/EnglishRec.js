@@ -7,12 +7,12 @@ const Dictaphone = (props) => {
   const [message, setMessage] = useState("");
   const commands = [
     {
-      command: "translate to spanish *",
+      command: "spanish *",
       // callback: (food) => setMessage(`Your order is for: ${food}`),
       callback: (food) => props.translateEnglish(` ${food}`),
     },
     {
-      command: "translate to english *",
+      command: "english *",
       callback: (food) => props.translateSpanish(` ${food}`),
     },
     {

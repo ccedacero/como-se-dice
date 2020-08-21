@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
+import CardStyle from "./CardStyle.css";
 import logo from "../logo.png";
 function Copyright() {
   return (
@@ -112,13 +113,14 @@ export default function Vocabulario() {
                   </CardContent>
                   <CardActions>
                     <Link to={`vocabulario/${card.title.toLowerCase()}`}>
-                      <Button size="small" edge="center" color="primary">
+                      <Button
+                        size="small"
+                        edge="center"
+                        style={{ backgroundColor: "#95e1d3" }}
+                      >
                         Practicar
                       </Button>
                     </Link>
-                    <Button size="small" color="primary">
-                      Mas Info
-                    </Button>
                   </CardActions>
                 </Card>
               </Grid>

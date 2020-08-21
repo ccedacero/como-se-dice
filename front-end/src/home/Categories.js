@@ -12,9 +12,8 @@ const Categories = [
     title: "Animales",
     fetchCategory: "animals",
     description: "Aprenda sobre animales comunes en la finca",
-    img:
-      "https://cdn.pixabay.com/photo/2014/10/04/16/55/wood-cube-473703_960_720.jpg",
-    imgTitle: "Alphabet Wood Cubes",
+    img: "https://cdn.pixabay.com/photo/2017/07/20/07/05/cow-2521454_1280.png",
+    imgTitle: "Animals",
   },
 
   {
@@ -116,7 +115,7 @@ const Categories = [
     fetchCategory: "time",
     description: " Aprenda vocabulario sobre fechas de tiempo",
     img:
-      "https://cdn.pixabay.com/photo/2016/10/23/17/06/calendar-1763587_960_720.png",
+      "https://cdn.pixabay.com/photo/2016/10/16/16/32/clock-1745702_1280.png",
     imgTitle: "Calendar",
   },
   {
@@ -132,15 +131,14 @@ const Categories = [
     fetchCategory: "weekdays",
     description: " Aprenda vocabulario sobre los días y estaciones",
     img:
-      "https://cdn.pixabay.com/photo/2013/07/13/11/45/seasons-158601_960_720.png",
+      "https://cdn.pixabay.com/photo/2017/10/20/20/37/calendar-2872749_1280.png",
     imgTitle: "Four Seasons Tree",
   },
   {
     title: "Preguntas",
     fetchCategory: "questions",
     description: " Aprenda preguntas frequentes",
-    img:
-      "https://cdn.pixabay.com/photo/2013/07/13/11/45/seasons-158601_960_720.png",
+    img: "https://cdn.pixabay.com/photo/2014/04/02/10/35/panda-303949_1280.png",
     imgTitle: "Four Seasons Tree",
   },
   {
@@ -148,7 +146,7 @@ const Categories = [
     fetchCategory: "mycards",
     description: "Practice las palabras que has agregado",
     img:
-      "https://cdn.pixabay.com/photo/2013/07/13/11/45/seasons-158601_960_720.png",
+      "https://cdn.pixabay.com/photo/2017/07/11/00/24/house-2492054_1280.png",
     imgTitle: "Four Seasons Tree",
   },
 ];

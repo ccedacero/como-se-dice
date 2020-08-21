@@ -84,7 +84,7 @@ export default function AlphabetCard({
         count: prevState.count + 1,
       }));
     }
-    // persistCard();
+    persistCard();
   };
 
   const previousCard = (e) => {

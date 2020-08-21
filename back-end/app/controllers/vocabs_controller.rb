@@ -20,6 +20,7 @@ class VocabsController < ApplicationController
   def destroy 
     delete_term = Vocab.find(params[:id])
     delete_term.destroy()
+    render json: delete_term
     end
 
 

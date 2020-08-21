@@ -4,6 +4,15 @@ import Categories from "../../home/Categories";
 import { payLoad } from "../../constants/index";
 import useIsMounted from "ismounted";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+
 export const Alphabet = (props) => {
   let queryStr = "";
   const isMounted = useIsMounted();
@@ -26,6 +35,18 @@ export const Alphabet = (props) => {
     vocab_id: null,
     reviewed: true,
   });
+  //confirmation modal
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  // end fonfirmation modal
 
   let str = queryStr.replace(/\s/g, "");
 
@@ -69,10 +90,11 @@ export const Alphabet = (props) => {
       );
     }
   };
+  console.log(open);
 
   const handleDelete = (e) => {
     e.preventDefault();
-    // console.log(trackCardId);
+    console.log(trackCardId);
     const deletePayload = {
       method: "DELETE",
       headers: {
@@ -84,17 +106,44 @@ export const Alphabet = (props) => {
       .then((r) => r.json())
       .then((confirmation) => {
         console.log(confirmation);
-        // setTimeout(() => props.history.push("/vocabulario"), 500);
+        setTimeout(() => props.history.push("/vocabulario"), 1000);
       });
+    handleClose();
   };
   return (
     <div>
       {renderAlphabet()}
       {vocabQuery === "mycards" ? (
-        <DeleteOutlineIcon
-          style={{ fontSize: "50px", color: "red" }}
-          onClick={handleDelete}
-        />
+        <>
+          <DeleteOutlineIcon
+            style={{ fontSize: "50px", color: "red" }}
+            onClick={handleClickOpen}
+          />
+          <Dialog
+            fullScreen={fullScreen}
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="responsive-dialog-title"
+          >
+            <DialogTitle id="responsive-dialog-title">
+              {"Seguro que quieres borrar tu tarjeta?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Perderas toda la informaccion relacionada con tu tarjeta.
+                Seguro?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button autoFocus onClick={handleDelete} color="primary">
+                Si?
+              </Button>
+              <Button onClick={handleClose} color="primary" autoFocus>
+                No?
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </>
       ) : (
         false
       )}

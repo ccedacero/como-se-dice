@@ -206,7 +206,7 @@ export const Quiz = ({
       .then((quizQuestionsObj) => {
         console.log(quizQuestionsObj);
       });
-    setTimeout(() => history.push("/vocabulario"), 4000);
+    setTimeout(() => history.push("/pruebas"), 3000);
   };
 
   // const persistResponse = () => {
@@ -270,7 +270,7 @@ export const Quiz = ({
     } else {
       setHelperText(
         `Terminaste!Felicidades!, tuviste ${
-          results.no_correct - results.no_incorrect
+          results.no_correct + 1 - results.no_incorrect
         } preguntas correctas!`
       );
     }

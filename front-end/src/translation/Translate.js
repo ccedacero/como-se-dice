@@ -44,7 +44,7 @@ export const Translator = () => {
   const [translated, setTranslated] = useState("");
   const [results, setResults] = useState();
   //   let text = "Hola my name is yoshi and i like to dance";
-  const API_KEY = ["AIzaSyBDQ7tSF6xPu54KW1fR1pk60kEczSlXQ0s"];
+  const API_KEY = [""];
   let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
 
   useEffect(() => {

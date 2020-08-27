@@ -42,12 +42,12 @@ export default function CircularStatic(props) {
   React.useEffect(() => {
     setTimeout(() => {
       props.history.push("/vocabulario/agregadas");
-    }, 7000);
+    }, 5000);
     const timer = setInterval(() => {
       setProgress((prevProgress) =>
         prevProgress >= 100 ? 10 : prevProgress + 10
       );
-    }, 700);
+    }, 500);
     return () => {
       clearInterval(timer);
     };

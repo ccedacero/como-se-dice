@@ -27,7 +27,7 @@ class ResultsController < ApplicationController
   
   def get_week_summary 
     reviewed = {}
-    # recentReviewed = get_dates(Cardtrack.all)  (MUST SWITCH THIS BACK !!!)
+    # recentReviewed = get_dates(Cardtrack.all)  
     Cardtrack.all.each_with_index do |e, index|
       if reviewed[e.created_at.to_date] 
         reviewed[e.created_at.to_date] = reviewed[e.created_at.to_date]+ 1

@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import FolderIcon from "@material-ui/icons/Folder";
-import AudioRecorder from "./AudioRecorder";
 import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Progress from "./Progress";

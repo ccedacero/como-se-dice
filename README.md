@@ -1,14 +1,14 @@
 # ¿ Como Se Dice ?
 
-A platform to help spanish speaking farm workers learn English. It parses Berkley’s Agricultural Personnel Management english learning resources to create a centralized and interactive location for learning English. You can see a quick [demo here](https://youtu.be/zymhOk7uurQ)
+A platform to help spanish speaking farm workers learn English. It parses Berkley’s Agricultural Personnel Management english learning resources to create a centralized and interactive location for learning English. You can see a quick [demo here](https://youtu.be/zymhOk7uurQ).
 
 <!-- ![The landing page for Neighbor's Kitchen](https://i.imgur.com/MwODixc.png )
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://i.imgur.com/Es8gs8S.png" alt="neighbor's kitchen menu" width="350"/>  <img src="https://i.imgur.com/yVgHeUH.png" alt="neighbor's kitchen menu" width="350" /> -->
 
 ### Features
 
-- User are able to learn and practice over 250 vocabulary words and phrases by using flashcard with audio playback
-- Users are able to test their skills by taking quizzes for different vocabulary card categories
+- User are able to learn and practice over 250 vocabulary words and phrases by using flashcard with audio playback.
+- Users are able to test their skills by taking quizzes for different vocabulary card categories.
 - Users are able to track their progress by reviewing their dashboard which contains stats for
   questions they've gotten incorrectly, alongside their weekly activity.
 - Users are able to translate text from English to Spanish and Spanish to English by typing their text or by speaking it.
@@ -41,9 +41,10 @@ If you'd like to test this version of the app on your local system you can do so
 - [ActiveModelSerializers](https://github.com/rails-api/active_model_serializers) - ActiveModelSerializers were used for organizing backend API responses.
 - [Material-ui](http://material-ui.com/) - Styling was done using Material-ui along with custom CSS.
 
-## Authors
+## Next Steps
 
-- **Cristian** - [Cristian](https://github.com/ccedacero)
+In the current state, the app still needs a lot more content before it can be released. Barkeley's
+content does not have quizzes, and I've had to create my own quizzes for each section. I have many more quizzes to create, more vocab I would like to add, and ensure everything is completely mobile friendly. I will be working on this these upcoming months.
 
 ## License
 

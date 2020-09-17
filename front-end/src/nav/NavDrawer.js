@@ -62,26 +62,6 @@ export class NavDrawer extends React.Component {
                 </li>
               </>
             )}
-            {/* <li>
-              <Button
-                color="inherit"
-                // className={classes.right}
-                component={Link}
-                to="/login"
-              >
-                Login
-              </Button>
-            </li>
-            <li>
-              <Button color="inherit" component={Link} to="/signup">
-                Signup
-              </Button>
-            </li>
-            <li>
-            <Button color="inherit" component={Link} to="/forum">
-              Forum
-            </Button>
-            </li> */}
           </ul>
         </div>
       </Drawer>

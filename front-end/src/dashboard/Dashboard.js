@@ -3,7 +3,6 @@ import { Bar } from "react-chartjs-2";
 import { MyPie } from "./MyPie";
 import React, { useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
-import TestStats from "./TestStats";
 import { payLoad } from "../constants/index";
 export const BarChart = () => {
   const [state, setState] = useState({

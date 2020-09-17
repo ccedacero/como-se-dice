@@ -74,7 +74,6 @@ export default function AlphabetCard({
   const handleplaySong = () => {
     audio.src = wordUrl;
     audio.play();
-    // setTimeout(() => audio.pause(), 5000);
   };
 
   const nextCard = (e) => {

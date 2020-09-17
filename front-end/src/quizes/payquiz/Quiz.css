@@ -1,0 +1,27 @@
+.MuiFormGroup-root span {
+  font-size: 2em !important;
+}
+
+.MuiContainer-root legend {
+  font-size: 2em !important;
+  line-height: 2em !important;
+  margin-top: -1em !important;
+}
+
+.radioForm {
+  display: flow-root !important;
+  /* margin-top: 2em !important; */
+  /* max-width: 74%; */
+  justify-items: center !important;
+  text-align: center !important;
+  border: 0.2em solid #fce38a !important;
+  border-radius: 1.5em !important;
+  margin-top: 4em !important;
+}
+.MuiFormHelperText-root {
+  font-size: 2em !important;
+}
+
+.MuiContainer-root {
+  justify-content: center !important;
+}

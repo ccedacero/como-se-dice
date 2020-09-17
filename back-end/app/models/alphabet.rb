@@ -1,2 +1,0 @@
-class Alphabet < ApplicationRecord
-end

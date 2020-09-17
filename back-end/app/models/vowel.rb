@@ -1,2 +1,0 @@
-class Vowel < ApplicationRecord
-end

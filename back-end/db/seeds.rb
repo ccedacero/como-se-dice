@@ -158,12 +158,13 @@ end
 # SEEDING QUIZES!!!  
 
 #PAY QUIZ HERE 
-Test.create(name: "Payments");
+Test.create(name: "Pago", category:"payments");
   
   Question.create(question:"Como se dice Turno del atardecer?", test_id: Test.last.id)
   options =["Day shift","Afternoon shift","Evening shift","Night shift"]
   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
   ans = "Evening shift"
+  Test.last.update(no_of_questions: options.length);
   def updateAnswer(ans)
   updateQ = Question.last.answers.select do |a|
     a.answer === ans
@@ -217,13 +218,13 @@ Test.create(name: "Payments");
 
 #   #SEEDING GREETINGS QUIZ 
 
-  Test.create(name: "Saludos");
+  Test.create(name: "saludos", category:"saludos");
   
   Question.create(question:"Como se dice 'Gusto en conocerte!?'", test_id: Test.last.id)
   options =["I liked meeting you","Nice to meet you!","Nice seeing you","See you next week"]
   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
   ans = "Nice to meet you!"
-
+  Test.last.update(no_of_questions: options.length);
   def updateAnswer(ans)
   updateQ = Question.last.answers.select do |a|
     a.answer === ans
@@ -280,12 +281,13 @@ Test.create(name: "Payments");
 
   # Animales = [Livestock, Cow, Calf, Heifer,Steer, Bull, Pig, Sow(cerda), Goat, Sheep, Lamb, Buck, Ram, Horse, Stallion, Colt, Dairy]
     
-  Test.create(name: "animals");
+  Test.create(name: "animals", category:"animals");
   
   Question.create(question:"Como se dice 'Vaca' en ingles?'", test_id: Test.last.id)
   options =["Cow","Chicken","Pig","Sheep"]
   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
   ans = "Cow"
+  Test.last.update(no_of_questions: options.length);
 
   def updateAnswer(ans)
   updateQ = Question.last.answers.select do |a|
@@ -338,61 +340,61 @@ Test.create(name: "Payments");
   updateAnswer(ans)
   #SEEDING GREETINGS QUIZ 
 
-  Test.create(name: "Saludos");
+#   (name: "saludos", category:"saludos");
   
-  Question.create(question:"Como se dice 'Gusto en conocerte!?'", test_id: Test.last.id)
-  options =["I liked meeting you","Nice to meet you!","Nice seeing you","See you next week"]
-  options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
-  ans = "Nice to meet you!"
+#   Question.create(question:"Como se dice 'Gusto en conocerte!?'", test_id: Test.last.id)
+#   options =["I liked meeting you","Nice to meet you!","Nice seeing you","See you next week"]
+#   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   ans = "Nice to meet you!"
+#   Test.last.update(no_of_questions: options.length);
+#   def updateAnswer(ans)
+#   updateQ = Question.last.answers.select do |a|
+#     a.answer === ans
+#   end
+#   updateQ.first.update(is_correct: true)
+#  end
+#  updateAnswer(ans)
 
-  def updateAnswer(ans)
-  updateQ = Question.last.answers.select do |a|
-    a.answer === ans
-  end
-  updateQ.first.update(is_correct: true)
- end
- updateAnswer(ans)
+#   Question.create(question:"Como se dice 'Nos vemos mañana?' ", test_id: Test.last.id)
+#   options1 = ["See you tomorrow","See you next week", "See you later", "See you tonight",]
+#   options1.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   ans = "See you tomorrow"
+#   updateAnswer(ans)
 
-  Question.create(question:"Como se dice 'Nos vemos mañana?' ", test_id: Test.last.id)
-  options1 = ["See you tomorrow","See you next week", "See you later", "See you tonight",]
-  options1.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
-  ans = "See you tomorrow"
-  updateAnswer(ans)
+#   Question.create(question:"Que significa 'Good night'?", test_id: Test.last.id)
+#   options2 =["Hasta mañana", "Buenos dias", "Buenos tardes", "Buenos Noches"]
+#   options2.map{|q|  AnTest.createswer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  Question.create(question:"Que significa 'Good night'?", test_id: Test.last.id)
-  options2 =["Hasta mañana", "Buenos dias", "Buenos tardes", "Buenos Noches"]
-  options2.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   ans ="Buenos Noches"
+#   updateAnswer(ans)
 
-  ans ="Buenos Noches"
-  updateAnswer(ans)
+#   Question.create(question:"Que significa 'See you soon!'?", test_id: Test.last.id)
+#   options3 =["Nos vemos pronto","Nos vemos hoy","Nos vemos esta tarde","Nos vemos mañana "]
+#   options3.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  Question.create(question:"Que significa 'See you soon!'?", test_id: Test.last.id)
-  options3 =["Nos vemos pronto","Nos vemos hoy","Nos vemos esta tarde","Nos vemos mañana "]
-  options3.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   ans = "Nos vemos pronto"
+#   updateAnswer(ans)
 
-  ans = "Nos vemos pronto"
-  updateAnswer(ans)
+#   Question.create(question: "Que significa 'You're welcome'?", test_id: Test.last.id)
+#   options4 =["Gracias","Bienvenido","De nada","Bienvenido a mi casa"]
+#   options4.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  Question.create(question: "Que significa 'You're welcome'?", test_id: Test.last.id)
-  options4 =["Gracias","Bienvenido","De nada","Bienvenido a mi casa"]
-  options4.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   ans = "De nada"
+#   updateAnswer(ans)
 
-  ans = "De nada"
-  updateAnswer(ans)
+#   Question.create(question:"Como dirias 'Muy bien, gracias!'?", test_id: Test.last.id)
+#   options5 =["cool, Thank you!","Very well, Thank you!","Thank you!","Great"]
+#   options5.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  Question.create(question:"Como dirias 'Muy bien, gracias!'?", test_id: Test.last.id)
-  options5 =["cool, Thank you!","Very well, Thank you!","Thank you!","Great"]
-  options5.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
-
-  ans = "Very well, Thank you!"
-  updateAnswer(ans)
+#   ans = "Very well, Thank you!"
+#   updateAnswer(ans)
   
-  Question.create(question: "Que sigfnica 'How have you been?'", test_id: Test.last.id)
-  options6 =["Como has estado?","Que has estado haciendo?","Que hiciste hoy","Como te sientes"]
-  options6.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   Question.create(question: "Que sigfnica 'How have you been?'", test_id: Test.last.id)
+#   options6 =["Como has estado?","Que has estado haciendo?","Que hiciste hoy","Como te sientes"]
+#   options6.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans = "Como has estado?"
-  updateAnswer(ans)
+#   ans = "Como has estado?"
+#   updateAnswer(ans)
 
 puts "=========================="
 puts "~~~~~~~~~~SEEDED~~~~~~~~~~"

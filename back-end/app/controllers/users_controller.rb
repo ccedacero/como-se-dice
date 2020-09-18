@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
     render json: @current_user
   end
-
+# sends twilio sms to user to confirm user registration
   def confirm_user(newUser) 
     account_sid = 'account_sid goes here'
     auth_token = 'auth_token goes here'

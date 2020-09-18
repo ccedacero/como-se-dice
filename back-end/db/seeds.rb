@@ -1,3 +1,5 @@
+require 'twilio-ruby'
+
 # User.destroy_all
 # Alphabet.destroy_all
 # Vowel.destroy_all

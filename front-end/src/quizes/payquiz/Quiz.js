@@ -103,7 +103,6 @@ export const Quiz = ({
         return ans.answer === radioSelection;
       }
     );
-    console.log(radioSelected);
     setResponse((prevState) => {
       return {
         ...prevState,

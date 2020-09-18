@@ -9,7 +9,7 @@ import { Alphabet } from "./flashcard/alphabet/Alphabet";
 import { Vocab } from "./flashcard/vocab/Vocab";
 import { QuizzesContainer as pruebas } from "./quizes/QuizzesContainer";
 import SignIn from "./signin/SignIn";
-import SignUp from "./signup/SignUp";
+import SignUp from "./signup/Signup";
 import Quiz from "./quizes/payquiz/Quiz";
 import { payLoad } from "./constants/index";
 import { HomeLanding } from "./dashboard/Home";

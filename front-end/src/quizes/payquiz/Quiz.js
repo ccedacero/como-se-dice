@@ -10,7 +10,6 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
 import { payLoad } from "../../constants/index";
-import Categories from "../../home/Categories";
 import "./Quiz.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,14 +28,18 @@ export const Quiz = ({
   match: {
     params: { id },
   },
-  currentUser,
   history,
 }) => {
   const classes = useStyles();
+  // this state is used to store the quiz and answers object
   const [state, setState] = useState([]);
+  // this state is used to track the currently selected answer choice on the quiz
   const [value, setValue] = useState("");
+  // this state is used to display an error if the selecte answer choice is incorrect
   const [error, setError] = useState(false);
+  // this state is used to display helper text for correct and incorrect answers
   const [helperText, setHelperText] = useState("Buena Suerte!");
+  // this state is used to set the current question and answer choices
   const [question, setQuestion] = useState({
     currentQuestion: "",
     question: "",
@@ -46,7 +49,24 @@ export const Quiz = ({
     Option4: "",
     questionId: "",
   });
-  console.log(id);
+
+  // this state keeps track of current user response(whether correcr or incorrect)
+  // and is used to persist to server
+  const [response, setResponse] = useState({
+    question_id: null,
+    choice_id: null,
+  });
+
+  //this state keeps track of quiz results
+  const [results, setResults] = useState({
+    test_id: 0,
+    no_correct: 0,
+    no_incorrect: 0,
+    user_id: localStorage.user,
+    score: 0,
+  });
+
+  // Load the quiz into the state
   useEffect(() => {
     let fetchId = id;
     if (id === "Animales") {
@@ -55,7 +75,9 @@ export const Quiz = ({
     fetch(`http://localhost:3000/tests/${fetchId}`, payLoad)
       .then((r) => r.json())
       .then((quizQuestionsObj) => {
+        console.log(quizQuestionsObj);
         setState(quizQuestionsObj);
+        // set the first question with default values
         setQuestion({
           currentQuestion: 0,
           question: quizQuestionsObj[0].question,
@@ -67,23 +89,13 @@ export const Quiz = ({
         });
       });
   }, []);
-
-  const [results, setResults] = useState({
-    test_id: 0,
-    no_correct: 0,
-    no_incorrect: 0,
-    user_id: localStorage.user,
-    score: 0,
-  });
-  const [response, setResponse] = useState({
-    user_id: localStorage.user,
-    question_id: null,
-    choice_id: null,
-    is_right: null,
-  });
-
-  // WE ARE GOING TO FIRST GET THE DASHBORAD TO DISPLAY GENERAL TEST RESULTS
-
+  // function to keep track of radio values
+  const handleRadioChange = (event) => {
+    setValue(event.target.value);
+    setHelperText(" ");
+    setError(false);
+  };
+  // helper function to get currently selected answer and set response state
   const getSelectedRadio = (e) => {
     let radioSelection = e.target.value;
     const radioSelected = state[question.currentQuestion].answers.find(
@@ -91,7 +103,7 @@ export const Quiz = ({
         return ans.answer === radioSelection;
       }
     );
-
+    console.log(radioSelected);
     setResponse((prevState) => {
       return {
         ...prevState,
@@ -101,8 +113,36 @@ export const Quiz = ({
     });
   };
 
-  const setResponseTrue = () => {
-    const sample = {
+  // retrive current question from state and set it
+  const handleQuestionChange = () => {
+    return (
+      state[question.currentQuestion] &&
+      state[question.currentQuestion].question
+    );
+  };
+
+  // function to update local incorrect question tracking state
+  const setIncorrectResults = () => {
+    setResults((prevState) => {
+      return {
+        ...prevState,
+        no_incorrect: prevState.no_incorrect + 1,
+      };
+    });
+  };
+
+  // function to update local correct question tracking state
+  const setCorrectResults = () => {
+    setResults((prevState) => {
+      return {
+        ...prevState,
+        no_correct: prevState.no_correct + 1,
+      };
+    });
+  };
+  // function to persist a correct answer to server
+  const persistTrueResponse = () => {
+    const selectedResponse = {
       user_id: localStorage.user,
       question_id: response.question_id,
       choice_id: response.choice_id,
@@ -114,7 +154,7 @@ export const Quiz = ({
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.token}`,
       },
-      body: JSON.stringify(sample),
+      body: JSON.stringify(selectedResponse),
     };
     fetch("http://localhost:3000/user_answers", answerPayLoad)
       .then((r) => r.json())
@@ -123,8 +163,9 @@ export const Quiz = ({
       });
   };
 
-  const setResponseFalse = () => {
-    const sample = {
+  // function to persist incorrect response to server
+  const persistFalseResponse = () => {
+    const selectedResponse = {
       user_id: localStorage.user,
       question_id: response.question_id,
       choice_id: response.choice_id,
@@ -136,7 +177,7 @@ export const Quiz = ({
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.token}`,
       },
-      body: JSON.stringify(sample),
+      body: JSON.stringify(selectedResponse),
     };
     fetch("http://localhost:3000/user_answers", answerPayLoad)
       .then((r) => r.json())
@@ -145,47 +186,7 @@ export const Quiz = ({
       });
   };
 
-  //  BUG FOUND IN LAST QUESTION RENDER - DOES NOT CHECK CORRECT
-  //  ANSWER
-  const handleRadioChange = (event) => {
-    setValue(event.target.value);
-    setHelperText(" ");
-    setError(false);
-  };
-
-  const handleQuestionChange = () => {
-    return (
-      state[question.currentQuestion] &&
-      state[question.currentQuestion].question
-    );
-  };
-
-  function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
-  const setIncorrectResults = () => {
-    setResults((prevState) => {
-      return {
-        ...prevState,
-        no_incorrect: prevState.no_incorrect + 1,
-      };
-    });
-  };
-
-  const setCorrectResults = () => {
-    setResults((prevState) => {
-      return {
-        ...prevState,
-        no_correct: prevState.no_correct + 1,
-      };
-    });
-  };
-
+  // persist total quiz results
   const persistResults = () => {
     const resultObj = {
       ...results,
@@ -199,7 +200,7 @@ export const Quiz = ({
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.token}`,
       },
-      body: JSON.stringify(resultObj), // body data type must match "Content-Type" header
+      body: JSON.stringify(resultObj),
     };
     fetch("http://localhost:3000/results", createPayload)
       .then((r) => r.json())
@@ -209,23 +210,17 @@ export const Quiz = ({
     setTimeout(() => history.push("/pruebas"), 3000);
   };
 
-  // const persistResponse = () => {
-  //   const answerPayLoad = {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.token}`,
-  //     },
-  //     body: JSON.stringify(response),
-  //   };
+  // a method to randomize questions for this approach
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
 
-  //   fetch("http://localhost:3000/user_answers", answerPayLoad)
-  //     .then((r) => r.json())
-  //     .then((persistedObj) => {
-  //       console.log(persistedObj);
-  //     });
-  // };
-
+  // main function that combines all quiz logic based on previous questions
+  // and whether the answer is correct and incorrect
   const handleSubmit = (event) => {
     event.preventDefault();
     if (question.currentQuestion + 1 !== state.length) {
@@ -235,13 +230,10 @@ export const Quiz = ({
         } else {
           setHelperText("Please select an option.");
           setError(true);
-          // return;
         }
       });
       if (comparison.answer && comparison.answer === value) {
-        setResponseTrue();
-
-        // persistResponse();
+        persistTrueResponse();
         let arr = shuffle([0, 1, 2, 3]);
         setQuestion((prevState) => {
           return {
@@ -258,11 +250,10 @@ export const Quiz = ({
         setError(false);
         setCorrectResults();
       } else if (comparison.answer && comparison.answer !== value) {
-        setResponseFalse();
+        persistFalseResponse();
         setHelperText("Lo Siento, Intente Otra vez!");
         setError(true);
         setIncorrectResults();
-        // persistResponse();
       } else {
         setHelperText("Por favor, seleccione una opcion:");
         setError(true);

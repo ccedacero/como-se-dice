@@ -61,20 +61,16 @@ export default function AlphabetCard({
   setAlphabet,
   cardType,
 }) {
-  console.log(id, word, wordSpanish, wordUrl);
-  // console.log(alphabet, "this is alphabet"); array of everything working
-  // console.log(setAlphabet, "this is set alphabet"); set state function working
-  const [isFlipped, setisFlipped] = useState(false);
   const classes = useStyles();
-  const [playing, setPlaying] = useState(false);
+  const [isFlipped, setisFlipped] = useState(false);
   const [alrt, setAlrt] = useState(false);
   const [end, setEnd] = useState(false);
-  //   const bull = <span className={classes.bullet}>•</span>;
+
   let audio = new Audio();
+
   const handleplaySong = () => {
     audio.src = wordUrl;
     audio.play();
-    // setTimeout(() => audio.pause(), 5000);
   };
 
   const nextCard = (e) => {
@@ -102,12 +98,8 @@ export default function AlphabetCard({
       return !preveState;
     });
   };
-  // Globals storing flip and next card ids
-  let currentCard = id;
 
-  // let currentFlip = id;
-
-  // AUTO CLICKING FUNCTIONS LIVE BELOW HERE
+  // AUTO CLICKING FUNCTIONS UNDER CONSTRUCTION
   // const autoFlip = () => {
   //   let interval1 = setInterval(() => {
   //     modifiedFlip(interval1);
@@ -124,6 +116,8 @@ export default function AlphabetCard({
   //   currentFlip++;
   // };
 
+  // Globals storing flip and next card ids
+  let currentCard = id;
   const modifiedNext = (interval) => {
     if (currentCard === alphabet[alphabet.length - 1].id) {
       // setAlrt(true);
@@ -138,19 +132,14 @@ export default function AlphabetCard({
       }));
     }
     currentCard++;
-    console.log(currentCard, alphabet[alphabet.length - 1].id);
   };
 
   const autoNext = () => {
     setAlrt(true);
     let interval = setInterval(() => {
       modifiedNext(interval);
-    }, 2000);
+    }, 5000);
   };
-  // const automate = () => {
-  //   autoFlip();
-  //   setTimeout(autoNext, 2000);
-  // };
 
   const persistCard = () => {
     const persistObj = {
@@ -173,7 +162,6 @@ export default function AlphabetCard({
         console.log(tconfirmation);
       });
   };
-  console.log(end);
   return (
     <div>
       {(cardType !== null && cardType === "alphabets") ||

@@ -28,7 +28,6 @@ export const Quiz = ({
   match: {
     params: { id },
   },
-  currentUser,
   history,
 }) => {
   const classes = useStyles();
@@ -50,6 +49,14 @@ export const Quiz = ({
     Option4: "",
     questionId: "",
   });
+
+  // this state keeps track of current user response(whether correcr or incorrect)
+  // and is used to persist to server
+  const [response, setResponse] = useState({
+    question_id: null,
+    choice_id: null,
+  });
+
   //this state keeps track of quiz results
   const [results, setResults] = useState({
     test_id: 0,
@@ -57,15 +64,6 @@ export const Quiz = ({
     no_incorrect: 0,
     user_id: localStorage.user,
     score: 0,
-  });
-
-  // this state keeps track of current user response(whether correcr or incorrect)
-  // and is used to persist to server
-  const [response, setResponse] = useState({
-    user_id: localStorage.user,
-    question_id: null,
-    choice_id: null,
-    is_right: null,
   });
 
   // Load the quiz into the state
@@ -91,8 +89,13 @@ export const Quiz = ({
         });
       });
   }, []);
-
-  // get value for current selected answer
+  // function to keep track of radio values
+  const handleRadioChange = (event) => {
+    setValue(event.target.value);
+    setHelperText(" ");
+    setError(false);
+  };
+  // helper function to get currently selected answer and set response state
   const getSelectedRadio = (e) => {
     let radioSelection = e.target.value;
     const radioSelected = state[question.currentQuestion].answers.find(
@@ -100,7 +103,7 @@ export const Quiz = ({
         return ans.answer === radioSelection;
       }
     );
-    // get state for current selected response
+    console.log(radioSelected);
     setResponse((prevState) => {
       return {
         ...prevState,
@@ -110,8 +113,35 @@ export const Quiz = ({
     });
   };
 
+  // retrive current question from state and set it
+  const handleQuestionChange = () => {
+    return (
+      state[question.currentQuestion] &&
+      state[question.currentQuestion].question
+    );
+  };
+
+  // function to update local incorrect question tracking state
+  const setIncorrectResults = () => {
+    setResults((prevState) => {
+      return {
+        ...prevState,
+        no_incorrect: prevState.no_incorrect + 1,
+      };
+    });
+  };
+
+  // function to update local correct question tracking state
+  const setCorrectResults = () => {
+    setResults((prevState) => {
+      return {
+        ...prevState,
+        no_correct: prevState.no_correct + 1,
+      };
+    });
+  };
   // function to persist a correct answer to server
-  const setResponseTrue = () => {
+  const persistTrueResponse = () => {
     const selectedResponse = {
       user_id: localStorage.user,
       question_id: response.question_id,
@@ -134,7 +164,7 @@ export const Quiz = ({
   };
 
   // function to persist incorrect response to server
-  const setResponseFalse = () => {
+  const persistFalseResponse = () => {
     const selectedResponse = {
       user_id: localStorage.user,
       question_id: response.question_id,
@@ -154,50 +184,6 @@ export const Quiz = ({
       .then((persistedObj) => {
         console.log(persistedObj);
       });
-  };
-
-  // function to keep track of quiz values
-  const handleRadioChange = (event) => {
-    setValue(event.target.value);
-    setHelperText(" ");
-    setError(false);
-  };
-
-  // retrive current question from state and set it
-  const handleQuestionChange = () => {
-    return (
-      state[question.currentQuestion] &&
-      state[question.currentQuestion].question
-    );
-  };
-
-  // a method to randomize questions for this approach
-  function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
-  // function to update local incorrect question tracking state
-  const setIncorrectResults = () => {
-    setResults((prevState) => {
-      return {
-        ...prevState,
-        no_incorrect: prevState.no_incorrect + 1,
-      };
-    });
-  };
-
-  // function to update local correct question tracking state
-  const setCorrectResults = () => {
-    setResults((prevState) => {
-      return {
-        ...prevState,
-        no_correct: prevState.no_correct + 1,
-      };
-    });
   };
 
   // persist total quiz results
@@ -224,6 +210,15 @@ export const Quiz = ({
     setTimeout(() => history.push("/pruebas"), 3000);
   };
 
+  // a method to randomize questions for this approach
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
   // main function that combines all quiz logic based on previous questions
   // and whether the answer is correct and incorrect
   const handleSubmit = (event) => {
@@ -238,7 +233,7 @@ export const Quiz = ({
         }
       });
       if (comparison.answer && comparison.answer === value) {
-        setResponseTrue();
+        persistTrueResponse();
         let arr = shuffle([0, 1, 2, 3]);
         setQuestion((prevState) => {
           return {
@@ -255,7 +250,7 @@ export const Quiz = ({
         setError(false);
         setCorrectResults();
       } else if (comparison.answer && comparison.answer !== value) {
-        setResponseFalse();
+        persistFalseResponse();
         setHelperText("Lo Siento, Intente Otra vez!");
         setError(true);
         setIncorrectResults();

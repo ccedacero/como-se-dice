@@ -31,6 +31,7 @@ export const Quiz = ({
   history,
 }) => {
   const classes = useStyles();
+  // STATE DECLARATIONS
   // this state is used to store the quiz and answers object
   const [state, setState] = useState([]);
   // this state is used to track the currently selected answer choice on the quiz
@@ -75,7 +76,6 @@ export const Quiz = ({
     fetch(`http://localhost:3000/tests/${fetchId}`, payLoad)
       .then((r) => r.json())
       .then((quizQuestionsObj) => {
-        console.log(quizQuestionsObj);
         setState(quizQuestionsObj);
         // set the first question with default values
         setQuestion({
@@ -186,7 +186,7 @@ export const Quiz = ({
       });
   };
 
-  // persist total quiz results
+  // persist total quiz results,only run at the end of quiz
   const persistResults = () => {
     const resultObj = {
       ...results,
@@ -218,7 +218,6 @@ export const Quiz = ({
     }
     return a;
   }
-
   // main function that combines all quiz logic based on previous questions
   // and whether the answer is correct and incorrect
   const handleSubmit = (event) => {
@@ -249,11 +248,12 @@ export const Quiz = ({
         setHelperText("Buen Trabajo!");
         setError(false);
         setCorrectResults();
+        persistTrueResponse();
       } else if (comparison.answer && comparison.answer !== value) {
-        persistFalseResponse();
         setHelperText("Lo Siento, Intente Otra vez!");
         setError(true);
         setIncorrectResults();
+        persistFalseResponse();
       } else {
         setHelperText("Por favor, seleccione una opcion:");
         setError(true);

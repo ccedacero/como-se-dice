@@ -2,6 +2,8 @@
 
 A platform to help spanish speaking farm workers learn English. It parses Berkley’s Agricultural Personnel Management english learning resources to create a centralized and interactive location for learning English.
 
+Live demo video can be seen here: https://www.youtube.com/watch?v=zymhOk7uurQ&ab_channel=CristianC
+
 <!-- ![The landing page for Neighbor's Kitchen](https://i.imgur.com/MwODixc.png )
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://i.imgur.com/Es8gs8S.png" alt="neighbor's kitchen menu" width="350"/>  <img src="https://i.imgur.com/yVgHeUH.png" alt="neighbor's kitchen menu" width="350" /> -->
 

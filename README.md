@@ -1,11 +1,11 @@
 # ¿ Como Se Dice ?
 
 A platform to help spanish speaking farm workers learn English. It parses Berkley’s Agricultural Personnel Management english learning resources to create a centralized and interactive location for learning English.
-
-Live demo video can be seen here: https://www.youtube.com/watch?v=zymhOk7uurQ&ab_channel=CristianC
-
-<!-- ![The landing page for Neighbor's Kitchen](https://i.imgur.com/MwODixc.png )
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://i.imgur.com/Es8gs8S.png" alt="neighbor's kitchen menu" width="350"/>  <img src="https://i.imgur.com/yVgHeUH.png" alt="neighbor's kitchen menu" width="350" /> -->
+<pre>
+           <img src="https://ccedacero.com/images/compressed/resized-comosedice.png" alt="como se dice preview" width="650"/>  
+</pre>
+- Live demo video can be seen [here](https://www.youtube.com/watch?v=zymhOk7uurQ&ab_channel=CristianC)  
+    
 
 ### Features
 
@@ -27,13 +27,18 @@ If you'd like to test this version of the app on your local system you can do so
 5. The app will open in a new Chrome window and you should now be able to test out it's features.
 
 ## Built With
-
-<!-- * [Faker](https://github.com/faker-ruby/faker) - The faker gem was used for seeding data.
-* [BootStrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) - Bootstrap and custom CSS were used for styling. -->
-
-- [Ruby on Rails](https://rubyonrails.org/) - The Ruby on Rails framework was used for handling our back-end logic.
+- [React JS](https://reactjs.org/) - I used React to build the user interface and to manage the flow of the app. 
+- [Ruby on Rails](https://rubyonrails.org/) - I used Ruby on Rails to handle the back-end logic. 
+- [Material-ui](https://material-ui.com/) - Material-ui and custom css were used for styling the app. 
+- [Charts JS](https://www.chartjs.org/) - Charts JS was used to display user stats on the dashboard.
 - [PostgreSQL](https://www.postgresql.org/) - PostgresSQL was used for storing all app data.
 - [ActiveModelSerializers](https://github.com/rails-api/active_model_serializers) - ActiveModelSerializers were used for organizing backend API responses.
+- [Google Translation API](https://cloud.google.com/translate/docs) - The Google Translate API was used to handle API English and Spanish translation.
+- [React-speech-recognition](https://www.npmjs.com/package/react-speech-recognition) - React speech recognition was used to allow users to dictate translation text and translation commands. 
+- [Amazon S3](https://www.npmjs.com/package/react-speech-recognition) - An Amazon S3 object was used to store audio files. 
+- [Cloudinary](https://cloudinary.com/) - Cloudinary was used to store file uploads. 
+
+
 
 ## Authors
 

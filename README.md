@@ -23,8 +23,8 @@ If you'd like to test this version of the app on your local system you can do so
 1. Navigate to your desired directory and `git clone` the repo url
 2. Open the backend folder and run `bundle install`
 3. Start the service with `rails s`
-4. Navigate to the frontend folder and type `open index.html`
-5. The app will open in a new Chrome window and you should now be able to test out it's features.
+4. Navigate to the frontend folder and type `npm start`
+5. The app will open in a new Chrome window and you should now be able to test out it's features by signing up for a new user. 
 
 ## Built With
 - [React JS](https://reactjs.org/) - I used React to build the user interface and to manage the flow of the app. 

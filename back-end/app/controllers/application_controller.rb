@@ -21,6 +21,7 @@ class ApplicationController < ActionController::API
       # get the user_id from the decoded token and use it to
       # set an instance variable for the current user
       set_current_user!(payload["user_id"])
+      # byebug
     rescue
       render json: { error: "Invalid Request" }, status: :unauthorized
     end

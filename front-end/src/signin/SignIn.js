@@ -91,13 +91,16 @@ export default function SignIn({ history, handleLogin }) {
     fetch("http://localhost:3000/login", payLoad)
       .then((r) => r.json())
       .then((userObj) => {
-        const { user, token } = userObj;
-        handleLogin(user);
-        console.log(user);
-        localStorage.token = token;
-        localStorage.user = user.id;
-        if (user !== undefined && user !== null) {
-          history.push("/home");
+        if (!userObj.error) {
+          const { user, token } = userObj;
+          handleLogin(user);
+          console.log(user);
+          localStorage.token = token;
+          localStorage.user = user.id;
+
+          if (user !== undefined && user !== null) {
+            history.push("/home");
+          }
         }
       });
   };

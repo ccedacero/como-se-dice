@@ -69,24 +69,28 @@ export default function TestStats() {
   // ];
 
   useEffect(() => {
-    fetch("http://localhost:3000/total", payLoad)
-      .then((r) => r.json())
-      .then((statsObj) => {
-        let arr = [];
-        statsObj.answer_stats.map((ans) => {
-          arr.push(
-            createData(
-              ans.category,
-              ans.question,
-              ans.inc_answers_chosen.length,
-              ans.inc_answers_chosen[0]
-            )
-          );
+    if (payLoad.token !== "Bearer undefined") {
+      fetch("http://localhost:3000/total", payLoad)
+        .then((r) => r.json())
+        .then((statsObj) => {
+          let arr = [];
+          if (statsObj.answer_stats !== undefined) {
+            statsObj.answer_stats.map((ans) => {
+              arr.push(
+                createData(
+                  ans.category,
+                  ans.question,
+                  ans.inc_answers_chosen.length,
+                  ans.inc_answers_chosen[0]
+                )
+              );
+            });
+            setRows(arr);
+            console.log(statsObj);
+          }
         });
-        setRows(arr);
-        console.log(statsObj);
-      });
-  }, []);
+    }
+  }, [localStorage.token]);
   // debugger;
 
   // const setStatValues = (stats) => {

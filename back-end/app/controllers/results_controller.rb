@@ -1,4 +1,5 @@
 class ResultsController < ApplicationController
+  before_action :authenticate
   def index 
       results = Result.all 
       render json: results 

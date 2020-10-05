@@ -51,7 +51,7 @@ const App = (props) => {
     //   props.history.push("/vocabulario");
     // }
   };
-  // console.log(state);
+  console.log("current user", state);
 
   const handleLogOut = () => {
     localStorage.clear();

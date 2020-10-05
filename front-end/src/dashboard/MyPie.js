@@ -25,41 +25,43 @@ export const MyPie = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3000/total", payLoad)
-      .then((r) => r.json())
-      .then((statsObj) => {
-        setState((prevState) => {
-          return {
-            ...prevState,
-            datasets: [
-              {
-                label: "Resultados de Pruebas",
-                backgroundColor: [
-                  // "#C9DE00",
-                  "#fce38a",
-                  "#f38181",
-                  "#00A6B4",
-                  "#6800B4",
-                ],
-                hoverBackgroundColor: [
-                  "#501800",
-                  "#4B5000",
-                  "#175000",
-                  "#003350",
-                  "#35014F",
-                ],
-                data: [
-                  // statsObj.test_average,
-                  statsObj.number_correct,
-                  statsObj.number_incorrect,
-                ],
-              },
-            ],
-          };
+    if (payLoad.token !== "Bearer undefined") {
+      fetch("http://localhost:3000/total", payLoad)
+        .then((r) => r.json())
+        .then((statsObj) => {
+          setState((prevState) => {
+            return {
+              ...prevState,
+              datasets: [
+                {
+                  label: "Resultados de Pruebas",
+                  backgroundColor: [
+                    // "#C9DE00",
+                    "#fce38a",
+                    "#f38181",
+                    "#00A6B4",
+                    "#6800B4",
+                  ],
+                  hoverBackgroundColor: [
+                    "#501800",
+                    "#4B5000",
+                    "#175000",
+                    "#003350",
+                    "#35014F",
+                  ],
+                  data: [
+                    // statsObj.test_average,
+                    statsObj.number_correct,
+                    statsObj.number_incorrect,
+                  ],
+                },
+              ],
+            };
+          });
+          setAverage(statsObj.test_average);
         });
-        setAverage(statsObj.test_average);
-      });
-  }, []);
+    }
+  }, [localStorage.token]);
   return (
     <div>
       <Pie

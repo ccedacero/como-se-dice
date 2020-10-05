@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       token = encode_token({ user_id: user.id })
 
       render json: { user: UserSerializer.new(user), token: token }, status: :created
-      confirm_user(user.username)
+      # confirm_user(user.username)
     else
       render json: { error: user.errors.full_messages }, status: :bad_request
     end
@@ -26,9 +26,9 @@ class UsersController < ApplicationController
     # byebug
 
       render json: { user: UserSerializer.new(user), token: token }
-      
+    # byebug  
       # render json: user # implicitly run serializer
-      confirm_user()
+      # confirm_user()
     else
       render json: { error: "Invalid username or password" }, status: :unauthorized
     end
@@ -47,17 +47,17 @@ class UsersController < ApplicationController
     render json: @current_user
   end
 # sends twilio sms to user to confirm user registration
-  def confirm_user(newUser) 
-    account_sid = 'account_sid goes here'
-    auth_token = 'auth_token goes here'
-    client = Twilio::REST::Client.new(account_sid, auth_token)
+  # def confirm_user(newUser) 
+  #   account_sid = 'account_sid goes here'
+  #   auth_token = 'auth_token goes here'
+  #   client = Twilio::REST::Client.new(account_sid, auth_token)
     
-    from = '+13345083478' # Your Twilio number
-    to = '+my_cellphone' # Your mobile phone number
-    client.messages.create(
-    from: from,
-    to: to,
-    body: "Congratulations #{newUser}! You've succesfully registered to Como Se Dice. Happy Learning!"
-    )
-  end
+  #   from = '+13345083478' # Your Twilio number
+  #   to = '+my_cellphone' # Your mobile phone number
+  #   client.messages.create(
+  #   from: from,
+  #   to: to,
+  #   body: "Congratulations #{newUser}! You've succesfully registered to Como Se Dice. Happy Learning!"
+  #   )
+  # end
 end 

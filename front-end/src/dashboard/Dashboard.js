@@ -20,31 +20,34 @@ export const BarChart = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3000/total", payLoad)
-      .then((r) => r.json())
-      .then((statsObj) => {
-        setStatValues(statsObj);
-      });
-  }, []);
-
+    console.log(payLoad);
+    if (payLoad.token !== "Bearer undefined") {
+      fetch("http://localhost:3000/total", payLoad)
+        .then((r) => r.json())
+        .then((statsObj) => {
+          setStatValues(statsObj);
+        });
+    }
+  }, [localStorage.token]);
   const setStatValues = (stats) => {
-    setState((prevState) => {
-      return {
-        ...prevState,
-        labels: stats.week_activity.days,
-        datasets: [
-          {
-            label: "Terms Studies last 7 Days",
-            backgroundColor: "rgba(75,192,192,1)",
-            borderColor: "rgba(0,0,0,1)",
-            borderWidth: 2,
-            data: stats.week_activity.values,
-          },
-        ],
-      };
-    });
+    if (stats.week_activity !== undefined) {
+      setState((prevState) => {
+        return {
+          ...prevState,
+          labels: stats.week_activity.days,
+          datasets: [
+            {
+              label: "Terms Studies last 7 Days",
+              backgroundColor: "rgba(75,192,192,1)",
+              borderColor: "rgba(0,0,0,1)",
+              borderWidth: 2,
+              data: stats.week_activity.values,
+            },
+          ],
+        };
+      });
+    }
   };
-  console.log(state);
   return (
     <div>
       <Container maxWidth="md">

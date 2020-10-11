@@ -341,14 +341,18 @@ Test.create(name: "Pago", category:"payments");
   ans = "Dairy"
   updateAnswer(ans)
   
-  #SEEDING GREETINGS QUIZ 
+  #SEEDING Measurements QUIZ 
 
-#   (name: "saludos", category:"saludos");
-  
-  Question.create(question:"Como se dice 'Gusto en conocerte!?'", test_id: Test.last.id)
-  options =["I liked meeting you","Nice to meet you!","Nice seeing you","See you next week"]
+  # measurements = ["Measurement", "Inch", "Foot", "Yard", "Mile", "Ounce", "Paint", "Quart", "Gallon", "Pound", "To", "Millimeter", "Centimeter", "Meter", "Kilometer", "Acre", "Hectare", "Liter", "Kilo"]
+  # medidas = ["Medida", "Pulgada", "Pie", "Yarda", "Milla", "Onza", "Pintura", "Cuarto", "Galón", "Libra", "Hasta", "Milímetro", "Centímetro", "Metro", "Kilómetro", "Acre", "Hectárea", "Litro", "Kilo"]
+
+  Test.create(name: "measurements", category:"measurements");
+
+  Question.create(question:"Como se dice 'Corri siete millas!?'", test_id: Test.last.id)
+  options =["I measured seven miles","I ran seven yards!","I ran seven miles","I ran seven kilometers"]
   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
-  ans = "Nice to meet you!"
+  ans = "I ran seven miles"
+  
   Test.last.update(no_of_questions: options.length);
   def updateAnswer(ans)
   updateQ = Question.last.answers.select do |a|
@@ -358,45 +362,45 @@ Test.create(name: "Pago", category:"payments");
  end
  updateAnswer(ans)
 
-  Question.create(question:"Como se dice 'Nos vemos mañana?' ", test_id: Test.last.id)
-  options1 = ["See you tomorrow","See you next week", "See you later", "See you tonight",]
+  Question.create(question:"Que significa 'Pulgada' ", test_id: Test.last.id)
+  options1 = ["Foot","Inch", "Quart", "Yard",]
   options1.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
-  ans = "See you tomorrow"
+  ans = "Inch"
   updateAnswer(ans)
 
-  Question.create(question:"Que significa 'Good night'?", test_id: Test.last.id)
-  options2 =["Hasta mañana", "Buenos dias", "Buenos tardes", "Buenos Noches"]
+  Question.create(question:"Que significa 'Quart'?", test_id: Test.last.id)
+  options2 =["Pound", "Yard", "Ounce", "Cuarto"]
   options2.map{|q|  AnTest.createswer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans ="Buenos Noches"
+  ans ="Cuarto"
   updateAnswer(ans)
 
-  Question.create(question:"Que significa 'See you soon!'?", test_id: Test.last.id)
-  options3 =["Nos vemos pronto","Nos vemos hoy","Nos vemos esta tarde","Nos vemos mañana "]
+  Question.create(question:"Que palabra no tiene que ver con medidas ?", test_id: Test.last.id)
+  options3 =["Far Away","Mile","Inch","Hectare"]
   options3.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans = "Nos vemos pronto"
+  ans = "Far Away"
   updateAnswer(ans)
 
-  Question.create(question: "Que significa 'You're welcome'?", test_id: Test.last.id)
-  options4 =["Gracias","Bienvenido","De nada","Bienvenido a mi casa"]
+  Question.create(question: "Que significa 'Walk to the end of the street'?", test_id: Test.last.id)
+  options4 =["Camine hasta el final de la calle","Estoy caminando en la calle","Esta calle es larga","Vamos al final de la calle"]
   options4.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans = "De nada"
+  ans = "Camine hasta el final de la calle"
   updateAnswer(ans)
 
-  Question.create(question:"Como dirias 'Muy bien, gracias!'?", test_id: Test.last.id)
-  options5 =["cool, Thank you!","Very well, Thank you!","Thank you!","Great"]
+  Question.create(question:"Como dirias 'La mesa mide 165 centimetros'?", test_id: Test.last.id)
+  options5 =["I weight 165 centimers", "I am 165 centimeters","The table measures 165 centimeters","The able is 165 centimers"]
   options5.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans = "Very well, Thank you!"
+  ans = "The table measures 165 centimeters"
   updateAnswer(ans)
   
-  Question.create(question: "Que sigfnica 'How have you been?'", test_id: Test.last.id)
-  options6 =["Como has estado?","Que has estado haciendo?","Que hiciste hoy","Como te sientes"]
+  Question.create(question: "Selecciona la palabra que significa 'Pie' ", test_id: Test.last.id)
+  options6 =["Fur","Foot","Feet","Quart"]
   options6.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans = "Como has estado?"
+  ans = "Foot"
   updateAnswer(ans)
 
 puts "=========================="

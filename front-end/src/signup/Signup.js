@@ -12,21 +12,19 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      {"Copyright © Como Se Dice?"}
+      <Link color="inherit" href="www.comosedice.com">
+        {/* Aprenda Ingles hoy! */}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
   );
 }
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -67,12 +65,12 @@ export default function SignUp({ history, handleLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.token}`,
       },
-      body: JSON.stringify(signUpForm), // body data type must match "Content-Type" header
+      body: JSON.stringify(signUpForm),
     };
     fetch("http://localhost:3000/users", payload)
       .then((r) => r.json())
@@ -137,10 +135,10 @@ export default function SignUp({ history, handleLogin }) {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
-              />
+              /> */}
             </Grid>
           </Grid>
           <Button
@@ -152,10 +150,10 @@ export default function SignUp({ history, handleLogin }) {
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
+              <Link href="/login" variant="body2">
+                Already have an account?
               </Link>
             </Grid>
           </Grid>

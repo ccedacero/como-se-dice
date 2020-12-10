@@ -62,6 +62,14 @@ export const Alphabet = (props) => {
   }
 
   useEffect(() => {
+    let token = localStorage.getItem('token');
+    const payLoad = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
     fetch(fetchUrl, payLoad)
       .then((r) => r.json())
       .then((alphabetObj) => {
@@ -145,8 +153,8 @@ export const Alphabet = (props) => {
           </Dialog>
         </>
       ) : (
-        false
-      )}
+          false
+        )}
     </div>
   );
 };

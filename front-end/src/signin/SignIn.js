@@ -94,12 +94,10 @@ export default function SignIn({ history, handleLogin }) {
         if (!userObj.error) {
           const { user, token } = userObj;
           handleLogin(user);
-          console.log(user);
           localStorage.token = token;
           localStorage.user = user.id;
-
           if (user !== undefined && user !== null) {
-            history.push("/home");
+            history.push("/vocabulario");
           }
         }
       });
@@ -161,7 +159,7 @@ export default function SignIn({ history, handleLogin }) {
             <Grid container>
               <Grid item>
                 <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"Don't have an account?"}
                 </Link>
               </Grid>
             </Grid>

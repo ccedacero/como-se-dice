@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::API
   before_action :authenticate
-  # before :authenticate_user!
   # before_filter :authenticate_user!, except: [:new, :create]
 
   def encode_token(payload)

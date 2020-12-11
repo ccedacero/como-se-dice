@@ -20,15 +20,20 @@ export const BarChart = () => {
   });
 
   useEffect(() => {
-    console.log(payLoad);
-    if (payLoad.token !== "Bearer undefined") {
-      fetch("http://localhost:3000/total", payLoad)
-        .then((r) => r.json())
-        .then((statsObj) => {
-          setStatValues(statsObj);
-        });
-    }
-  }, [localStorage.token]);
+    const payLoad = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    };
+    fetch("http://localhost:3000/total", payLoad)
+      .then((r) => r.json())
+      .then((statsObj) => {
+        setStatValues(statsObj);
+      });
+  }, []);
+
   const setStatValues = (stats) => {
     if (stats.week_activity !== undefined) {
       setState((prevState) => {

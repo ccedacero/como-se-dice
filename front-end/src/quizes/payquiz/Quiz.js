@@ -9,7 +9,6 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { Typography } from "@material-ui/core";
-import { payLoad } from "../../constants/index";
 import "./Quiz.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -69,11 +68,14 @@ export const Quiz = ({
 
   // Load the quiz into the state
   useEffect(() => {
-    let fetchId = id;
-    if (id === "Animales") {
-      fetchId = "animals";
-    }
-    fetch(`http://localhost:3000/tests/${fetchId}`, payLoad)
+    const payLoad = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }
+    };
+    fetch(`http://localhost:3000/tests/${id}`, payLoad)
       .then((r) => r.json())
       .then((quizQuestionsObj) => {
         setState(quizQuestionsObj);
@@ -89,6 +91,8 @@ export const Quiz = ({
         });
       });
   }, []);
+
+
   // function to keep track of radio values
   const handleRadioChange = (event) => {
     setValue(event.target.value);
@@ -259,8 +263,7 @@ export const Quiz = ({
       }
     } else {
       setHelperText(
-        `Terminaste!Felicidades!, tuviste ${
-          results.no_correct + 1 - results.no_incorrect
+        `Terminaste!Felicidades!, tuviste ${results.no_correct + 1 - results.no_incorrect
         } preguntas correctas!`
       );
     }

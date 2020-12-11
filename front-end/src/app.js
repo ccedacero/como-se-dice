@@ -29,15 +29,13 @@ const App = (props) => {
   });
 
   useEffect(() => {
-    if (localStorage.token) {
-      fetch(`http://localhost:3000/autologin`, payLoad)
-        .then((r) => r.json())
-        .then((data) => {
-          if (!data.error) {
-            handleLogin(data);
-          }
-        });
-    }
+    fetch(`http://localhost:3000/autologin`, payLoad)
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data.error) {
+          handleLogin(data);
+        }
+      });
   }, []);
 
   const updateUser = (newUser) => {
@@ -108,7 +106,6 @@ const App = (props) => {
         </Switch>
       </main>
     </div>
-    // </Router>
   );
 };
 

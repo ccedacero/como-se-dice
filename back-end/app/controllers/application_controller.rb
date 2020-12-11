@@ -16,7 +16,6 @@ class ApplicationController < ActionController::API
     begin
       # decode token using JWT library
       payload = decode_token(get_auth_token)
-
       # get the user_id from the decoded token and use it to
       # set an instance variable for the current user
       set_current_user!(payload["user_id"])

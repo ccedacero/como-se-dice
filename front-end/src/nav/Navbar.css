@@ -3,30 +3,19 @@ nav {
   font-size: 1.3em;
   width: 100%;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-/* 
-ul {
   display: flex;
   justify-content: flex-end;
-  list-style: none;
-} */
-
-.rightMenu ul {
-  display: flex;
-  justify-content: flex-end;
-  list-style: none;
 }
 
-.rightMenu li {
+li {
   margin: 0.5em;
 }
 
-.leftMenu ul {
+ul {
   display: flex;
   justify-content: space-evenly;
 }
+
 a {
   font-size: 1.2em;
   color: #fff;
@@ -34,7 +23,9 @@ a {
   text-decoration: none;
   /* font-family: "Montserrat", sans-serif; */
 }
-
+.homeLink {
+  margin-right: 47.5%;
+}
 header {
   background-color: #f38181;
 }

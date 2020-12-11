@@ -10,13 +10,13 @@ export const HomeLanding = () => {
       <Container maxWidth="lg">
         <Grid container>
           <Grid item xs={6}>
-            localStorage.token ? <BarChart /> : ();
+            <BarChart />
           </Grid>
           <Grid item xs={6}>
-            localStorage.token ? <MyPie /> : ();
+            <MyPie />
           </Grid>
         </Grid>
-        localStorage.token ? <TestStats /> : ();
+        <TestStats />
       </Container>
     </div>
   );

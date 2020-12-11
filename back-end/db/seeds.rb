@@ -1,6 +1,6 @@
 require 'twilio-ruby'
 
-# User.destroy_all
+
 # Alphabet.destroy_all
 # Vowel.destroy_all
 # Vocab.destroy_all
@@ -10,6 +10,7 @@ require 'twilio-ruby'
 # Test.destroy_all
 # Result.destroy_all
 # UserAnswer.destroy_all
+# User.destroy_all
 # Forum.destroy_all
 # Interview.destroy_all
 # Comment.destroy_all
@@ -220,7 +221,7 @@ Test.create(name: "Pago", category:"payments");
 
 #   #SEEDING GREETINGS QUIZ 
 
-  Test.create(name: "saludos", category:"saludos");
+  Test.create(name: "Saludos", category:"greetings");
   
   Question.create(question:"Como se dice 'Gusto en conocerte!?'", test_id: Test.last.id)
   options =["I liked meeting you","Nice to meet you!","Nice seeing you","See you next week"]
@@ -283,7 +284,7 @@ Test.create(name: "Pago", category:"payments");
 
   # Animales = [Livestock, Cow, Calf, Heifer,Steer, Bull, Pig, Sow(cerda), Goat, Sheep, Lamb, Buck, Ram, Horse, Stallion, Colt, Dairy]
     
-  Test.create(name: "animals", category:"animals");
+  Test.create(name: "Animales", category:"animals");
   
   Question.create(question:"Como se dice 'Vaca' en ingles?'", test_id: Test.last.id)
   options =["Cow","Chicken","Pig","Sheep"]
@@ -346,62 +347,62 @@ Test.create(name: "Pago", category:"payments");
   # measurements = ["Measurement", "Inch", "Foot", "Yard", "Mile", "Ounce", "Paint", "Quart", "Gallon", "Pound", "To", "Millimeter", "Centimeter", "Meter", "Kilometer", "Acre", "Hectare", "Liter", "Kilo"]
   # medidas = ["Medida", "Pulgada", "Pie", "Yarda", "Milla", "Onza", "Pintura", "Cuarto", "Galón", "Libra", "Hasta", "Milímetro", "Centímetro", "Metro", "Kilómetro", "Acre", "Hectárea", "Litro", "Kilo"]
 
-  Test.create(name: "measurements", category:"measurements");
+#   Test.create(name: "measurements", category:"measurements");
 
-  Question.create(question:"Como se dice 'Corri siete millas!?'", test_id: Test.last.id)
-  options =["I measured seven miles","I ran seven yards!","I ran seven miles","I ran seven kilometers"]
-  options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
-  ans = "I ran seven miles"
+#   Question.create(question:"Como se dice 'Corri siete millas!?'", test_id: Test.last.id)
+#   options =["I measured seven miles","I ran seven yards!","I ran seven miles","I ran seven kilometers"]
+#   options.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   ans = "I ran seven miles"
   
-  Test.last.update(no_of_questions: options.length);
-  def updateAnswer(ans)
-  updateQ = Question.last.answers.select do |a|
-    a.answer === ans
-  end
-  updateQ.first.update(is_correct: true)
- end
- updateAnswer(ans)
+#   Test.last.update(no_of_questions: options.length);
+#   def updateAnswer(ans)
+#   updateQ = Question.last.answers.select do |a|
+#     a.answer === ans
+#   end
+#   updateQ.first.update(is_correct: true)
+#  end
+#  updateAnswer(ans)
 
-  Question.create(question:"Que significa 'Pulgada' ", test_id: Test.last.id)
-  options1 = ["Foot","Inch", "Quart", "Yard",]
-  options1.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
-  ans = "Inch"
-  updateAnswer(ans)
+#   Question.create(question:"Que significa 'Pulgada' ", test_id: Test.last.id)
+#   options1 = ["Foot","Inch", "Quart", "Yard",]
+#   options1.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   ans = "Inch"
+#   updateAnswer(ans)
 
-  Question.create(question:"Que significa 'Quart'?", test_id: Test.last.id)
-  options2 =["Pound", "Yard", "Ounce", "Cuarto"]
-  options2.map{|q|  AnTest.createswer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   Question.create(question:"Que significa 'Quart'?", test_id: Test.last.id)
+#   options2 =["Pound", "Yard", "Ounce", "Cuarto"]
+#   options2.map{|q|  AnTest.createswer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans ="Cuarto"
-  updateAnswer(ans)
+#   ans ="Cuarto"
+#   updateAnswer(ans)
 
-  Question.create(question:"Que palabra no tiene que ver con medidas ?", test_id: Test.last.id)
-  options3 =["Far Away","Mile","Inch","Hectare"]
-  options3.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   Question.create(question:"Que palabra no tiene que ver con medidas ?", test_id: Test.last.id)
+#   options3 =["Far Away","Mile","Inch","Hectare"]
+#   options3.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans = "Far Away"
-  updateAnswer(ans)
+#   ans = "Far Away"
+#   updateAnswer(ans)
 
-  Question.create(question: "Que significa 'Walk to the end of the street'?", test_id: Test.last.id)
-  options4 =["Camine hasta el final de la calle","Estoy caminando en la calle","Esta calle es larga","Vamos al final de la calle"]
-  options4.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   Question.create(question: "Que significa 'Walk to the end of the street'?", test_id: Test.last.id)
+#   options4 =["Camine hasta el final de la calle","Estoy caminando en la calle","Esta calle es larga","Vamos al final de la calle"]
+#   options4.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans = "Camine hasta el final de la calle"
-  updateAnswer(ans)
+#   ans = "Camine hasta el final de la calle"
+#   updateAnswer(ans)
 
-  Question.create(question:"Como dirias 'La mesa mide 165 centimetros'?", test_id: Test.last.id)
-  options5 =["I weight 165 centimers", "I am 165 centimeters","The table measures 165 centimeters","The able is 165 centimers"]
-  options5.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   Question.create(question:"Como dirias 'La mesa mide 165 centimetros'?", test_id: Test.last.id)
+#   options5 =["I weight 165 centimers", "I am 165 centimeters","The table measures 165 centimeters","The able is 165 centimers"]
+#   options5.map{|q|  Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans = "The table measures 165 centimeters"
-  updateAnswer(ans)
+#   ans = "The table measures 165 centimeters"
+#   updateAnswer(ans)
   
-  Question.create(question: "Selecciona la palabra que significa 'Pie' ", test_id: Test.last.id)
-  options6 =["Fur","Foot","Feet","Quart"]
-  options6.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
+#   Question.create(question: "Selecciona la palabra que significa 'Pie' ", test_id: Test.last.id)
+#   options6 =["Fur","Foot","Feet","Quart"]
+#   options6.map{|q| Answer.create(question_id:Question.last.id, answer:q, is_correct: false)}
 
-  ans = "Foot"
-  updateAnswer(ans)
+#   ans = "Foot"
+#   updateAnswer(ans)
 
 puts "=========================="
 puts "~~~~~~~~~~SEEDED~~~~~~~~~~"

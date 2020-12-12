@@ -3,19 +3,17 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Button from "@material-ui/core/Button";
 const NavBar = ({ currentUser, handleLogOut }) => {
-  // console.log(currentUser);
-  // debugger;
   return (
     <header>
       <nav>
         {currentUser ? (
           <>
-            <ul class="homeLink">
+            <ul className="homeLink">
               <li>
                 <Link to="/home">Home</Link>
               </li>
             </ul>
-            <ul class="rightMenuUser">
+            <ul className="rightMenuUser">
               <li>
                 <Link to="/vocabulario">Vocabulario</Link>
               </li>

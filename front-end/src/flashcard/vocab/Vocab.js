@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import VocabCard from "./VocabCard";
-import Categories from "../../home/Categories";
 import { payLoad } from "../../constants/index";
 
 export const Vocab = ({
@@ -13,7 +12,6 @@ export const Vocab = ({
     count: 0,
   });
 
-  console.log(name);
   useEffect(() => {
     fetch("http://localhost:3000/vocabs/payments", payLoad)
       .then((r) => r.json())
@@ -30,25 +28,6 @@ export const Vocab = ({
     vocab_id: vocab[0].id,
     reviewed: true,
   });
-
-  // useEffect(() => {
-  //   const trackPayload = {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.token}`,
-  //     },
-  //     body: JSON.stringify(cardState),
-  //   };
-
-  //   fetch("http://localhost:3000/cardtracks", trackPayload)
-  //     .then((r) => r.json())
-  //     .then((tconfirmation) => {
-  //       console.log(tconfirmation);
-  //     });
-  // }, [cardState]);
-  console.log(cardState);
-
   const renderVocab = () => {
     if (vocab.words.length > 0) {
       let currentWord = vocab.words[vocab.count];

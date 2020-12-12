@@ -8,7 +8,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import { payLoad } from "../constants/index";
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TestStats({ stats }) {
+export default function TestStats({ stats: { answer_stats } }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -48,13 +47,13 @@ export default function TestStats({ stats }) {
   }
 
   useEffect(() => {
-    if (stats.answer_stats) {
-      setStatValues(stats);
+    if (answer_stats) {
+      setStatValues(answer_stats);
     }
-  }, [stats]);
+  }, [answer_stats]);
 
-  const setStatValues = (stats) => {
-    let arr = stats.answer_stats.map((ans) => {
+  const setStatValues = (answer_stats) => {
+    const arr = answer_stats.map((ans) => {
       return (
         createData(
           ans.category,

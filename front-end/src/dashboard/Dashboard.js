@@ -1,11 +1,8 @@
-// const { useEffect, useState } = require("react");
 import { Bar } from "react-chartjs-2";
-import { MyPie } from "./MyPie";
 import React, { useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
-import TestStats from "./TestStats";
-import { payLoad } from "../constants/index";
-export const BarChart = () => {
+
+export const BarChart = ({ stats }) => {
   const [state, setState] = useState({
     labels: [],
     datasets: [
@@ -18,21 +15,9 @@ export const BarChart = () => {
       },
     ],
   });
-
   useEffect(() => {
-    const payLoad = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    };
-    fetch("http://localhost:3000/total", payLoad)
-      .then((r) => r.json())
-      .then((statsObj) => {
-        setStatValues(statsObj);
-      });
-  }, []);
+    setStatValues(stats)
+  }, [stats]);
 
   const setStatValues = (stats) => {
     if (stats.week_activity !== undefined) {
@@ -85,7 +70,6 @@ export const BarChart = () => {
           }}
         />
       </Container>
-      {/* <TestStats /> */}
     </div>
   );
 };

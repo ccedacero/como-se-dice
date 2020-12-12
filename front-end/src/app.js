@@ -64,46 +64,46 @@ const App = (props) => {
       <CssBaseline />
       <Navbar currentUser={state.currentUser} handleLogOut={handleLogOut} />
       <main>
-        <Switch>
-          <Route exact path="/signup">
-            <SignUp exact history={props.history} handleLogin={handleLogin} />
-          </Route>
-          <Route exact path="/login">
-            <SignIn history={props.history} handleLogin={handleLogin} />
-          </Route>
-          <Route exact path="/home">
-            <HomeLanding history={props.history} />
-          </Route>
-          <Container maxWidth="lg">
-            {/* THESE TWO ARE K USING THE SAME ALPHABET COMPONENT  */}
-            <Route
-              exact
-              path="/vocabulario"
-              currentUser={state.currentUser}
-              component={Vocabulario}
-            />
-            {/* ALPHABET RENDERS ALL FLASHCARDS */}
-            <Route
-              path="/vocabulario/:id"
-              currentUser={state.currentUser}
-              component={Alphabet}
-            />
+        {/* <Switch> */}
+        <Route exact path="/signup">
+          <SignUp exact history={props.history} handleLogin={handleLogin} />
+        </Route>
+        <Route exact path="/login">
+          <SignIn history={props.history} handleLogin={handleLogin} />
+        </Route>
+        <Route exact path="/home">
+          <HomeLanding history={props.history} />
+        </Route>
+        <Container maxWidth="lg">
+          {/* THESE TWO ARE K USING THE SAME ALPHABET COMPONENT  */}
+          <Route
+            exact
+            path="/vocabulario"
+            currentUser={state.currentUser}
+            component={Vocabulario}
+          />
+          {/* ALPHABET RENDERS ALL FLASHCARDS */}
+          <Route
+            path="/vocabulario/:id"
+            currentUser={state.currentUser}
+            component={Alphabet}
+          />
 
-            {/* {THIS IS THE QUIZ SECTION} */}
-            <Route exact path="/pruebas" component={pruebas} />
-            <Route path="/pruebas/:id" component={Quiz} />
+          {/* {THIS IS THE QUIZ SECTION} */}
+          <Route exact path="/pruebas" component={pruebas} />
+          <Route path="/pruebas/:id" component={Quiz} />
 
-            {/* {Tranlation} */}
-            <Route exact path="/translate" component={Translator} />
-            {/* {Add Vocab Card} */}
-            <Route exact path="/addvocab" component={NewCard} />
-            <Route
-              exact
-              path="/loading"
-              component={CircularProgressWithLabel}
-            />
-          </Container>
-        </Switch>
+          {/* {Tranlation} */}
+          <Route exact path="/translate" component={Translator} />
+          {/* {Add Vocab Card} */}
+          <Route exact path="/addvocab" component={NewCard} />
+          <Route
+            exact
+            path="/loading"
+            component={CircularProgressWithLabel}
+          />
+        </Container>
+        {/* </Switch> */}
       </main>
     </div>
   );

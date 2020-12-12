@@ -17,7 +17,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        www.ycomosedice.com
+        "www.ycomosedice.com"
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -60,9 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 let cards = Categories;
-//  cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Vocabulario() {
   const classes = useStyles();
@@ -70,7 +68,6 @@ export default function Vocabulario() {
   return (
     <React.Fragment>
       <main>
-        {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography
@@ -98,7 +95,7 @@ export default function Vocabulario() {
           {/* End hero unit */}
           <Grid container spacing={4}>
             {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+              <Grid item key={card.title} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -142,7 +139,7 @@ export default function Vocabulario() {
         >
           ¡Aprenda Ingles!
         </Typography>
-        <Copyright />
+        {/* <Copyright /> */}
       </footer>
       {/* End footer */}
     </React.Fragment>

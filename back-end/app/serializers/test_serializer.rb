@@ -1,3 +1,3 @@
 class TestSerializer < ActiveModel::Serializer
-  attributes :id, :name, :answers
+  attributes :id, :name, :answers.shuffle()
 end

@@ -13,7 +13,7 @@ import Quizzes from "./Quizzes.css";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
 import CardStyle from "../home/CardStyle.css";
-import logo from "../logo.png";
+import logo from "../../logo.png";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">

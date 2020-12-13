@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
-import Vocabulario from "./home/Vocabulario";
-import Navbar from "./nav/Navbar";
+import Vocabulario from "./components/home/Vocabulario";
+import Navbar from "./components/nav/Navbar";
 import { Route, withRouter, Redirect } from "react-router-dom";
-import { Alphabet } from "./flashcard/alphabet/Alphabet";
-import { Vocab } from "./flashcard/vocab/Vocab";
-import { QuizzesContainer as pruebas } from "./quizes/QuizzesContainer";
-import SignIn from "./signin/SignIn";
-import SignUp from "./signup/Signup";
-import Quiz from "./quizes/payquiz/Quiz";
-import { payLoad } from "./constants/index";
-import { HomeLanding } from "./dashboard/Home";
-import { Translator } from "./translation/Translate";
-import { NewCard } from "./createvocab/NewCard";
-import CircularProgressWithLabel from "./createvocab/Progress";
+import { Alphabet } from "./components/flashcard/alphabet/Alphabet";
+import { Vocab } from "./components/flashcard/vocab/Vocab";
+import { QuizzesContainer as pruebas } from "./components/quizes/QuizzesContainer";
+import SignIn from "./components/signin/SignIn";
+import SignUp from "./components/signup/Signup";
+import { Quizparent } from "./components/quizes/payquiz/Quizparent";
+// import { payLoad } from "constants/index";
+import { HomeLanding } from "./components/dashboard/Home";
+import { Translator } from "./components/translation/Translate";
+import { NewCard } from "./components/createvocab/NewCard";
+import CircularProgressWithLabel from "./components/createvocab/Progress";
 
 const styles = (theme) => ({
   paddingTop: {
@@ -28,6 +28,13 @@ const App = (props) => {
   });
 
   useEffect(() => {
+    const payLoad = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    };
     fetch(`http://localhost:3000/autologin`, payLoad)
       .then((r) => r.json())
       .then((data) => {
@@ -84,7 +91,7 @@ const App = (props) => {
 
           {/* {THIS IS THE QUIZ SECTION} */}
           <Route exact path="/pruebas" component={pruebas} />
-          <Route path="/pruebas/:id" component={Quiz} />
+          <Route path="/pruebas/:id" component={Quizparent} />
 
           {/* {Tranlation} */}
           <Route exact path="/translate" component={Translator} />

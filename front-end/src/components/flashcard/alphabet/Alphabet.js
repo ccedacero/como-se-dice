@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AlphabetCard from "./AlphabetCard";
 import Categories from "../../home/Categories";
-import { payLoad } from "../../constants/index";
 import useIsMounted from "ismounted";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import Button from "@material-ui/core/Button";

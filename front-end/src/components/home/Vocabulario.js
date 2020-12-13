@@ -11,7 +11,7 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
 import CardStyle from "./CardStyle.css";
-import logo from "../logo.png";
+import logo from "../../logo.png";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">

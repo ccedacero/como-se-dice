@@ -1,5 +1,3 @@
-// We pay once a week is not playing audio
-// Can you come in at seven?
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -63,7 +61,6 @@ export default function VocabCard({
   // const [playing, setPlaying] = useState(false);
 
   let audio = new Audio();
-  // console.log(vocab, word, wordSpanish, wordUrl);
   const handleplaySong = () => {
     audio.src = wordUrl;
     audio.play();
@@ -120,7 +117,7 @@ export default function VocabCard({
       <ReactCardFlip
         isFlipped={isFlipped}
         flipDirection="horizontal"
-        //   flipSpeedFrontToBack="1"
+      //   flipSpeedFrontToBack="1"
       >
         <Card className={(classes.root, classes.centerCard)} variant="outlined">
           <div>

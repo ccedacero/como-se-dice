@@ -17,8 +17,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © Como Se Dice?"}
-      <Link color="inherit" href="www.comosedice.com">
-        {/* Aprenda Ingles hoy! */}
+      <Link color="inherit" to="#">
+        Aprenda Ingles hoy!
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -60,7 +60,6 @@ export default function SignUp({ history, handleLogin }) {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(signUpForm);
   };
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -21,7 +21,6 @@ export const Alphabet = (props) => {
     props.match.params.name === undefined
   ) {
     queryStr = props.history.location.pathname.split("/")[2];
-    console.log(queryStr, "using split");
   } else {
     queryStr = props.match.params.name;
   }
@@ -98,7 +97,6 @@ export const Alphabet = (props) => {
       );
     }
   };
-  console.log(open);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -113,7 +111,6 @@ export const Alphabet = (props) => {
     fetch(`http://localhost:3000/vocabs/${trackCardId}`, deletePayload)
       .then((r) => r.json())
       .then((confirmation) => {
-        console.log(confirmation);
         setTimeout(() => props.history.push("/vocabulario"), 1000);
       });
     handleClose();

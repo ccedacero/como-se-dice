@@ -8,7 +8,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import { payLoad } from "../constants/index";
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TestStats() {
+export default function TestStats({ stats: { answer_stats } }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -41,80 +40,31 @@ export default function TestStats() {
       align: "right",
       format: (value) => value.toLocaleString("en-US"),
     },
-
-    //   id: "size",
-    //   // label: "#Correcto\u00a0(km\u00b2)",
-    //   label: "#Correcto",
-    //   minWidth: 170,
-    //   align: "right",
-    //   format: (value) => value.toLocaleString("en-US"),
-    // },
-    // {
-    //   id: "density",
-    //   label: "Promedio",
-    //   minWidth: 170,
-    //   align: "right",
-    //   format: (value) => value.toFixed(2),
-    // },
   ];
 
   function createData(name, code, population, inc_ans) {
-    // const density = population ;
     return { name, code, population, inc_ans };
   }
 
-  // let rows = [
-  //   createData("India", "IN", 1324171354),
-  //   createData("Hi", "yshi", 123),
-  // ];
-
   useEffect(() => {
-    const payLoad = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    };
-    fetch("http://localhost:3000/total", payLoad)
-      .then((r) => r.json())
-      .then((statsObj) => {
-        let arr = [];
-        if (statsObj.answer_stats !== undefined) {
-          statsObj.answer_stats.map((ans) => {
-            arr.push(
-              createData(
-                ans.category,
-                ans.question,
-                ans.inc_answers_chosen.length,
-                ans.inc_answers_chosen[0]
-              )
-            );
-          });
-          setRows(arr);
-          console.log(statsObj, 'table object', arr)
-        }
-      });
-  }, []);
-  // debugger;
+    if (answer_stats) {
+      setStatValues(answer_stats);
+    }
+  }, [answer_stats]);
 
-  // const setStatValues = (stats) => {
-  //   setState((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       labels: stats.week_activity.days,
-  //       datasets: [
-  //         {
-  //           label: "Terms Studies last 7 Days",
-  //           backgroundColor: "rgba(75,192,192,1)",
-  //           borderColor: "rgba(0,0,0,1)",
-  //           borderWidth: 2,
-  //           data: stats.week_activity.values,
-  //         },
-  //       ],
-  //     };
-  //   });
-  // };
+  const setStatValues = (answer_stats) => {
+    const arr = answer_stats.map((ans) => {
+      return (
+        createData(
+          ans.category,
+          ans.question,
+          ans.inc_answers_chosen.length,
+          ans.inc_answers_chosen[0]
+        )
+      );
+    });
+    setRows(arr);
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

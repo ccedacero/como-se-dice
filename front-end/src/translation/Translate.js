@@ -81,7 +81,6 @@ export const Translator = () => {
     })
       .then((res) => res.json())
       .then((response) => {
-        console.log("response from google: ", response);
         setResults(response.data.translations[0].translatedText);
       })
       .catch((error) => {
@@ -104,7 +103,6 @@ export const Translator = () => {
     })
       .then((res) => res.json())
       .then((response) => {
-        console.log("response from google: ", response);
         setResults(response.data.translations[0].translatedText);
       })
       .catch((error) => {

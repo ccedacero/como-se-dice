@@ -17,11 +17,9 @@ import logo from "../logo.png";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" to="www.comosedice.com">
+        Aprenda Ingles hoy!
       </Link>{" "}
-      {new Date().getFullYear()}
       {"."}
     </Typography>
   );
@@ -65,9 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 let cards = Categories;
-//  cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export const QuizzesContainer = () => {
   const classes = useStyles();
@@ -75,7 +71,6 @@ export const QuizzesContainer = () => {
   return (
     <React.Fragment>
       <main>
-        {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography
@@ -101,7 +96,7 @@ export const QuizzesContainer = () => {
           {/* End hero unit */}
           <Grid container spacing={4}>
             {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+              <Grid item key={card.title} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}

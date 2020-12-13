@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,9 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import FolderIcon from "@material-ui/icons/Folder";
-import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import Progress from "./Progress";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -63,7 +61,6 @@ export const NewCard = () => {
 
   const handleFileChange = (e) => {
     e.persist();
-    console.log(e);
     setAudioF({ [e.target.name]: e.target.files[0] });
     // debugger;
   };

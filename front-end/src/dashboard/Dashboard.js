@@ -1,11 +1,8 @@
-// const { useEffect, useState } = require("react");
 import { Bar } from "react-chartjs-2";
-import { MyPie } from "./MyPie";
 import React, { useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
-import TestStats from "./TestStats";
-import { payLoad } from "../constants/index";
-export const BarChart = () => {
+
+export const BarChart = ({ stats: { week_activity } }) => {
   const [state, setState] = useState({
     labels: [],
     datasets: [
@@ -20,38 +17,28 @@ export const BarChart = () => {
   });
 
   useEffect(() => {
-    const payLoad = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    };
-    fetch("http://localhost:3000/total", payLoad)
-      .then((r) => r.json())
-      .then((statsObj) => {
-        setStatValues(statsObj);
-      });
-  }, []);
-
-  const setStatValues = (stats) => {
-    if (stats.week_activity !== undefined) {
-      setState((prevState) => {
-        return {
-          ...prevState,
-          labels: stats.week_activity.days,
-          datasets: [
-            {
-              label: "Terms Studies last 7 Days",
-              backgroundColor: "rgba(75,192,192,1)",
-              borderColor: "rgba(0,0,0,1)",
-              borderWidth: 2,
-              data: stats.week_activity.values,
-            },
-          ],
-        };
-      });
+    if (week_activity) {
+      setStatValues(week_activity)
     }
+  }, [week_activity]);
+
+  const setStatValues = (week_activity) => {
+
+    setState((prevState) => {
+      return {
+        ...prevState,
+        labels: week_activity.days,
+        datasets: [
+          {
+            label: "Terms Studies last 7 Days",
+            backgroundColor: "rgba(75,192,192,1)",
+            borderColor: "rgba(0,0,0,1)",
+            borderWidth: 2,
+            data: week_activity.values,
+          },
+        ],
+      };
+    });
   };
   return (
     <div>
@@ -85,7 +72,6 @@ export const BarChart = () => {
           }}
         />
       </Container>
-      {/* <TestStats /> */}
     </div>
   );
 };

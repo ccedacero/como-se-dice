@@ -12,7 +12,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import logo from "../logo.png";
+import logo from "../../logo.png";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">

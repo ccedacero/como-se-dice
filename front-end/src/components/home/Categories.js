@@ -30,7 +30,7 @@ const Categories = [
     fetchCategory: "climate",
     description: " Aprenda vocabulario esencial sobre el Clima y el tiempo ",
     img:
-      "https://cdn.pixabay.com/photo/2014/05/18/00/33/cloud-346710_960_720.png",
+      "https://cdn.pixabay.com/photo/2017/06/03/10/15/bulb-2368396_1280.jpg",
     imgTitle: "Weather Forecast",
   },
   {

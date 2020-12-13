@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import VocabCard from "./VocabCard";
-import { payLoad } from "../../constants/index";
 
 export const Vocab = ({
   match: {
@@ -13,6 +12,13 @@ export const Vocab = ({
   });
 
   useEffect(() => {
+     const payLoad = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    };
     fetch("http://localhost:3000/vocabs/payments", payLoad)
       .then((r) => r.json())
       .then((vocabObj) => {

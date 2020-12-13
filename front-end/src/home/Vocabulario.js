@@ -15,11 +15,9 @@ import logo from "../logo.png";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        "www.ycomosedice.com"
+      <Link color="inherit" to="www.comosedice.com">
+        Aprenda Ingles hoy!
       </Link>{" "}
-      {new Date().getFullYear()}
       {"."}
     </Typography>
   );

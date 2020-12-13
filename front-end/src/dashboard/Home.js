@@ -4,9 +4,9 @@ import { BarChart } from "./Dashboard";
 import { MyPie } from "./MyPie";
 import Grid from "@material-ui/core/Grid";
 import TestStats from "./TestStats";
-
 export const HomeLanding = () => {
   const [state, setState] = useState({})
+  
   useEffect(() => {
     const payLoad = {
       method: "GET",

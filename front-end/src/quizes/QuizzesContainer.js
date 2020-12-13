@@ -17,11 +17,9 @@ import logo from "../logo.png";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" to="www.comosedice.com">
+        Aprenda Ingles hoy!
       </Link>{" "}
-      {new Date().getFullYear()}
       {"."}
     </Typography>
   );
@@ -146,7 +144,7 @@ export const QuizzesContainer = () => {
         >
           ¡Aprenda Ingles!
         </Typography>
-        {/* <Copyright /> */}
+        <Copyright />
       </footer>
       {/* End footer */}
     </React.Fragment>

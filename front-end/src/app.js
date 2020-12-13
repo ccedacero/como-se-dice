@@ -3,8 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Vocabulario from "./home/Vocabulario";
 import Navbar from "./nav/Navbar";
-import { withStyles } from "@material-ui/core/styles";
-import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+import { Route, withRouter, Redirect } from "react-router-dom";
 import { Alphabet } from "./flashcard/alphabet/Alphabet";
 import { Vocab } from "./flashcard/vocab/Vocab";
 import { QuizzesContainer as pruebas } from "./quizes/QuizzesContainer";
@@ -16,7 +15,7 @@ import { HomeLanding } from "./dashboard/Home";
 import { Translator } from "./translation/Translate";
 import { NewCard } from "./createvocab/NewCard";
 import CircularProgressWithLabel from "./createvocab/Progress";
-// import NewItemForm from "./createvocab/NewItemForm";
+
 const styles = (theme) => ({
   paddingTop: {
     padding: "2em",
@@ -36,29 +35,23 @@ const App = (props) => {
           handleLogin(data);
         }
       });
-  }, []);
+  }, [localStorage.getItem('token')]);
 
   const updateUser = (newUser) => {
     setState({ currentUser: newUser });
-    // props.history.push("/vocabu")
   };
 
   const handleLogin = (currentUser) => {
     setState({ currentUser });
-    // if (state.currentUser !== null) {
-    //   props.history.push("/vocabulario");
-    // }
+
   };
-  console.log("current user", state);
 
   const handleLogOut = () => {
     localStorage.clear();
     setState({ currentUser: null });
     props.history.push("/login");
   };
-  if (state.currentUser !== undefined) {
-    console.log(state.currentUser);
-  }
+
   return (
     <div>
       <CssBaseline />

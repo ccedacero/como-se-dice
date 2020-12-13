@@ -58,6 +58,14 @@ export const Quiz = ({
     score: 0,
   });
 
+  // fisherYalesShuffle
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
   // Load the quiz into the state
   useEffect(() => {
     const payLoad = {
@@ -70,6 +78,9 @@ export const Quiz = ({
     fetch(`http://localhost:3000/tests/${id}`, payLoad)
       .then((r) => r.json())
       .then((quizQuestionsObj) => {
+        for (let question of quizQuestionsObj) {
+          question.answers = shuffle(question.answers);
+        }
         setState(quizQuestionsObj);
       });
   }, []);
@@ -188,14 +199,7 @@ export const Quiz = ({
 
   // a method to randomize questions for this approach
 
-  function shuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
 
-  }
 
   const isCorrect = (ans) => {
     return state[question].answers.find((ans) => ans.is_correct === true)
@@ -229,23 +233,6 @@ export const Quiz = ({
       setTimeout(persistResults, 2000);
     }
   }
-
-
-  //simple shuffle algorithm. Just inject your array and it'll pop out a new one.
-
-  function createRandomAnswer(arr) {
-    arr.map((answerOption, index) => {
-      return (
-        (<FormControlLabel
-          value={answerOption}
-          control={<Radio />}
-          label={answerOption}
-          onChange={(e) => getSelectedRadio(e)}
-        />))
-    })
-  }
-
-
   return (
     <> {state && (
       <Container class="radioForm" maxWidth="md">
@@ -269,7 +256,7 @@ export const Quiz = ({
               value={value}
               onChange={handleRadioChange}
             >
-              {shuffle(state[question].answers).map((answer) => {
+              {state[question].answers.map((answer) => {
                 return (<FormControlLabel
                   value={answer.answer}
                   control={< Radio />}

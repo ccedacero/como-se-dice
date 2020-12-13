@@ -9,7 +9,7 @@ import { Vocab } from "./flashcard/vocab/Vocab";
 import { QuizzesContainer as pruebas } from "./quizes/QuizzesContainer";
 import SignIn from "./signin/SignIn";
 import SignUp from "./signup/Signup";
-import Quiz from "./quizes/payquiz/Quiz";
+import {Quizparent} from "./quizes/payquiz/Quizparent";
 import { payLoad } from "./constants/index";
 import { HomeLanding } from "./dashboard/Home";
 import { Translator } from "./translation/Translate";
@@ -84,7 +84,7 @@ const App = (props) => {
 
           {/* {THIS IS THE QUIZ SECTION} */}
           <Route exact path="/pruebas" component={pruebas} />
-          <Route path="/pruebas/:id" component={Quiz} />
+          <Route path="/pruebas/:id" component={Quizparent} />
 
           {/* {Tranlation} */}
           <Route exact path="/translate" component={Translator} />

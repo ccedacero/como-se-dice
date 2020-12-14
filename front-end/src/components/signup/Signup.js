@@ -67,13 +67,14 @@ export default function SignUp({ history, handleLogin }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.token}`,
+        // Authorization: `Bearer ${localStorage.token}`,
       },
       body: JSON.stringify(signUpForm),
     };
     fetch("http://localhost:3000/users", payload)
       .then((r) => r.json())
       .then((userObj) => {
+        console.log(userObj)
         const { user, token } = userObj;
         handleLogin(user);
         localStorage.token = token;

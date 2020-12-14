@@ -161,6 +161,7 @@ export const Quizparent = ({
             no_incorrect: results.no_correct,
             test_id: state[question].test.id,
             score: testScore,
+            user_id: localStorage.user
         };
         const createPayload = {
             method: "POST",

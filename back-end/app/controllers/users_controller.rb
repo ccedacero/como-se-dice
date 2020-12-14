@@ -7,10 +7,10 @@ class UsersController < ApplicationController
       email: params[:email],
       # avatar: params[:avatar],
     )
-
+    puts user 
     if user.valid?
       token = encode_token({ user_id: user.id })
-
+      puts token 
       render json: { user: UserSerializer.new(user), token: token }, status: :created
       # confirm_user(user.username)
     else

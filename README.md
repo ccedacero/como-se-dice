@@ -4,8 +4,9 @@ A platform to help spanish speaking farm workers learn English. It parses Berkle
 <pre>
            <img src="https://ccedacero.com/images/compressed/resized-comosedice.png" alt="como se dice preview" width="650"/>  
 </pre>
-- Live demo video can be seen [here](https://www.youtube.com/watch?v=zymhOk7uurQ&ab_channel=CristianC)  
+- Live demo video can be seen [here](https://www.youtube.com/watch?v=zymhOk7uurQ&ab_channel=CristianC)    
     
+- Deployed [here](https://comosedice.herokuapp.com/)  
 
 ### Features
 

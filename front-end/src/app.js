@@ -26,7 +26,6 @@ const App = (props) => {
   const [state, setState] = useState({
     currentUser: null,
   });
-
   useEffect(() => {
     const payLoad = {
       method: "GET",

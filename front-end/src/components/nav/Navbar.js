@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Button from "@material-ui/core/Button";
 const NavBar = ({ currentUser, handleLogOut }) => {
+  console.log(currentUser)
   return (
     <header>
       <nav>
-        {currentUser ? (
+        {currentUser && localStorage.token ? (
           <>
             <ul className="homeLink">
               <li>

@@ -1,9 +1,7 @@
 class VowelsController < ApplicationController
-  
   def index 
-        vowels = Vowel.all
-        render json: vowels
-      end
-    
+    vowels = Vowel.all
+    render json: vowels
+  end
 end
 
